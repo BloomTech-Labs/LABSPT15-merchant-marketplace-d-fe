@@ -10,7 +10,7 @@ import RenderProfileListPage from './RenderProfileListPage';
 // Here is an example of using our reusable List component to display some list data to the UI.
 const ProfileList = () => {
   const { authState } = useOktaAuth();
-  console.log(authState);
+
   return (
     <List
       // Here we are passing our Axios request helper function as a callback.

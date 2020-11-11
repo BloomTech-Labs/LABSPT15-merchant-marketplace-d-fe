@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   sleep,
   getExampleData,
@@ -15,13 +14,13 @@ export const fetchProducts = () => dispatch => {
   const { authState } = useOktaAuth();
   dispatch({ type: FETCH_PRODUCTS_START });
 
-  //   setTimeout(() => {
-  //     getDSData("http://localhost:8000", authState)
-  //       .then((response) => {
-  //         dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response.data });
-  //       })
-  //       .catch(err => {
-  //         dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
-  //       });
-  //   }, 1000);
+  setTimeout(() => {
+    getDSData('http://localhost:8000', authState)
+      .then(response => {
+        dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response.data });
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
+      });
+  }, 1000);
 };
