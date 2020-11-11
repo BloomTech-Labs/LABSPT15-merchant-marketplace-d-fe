@@ -1,5 +1,26 @@
-// import all of your actions into this file, and export them back out. 
-// This allows for the simplification of flow when importing actions into your components throughout your app.
-// Actions should be focused to a single purpose. 
-// You can have multiple action creators per file if it makes sense to the purpose those action creators are serving. 
-// Declare action TYPES at the top of the file
+import {
+  sleep,
+  getExampleData,
+  getProfileData,
+  getDSData,
+} from '../../api/index';
+import { useOktaAuth } from '@okta/okta-react';
+
+export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
+
+export const fetchProducts = () => dispatch => {
+  const { authState } = useOktaAuth();
+  dispatch({ type: FETCH_PRODUCTS_START });
+
+  setTimeout(() => {
+    getDSData('http://localhost:8000', authState)
+      .then(response => {
+        dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response.data });
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
+      });
+  }, 1000);
+};
