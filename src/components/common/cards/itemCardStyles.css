@@ -1,0 +1,23 @@
+.itemCard{
+    max-height: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.cardContents{
+    display:flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.desc{
+    display: flex;
+}
+.descText{
+    margin-left: 10px;
+    padding-left: 10px;
+
+}
+.placeHolderIMG{
+    width: 70px;
+    height: 50px;
+    background-color: pink;
+}

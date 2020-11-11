@@ -1,0 +1,13 @@
+.contents{
+    margin: 10rem auto;
+    max-width: 400px;
+}
+
+.confButton{
+    margin: 0 auto;
+}
+
+.popContent{
+    display: flex;
+    flex-flow: column;
+}

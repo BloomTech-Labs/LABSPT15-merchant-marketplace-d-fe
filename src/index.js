@@ -18,6 +18,13 @@ import { LoginPage } from './components/pages/Login';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 
+// Seller Imports
+import Inventory from './components/inDevelopment/inventory';
+import NewItem from './components/inDevelopment/inventory/newItem';
+import MoreInfo from './components/inDevelopment/inventory/newItem/moreInfo';
+import AddPhotos from './components/inDevelopment/inventory/newItem/photos';
+import Finalize from './components/inDevelopment/inventory/newItem/finalize';
+
 ReactDOM.render(
   <Router>
     <React.StrictMode>
@@ -39,22 +46,39 @@ function App() {
   };
 
   return (
-    
     <Security {...config} onAuthRequired={authHandler}>
-    <Switch>
-      <Route path="/login" component={LoginPage} />
-      <Route path="/implicit/callback" component={LoginCallback} />
-      {/* any of the routes you need secured should be registered as SecureRoutes */}
-      <SecureRoute
-        path="/"
-        exact
-        component={() => <HomePage LoadingComponent={LoadingComponent} />}
-      />
-      <SecureRoute path="/example-list" component={ExampleListPage} />
-      
-      <SecureRoute path="/profile-list" component={ProfileListPage} />
-      <Route component={NotFoundPage} />
-    </Switch>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/implicit/callback" component={LoginCallback} />
+        {/* any of the routes you need secured should be registered as SecureRoutes */}
+        <SecureRoute
+          path="/"
+          exact
+          component={() => <HomePage LoadingComponent={LoadingComponent} />}
+        />
+        <SecureRoute path="/example-list" component={ExampleListPage} />
+        <SecureRoute path="/profile-list" component={ProfileListPage} />
+        {/* Seller's  Routes */}
+        <SecureRoute exact path="/inventory" component={Inventory} />
+        <SecureRoute exact path="/inventory/newitem" component={NewItem} />
+        <SecureRoute
+          exact
+          path="/inventory/newitem/moreinfo"
+          component={MoreInfo}
+        />
+        <SecureRoute
+          exact
+          path="/inventory/newitem/moreinfo/photos"
+          component={AddPhotos}
+        />
+        <SecureRoute
+          exact
+          path="/inventory/newitem/moreinfo/photos/finalize"
+          component={Finalize}
+        />
+        {/* 404 Route */}
+        <Route component={NotFoundPage} />
+      </Switch>
     </Security>
   );
 }
