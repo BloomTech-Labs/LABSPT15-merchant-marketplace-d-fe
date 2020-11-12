@@ -1,23 +1,26 @@
-.itemCard{
-    max-height: 100px;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-.cardContents{
-    display:flex;
-    justify-content: space-between;
-    align-content: center;
-}
-.desc{
-    display: flex;
-}
-.descText{
-    margin-left: 10px;
-    padding-left: 10px;
 
+.cardContainer{
+    height: 60px;
+    border: solid lightgray 1px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 10px 0 10px 0;
 }
-.placeHolderIMG{
+.cardImage{
     width: 70px;
     height: 50px;
     background-color: pink;
+}
+.cardDesc{
+    width: 60%;
+    max-width: 250px;
+    font-size: .75rem;
+}
+.descText{
+    margin-bottom: .125rem;
+}
+.cardPrice{
+    margin-top: 10%;
 }

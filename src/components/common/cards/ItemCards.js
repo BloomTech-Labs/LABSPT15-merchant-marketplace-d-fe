@@ -1,24 +1,18 @@
 import React from 'react';
-import { Card } from 'antd';
 import './itemCardStyles.css';
 
 function ItemCard(props) {
   return (
-    <Card className="itemCard">
-      <div className="cardContents">
-        <div className="desc">
-          <div className="placeHolderIMG">Temp</div>
-          <div className="descText">
-            <h3>Fake Product</h3>
-            <p>Description </p>
-          </div>
-        </div>
-
-        <div>
-          <h3>$00.00</h3>
-        </div>
+    <div className="cardContainer">
+      <div className="cardImage">PlaceHold</div>
+      <div className="cardDesc">
+        <h2 className="descText">{props.name}</h2>
+        <p className="descText">{props.description}</p>
       </div>
-    </Card>
+      <div>
+        <h2 className="cardPrice">${props.price}</h2>
+      </div>
+    </div>
   );
 }
 

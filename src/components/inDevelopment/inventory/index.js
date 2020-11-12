@@ -9,15 +9,21 @@ function Inventory(props) {
   const history = useHistory();
 
   return (
-    <div className="contents">
-      <ItemCard />
-      <Button
-        onClick={() => {
-          history.push('inventory/newitem');
-        }}
-      >
-        +Add Item
-      </Button>
+    <div className="outerContainer">
+      <div className="contents">
+        <ItemCard
+          name="testname"
+          description="test description text"
+          price="3.33"
+        />
+        <Button
+          onClick={() => {
+            history.push('inventory/newitem');
+          }}
+        >
+          +Add Item
+        </Button>
+      </div>
     </div>
   );
 }

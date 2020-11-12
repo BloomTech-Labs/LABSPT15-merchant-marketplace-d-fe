@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Form, Popover, InputNumber } from 'antd';
 import ItemCard from '../../../common/cards/ItemCards';
 import { Link } from 'react-router-dom';
+import ProgressBar from '../../../common/progressBar/progressBar';
 
 function Finalize(props) {
   const [progress, setProgress] = useState(80);
@@ -45,20 +46,22 @@ function Finalize(props) {
   );
 
   return (
-    <div className="contents">
-      <Progress percent={progress} status={status} />
-      <h1>Price</h1>
-      <ItemCard />
-      <Form>
-        <Form.Item>
-          <InputNumber />
-        </Form.Item>
-        <Form.Item>
-          <Popover content={popoverContent}>
-            <Button>Confirm and Continue</Button>
-          </Popover>
-        </Form.Item>
-      </Form>
+    <div className="outerContainer">
+      <ProgressBar percent={progress} status={status} />
+      <div className="contents">
+        <h1>Price</h1>
+        <ItemCard />
+        <Form>
+          <Form.Item>
+            <InputNumber />
+          </Form.Item>
+          <Form.Item>
+            <Popover content={popoverContent}>
+              <Button>Confirm and Continue</Button>
+            </Popover>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }

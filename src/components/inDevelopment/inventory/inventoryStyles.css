@@ -1,5 +1,8 @@
+.outerContainer{
+    margin-top: 10rem;
+}
 .contents{
-    margin: 10rem auto;
+    margin: auto;
     max-width: 400px;
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Progress, Form, Input, Button, Cascader } from 'antd';
+import { Form, Input, Button, Cascader, Progress } from 'antd';
+import ProgressBar from '../../../common/progressBar/progressBar';
 import '../inventoryStyles.css';
 import { useHistory } from 'react-router-dom';
 
@@ -7,10 +8,9 @@ function NewItem(props) {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="outerContainer">
+      <ProgressBar percent={20} status="active" />
       <div className="contents">
-        <Progress percent={20} status="active" />
-
         <h1>Main Information</h1>
         <Form>
           <Form.Item>
