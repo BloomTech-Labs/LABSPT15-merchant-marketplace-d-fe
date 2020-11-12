@@ -49,4 +49,17 @@ const getProfileData = authState => {
   }
 };
 
-export { sleep, getExampleData, getProfileData, getDSData };
+const postData = (url, newData, authState) => {
+  // here's another way you can compose together your API calls.
+  // Note the use of GetAuthHeader here is a little different than in the getProfileData call.
+  const headers = getAuthHeader(authState);
+  if (!url) {
+    throw new Error('No URL provided');
+  }
+  return axios
+    .post(url, newData, { headers })
+    .then(res => JSON.parse(res.data))
+    .catch(err => err);
+};
+
+export { sleep, getExampleData, getProfileData, getDSData, postData };
