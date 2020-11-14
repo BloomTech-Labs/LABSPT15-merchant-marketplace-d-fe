@@ -19,11 +19,7 @@ import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 
 // Seller Imports
-import Inventory from './components/inDevelopment/inventory';
-import NewItem from './components/inDevelopment/inventory/newItem';
-import MoreInfo from './components/inDevelopment/inventory/newItem/moreInfo';
-import AddPhotos from './components/inDevelopment/inventory/newItem/photos';
-import Finalize from './components/inDevelopment/inventory/newItem/finalize';
+import Inventory from './components/sellerPages/inventory';
 
 ReactDOM.render(
   <Router>
@@ -60,22 +56,6 @@ function App() {
         <SecureRoute path="/profile-list" component={ProfileListPage} />
         {/* Seller's  Routes */}
         <SecureRoute exact path="/inventory" component={Inventory} />
-        <SecureRoute exact path="/inventory/newitem" component={NewItem} />
-        <SecureRoute
-          exact
-          path="/inventory/newitem/moreinfo"
-          component={MoreInfo}
-        />
-        <SecureRoute
-          exact
-          path="/inventory/newitem/moreinfo/photos"
-          component={AddPhotos}
-        />
-        <SecureRoute
-          exact
-          path="/inventory/newitem/moreinfo/photos/finalize"
-          component={Finalize}
-        />
         {/* 404 Route */}
         <Route component={NotFoundPage} />
       </Switch>
