@@ -42,7 +42,7 @@ function Inventory(props) {
 
   return (
     <div className="outerContainer">
-      <div className={itemView}>
+      {/* <div className={itemView}>
         <div className="contents">
           <CurrentInventory />
           <Button
@@ -53,37 +53,35 @@ function Inventory(props) {
             +Add Item
           </Button>
         </div>
-      </div>
+      </div> */}
 
-      <div className="temp">
-        <div className="formContainer">
-          <ProgressBar percent={progressPoint} status={progressStatus} />
-          <Carousel ref={slider}>
-            <NewItem
-              slider={slider}
-              setData={setForm1}
-              setProgress={setProgressPoint}
-            />
-            <MoreInfo
-              slider={slider}
-              setData={setForm2}
-              setProgress={setProgressPoint}
-            />
-            <AddPhotos
-              slider={slider}
-              setProgress={setProgressPoint}
-              setData={setForm3}
-            />
-            <Finalize
-              slider={slider}
-              setData={setForm4}
-              setStatus={setProgressStatus}
-              setProgress={setProgressPoint}
-              product={form1}
-              formCosolidate={formCosolidate}
-            />
-          </Carousel>
-        </div>
+      <div className="formContainer">
+        <ProgressBar percent={progressPoint} status={progressStatus} />
+        <Carousel ref={slider}>
+          <NewItem
+            slider={slider}
+            setData={setForm1}
+            setProgress={setProgressPoint}
+          />
+          <MoreInfo
+            slider={slider}
+            setData={setForm2}
+            setProgress={setProgressPoint}
+          />
+          <AddPhotos
+            slider={slider}
+            setProgress={setProgressPoint}
+            setData={setForm3}
+          />
+          <Finalize
+            slider={slider}
+            setData={setForm4}
+            setStatus={setProgressStatus}
+            setProgress={setProgressPoint}
+            product={form1}
+            formCosolidate={formCosolidate}
+          />
+        </Carousel>
       </div>
 
       <Button

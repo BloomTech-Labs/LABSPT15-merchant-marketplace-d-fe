@@ -20,6 +20,7 @@ import { LoadingComponent } from './components/common';
 
 // Seller Imports
 import Inventory from './components/sellerPages/inventory';
+import CurrentInventory from './components/sellerPages/inventory/currentInventory';
 
 ReactDOM.render(
   <Router>
@@ -55,8 +56,8 @@ function App() {
         <SecureRoute path="/example-list" component={ExampleListPage} />
         <SecureRoute path="/profile-list" component={ProfileListPage} />
         {/* Seller's  Routes */}
-        <SecureRoute exact path="/inventory" component={Inventory} />
-        {/* 404 Route */}
+        <SecureRoute exact path="/inventory" component={CurrentInventory} />
+        <SecureRoute exact path="/inventory/additem" component={Inventory} />
         <Route component={NotFoundPage} />
       </Switch>
     </Security>

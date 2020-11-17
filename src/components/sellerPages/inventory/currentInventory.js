@@ -1,4 +1,6 @@
+import { Button } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ItemCard from '../../common/cards/ItemCards';
 
 function CurrentInventory(props) {
@@ -10,6 +12,9 @@ function CurrentInventory(props) {
           description="test description text"
           price="3.33"
         />
+        <Link to="/inventory/additem">
+          <Button>+Add Item</Button>
+        </Link>
       </div>
     </div>
   );
