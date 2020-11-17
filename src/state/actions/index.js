@@ -1,5 +1,44 @@
-// import all of your actions into this file, and export them back out. 
-// This allows for the simplification of flow when importing actions into your components throughout your app.
-// Actions should be focused to a single purpose. 
-// You can have multiple action creators per file if it makes sense to the purpose those action creators are serving. 
-// Declare action TYPES at the top of the file
+import {
+  sleep,
+  getExampleData,
+  getProfileData,
+  getDSData,
+  postData,
+} from '../../api/index';
+import { useOktaAuth } from '@okta/okta-react';
+
+export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
+
+export const ADD_PRODUCT_START = 'ADD_PRODUCT_START';
+export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
+export const ADD_PRODUCT_ERROR = 'ADD_PRODUCT_ERROR';
+
+export const fetchProducts = () => dispatch => {
+  const { authState } = useOktaAuth();
+  dispatch({ type: FETCH_PRODUCTS_START });
+
+  setTimeout(() => {
+    getDSData('http://localhost:8000', authState)
+      .then(response => {
+        dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response.data });
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
+      });
+  }, 1000);
+};
+
+export const addProduct = newProduct => dispatch => {
+  const { authState } = useOktaAuth();
+  dispatch({ type: ADD_PRODUCT_START });
+
+  postData('http://localhost:8000', newProduct, authState) //Post request, placeholder url
+    .then(response => {
+      dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
+    });
+};
