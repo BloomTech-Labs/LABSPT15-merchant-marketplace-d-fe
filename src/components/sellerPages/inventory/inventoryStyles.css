@@ -1,0 +1,24 @@
+.outerContainer{
+    margin-top: 10rem;
+}
+.contents{
+    margin: auto;
+    max-width: 400px;
+}
+.formContainer{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.confButton{
+    margin: 0 auto;
+}
+
+.popContent{
+    display: flex;
+    flex-flow: column;
+}
+
+.displayedNone{
+    display: none;
+}

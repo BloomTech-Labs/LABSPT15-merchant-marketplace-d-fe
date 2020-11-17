@@ -21,6 +21,10 @@ function RenderHomePage(props) {
         <p>
           <Link to="/datavis">Data Visualizations Example</Link>
         </p>
+        <hr />
+        <p>
+          <Link to="/inventory">PlaceHolder for Seller</Link>
+        </p>
         <p>
           <Button
             handleClick={() => authService.logout()}

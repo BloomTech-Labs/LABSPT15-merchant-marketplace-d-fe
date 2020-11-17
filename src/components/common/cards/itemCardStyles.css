@@ -1,0 +1,26 @@
+
+.cardContainer{
+    height: 60px;
+    border: solid lightgray 1px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+}
+.cardImage{
+    width: 70px;
+    height: 50px;
+    background-color: pink;
+}
+.cardDesc{
+    width: 60%;
+    max-width: 250px;
+    font-size: .75rem;
+}
+.descText{
+    margin-bottom: .125rem;
+}
+.cardPrice{
+    margin-top: 10%;
+}

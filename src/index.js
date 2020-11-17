@@ -22,6 +22,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+// Seller Imports
+import Inventory from './components/sellerPages/inventory';
+import CurrentInventory from './components/sellerPages/inventory/currentInventory';
+
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
@@ -58,8 +62,10 @@ function App() {
           component={() => <HomePage LoadingComponent={LoadingComponent} />}
         />
         <SecureRoute path="/example-list" component={ExampleListPage} />
-
         <SecureRoute path="/profile-list" component={ProfileListPage} />
+        {/* Seller's  Routes */}
+        <SecureRoute exact path="/inventory" component={CurrentInventory} />
+        <SecureRoute exact path="/inventory/additem" component={Inventory} />
         <Route component={NotFoundPage} />
       </Switch>
     </Security>
