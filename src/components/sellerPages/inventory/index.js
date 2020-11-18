@@ -7,8 +7,10 @@ import MoreInfo from './newItem/moreInfo';
 import AddPhotos from './newItem/photos';
 import Finalize from './newItem/finalize';
 import ProgressBar from '../../common/progressBar/progressBar';
+import { addProduct } from '../../../state/actions/index';
+import { connect } from 'react-redux';
 
-function Inventory(props) {
+function Inventory({ status, addProduct }) {
   // Final Data State
   const [newItemData, setNewItemData] = useState({});
 
@@ -25,7 +27,8 @@ function Inventory(props) {
       ...form3,
       ...form4,
     };
-    setNewItemData(completeObject);
+    setNewItemData(completeObject); //// I will review this later, I dont think we need a state here, we can just pass the object to the addProduct action
+    addProduct(newItemData);
   };
 
   // Progress Bar Sync
@@ -99,5 +102,8 @@ function Inventory(props) {
     </div>
   );
 }
+const mapStateToProps = state => ({
+  status: state.addProduct.getAddProductStatus,
+});
 
-export default Inventory;
+export default connect(mapStateToProps, { addProduct })(Inventory);
