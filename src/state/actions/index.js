@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   sleep,
   getExampleData,
@@ -5,7 +6,6 @@ import {
   getDSData,
   postData,
 } from '../../api/index';
-import { useOktaAuth } from '@okta/okta-react';
 
 export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
@@ -15,30 +15,33 @@ export const ADD_PRODUCT_START = 'ADD_PRODUCT_START';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_ERROR = 'ADD_PRODUCT_ERROR';
 
-export const fetchProducts = () => dispatch => {
-  const { authState } = useOktaAuth();
+export const fetchProducts = authState => dispatch => {
   dispatch({ type: FETCH_PRODUCTS_START });
+  //I am using a random API (actually mine) to test the action and see if I am able to connect redux to components
 
-  setTimeout(() => {
-    getDSData('http://localhost:8000', authState)
-      .then(response => {
-        dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response.data });
-      })
-      .catch(err => {
-        dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
-      });
-  }, 1000);
-};
-
-export const addProduct = newProduct => dispatch => {
-  const { authState } = useOktaAuth();
-  dispatch({ type: ADD_PRODUCT_START });
-
-  postData('http://localhost:8000', newProduct, authState) //Post request, placeholder url
+  getDSData(
+    'https://strings-music-instruments-api.herokuapp.com/api/instruments',
+    authState
+  )
     .then(response => {
-      dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
+      dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response });
     })
     .catch(err => {
-      dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
+      dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
     });
+};
+
+export const addProduct = (newProduct, authState) => dispatch => {
+  dispatch({ type: ADD_PRODUCT_START });
+
+  // Here will do the post request to the API
+
+  // postData('http://localhost:8000', newProduct, authState) //Post request, placeholder url
+  //   .then(response => {
+  //     dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
+  //   })
+  //   .catch(err => {
+  //     dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
+  //   });
+  dispatch({ type: ADD_PRODUCT_SUCCESS, payload: newProduct }); //This is for testing purposes
 };

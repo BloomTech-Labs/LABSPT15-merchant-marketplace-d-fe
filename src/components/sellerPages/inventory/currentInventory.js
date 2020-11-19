@@ -1,10 +1,18 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ItemCard from '../../common/cards/ItemCards';
 import NavBar from '../../common/navBar';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../../../state/actions/index';
+import { useOktaAuth } from '@okta/okta-react';
 
-function CurrentInventory(props) {
+function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
+  const { authState } = useOktaAuth();
+
+  useEffect(() => {
+    fetchProducts(authState);
+  }, []);
   return (
     <>
       <NavBar />
@@ -23,5 +31,9 @@ function CurrentInventory(props) {
     </>
   );
 }
+const mapStateToProps = state => ({
+  inventory: state.products.products,
+  getProductsStatus: state.products.getProductsStatus,
+});
 
-export default CurrentInventory;
+export default connect(mapStateToProps, { fetchProducts })(CurrentInventory);
