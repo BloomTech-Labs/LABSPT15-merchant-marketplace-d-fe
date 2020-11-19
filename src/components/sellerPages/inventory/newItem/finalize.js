@@ -21,8 +21,6 @@ function Finalize(props) {
 
   const onChange = values => {
     setPrice(values.price);
-    console.log(values.price);
-    console.log(price);
   };
 
   const popoverContent = (

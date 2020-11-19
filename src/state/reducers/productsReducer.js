@@ -16,7 +16,6 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, getProductsStatus: requestStatus.loading };
     case FETCH_PRODUCTS_SUCCESS:
       const newState = action.payload;
-      console.log('new state', newState);
       return { products: newState, getProductsStatus: requestStatus.success };
     case FETCH_PRODUCTS_ERROR:
       return { ...state, getProductsStatus: requestStatus.error };

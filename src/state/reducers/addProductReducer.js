@@ -15,6 +15,7 @@ const addProductReducer = (state = initialState, action) => {
     case ADD_PRODUCT_START:
       return { ...state, getAddProductStatus: requestStatus.loading };
     case ADD_PRODUCT_SUCCESS:
+      console.log(action.payload);
       return {
         newProduct: action.payload,
         getAddProductStatus: requestStatus.loading,

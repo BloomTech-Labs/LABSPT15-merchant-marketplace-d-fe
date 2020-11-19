@@ -30,7 +30,7 @@ const getDSData = (url, authState) => {
   }
   return axios
     .get(url, { headers })
-    .then(res => JSON.parse(res.data))
+    .then(res => res.data)
     .catch(err => err);
 };
 

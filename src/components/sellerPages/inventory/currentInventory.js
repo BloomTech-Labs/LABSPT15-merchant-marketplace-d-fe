@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import ItemCard from '../../common/cards/ItemCards';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../../state/actions/index';
+import { useOktaAuth } from '@okta/okta-react';
 
 function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
-  console.log('Inventory', inventory);
-  console.log('status', getProductsStatus);
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(authState);
   }, []);
   return (
     <div className="outerContainer">
