@@ -21,42 +21,44 @@ function Finalize(props) {
 
   const onChange = values => {
     setPrice(values.price);
-    console.log(values.price);
-    console.log(price);
   };
 
   const popoverContent = (
     <div className="popContent">
       <h2>What would you like to do with this item?</h2>
-      <Button
-        onMouseEnter={() => {
-          props.setStatus('');
-          props.setProgress(100);
-        }}
-        onClick={() => {
-          formConfirm();
-        }}
-      >
-        Create and Stock Item
-      </Button>
-
-      <Button
-        onMouseEnter={() => {
-          props.setStatus('active');
-          props.setProgress(90);
-        }}
-      >
-        Save Item as Draft
-      </Button>
-
-      <Button
-        onMouseEnter={() => {
-          props.setStatus('exception');
-          props.setProgress(0);
-        }}
-      >
-        Cancel
-      </Button>
+      <Link to="/myprofile/inventory">
+        <Button
+          onMouseEnter={() => {
+            props.setStatus('');
+            props.setProgress(100);
+          }}
+          onClick={() => {
+            formConfirm();
+          }}
+        >
+          Create and Stock Item
+        </Button>
+      </Link>
+      <Link to="/myprofile/inventory">
+        <Button
+          onMouseEnter={() => {
+            props.setStatus('active');
+            props.setProgress(90);
+          }}
+        >
+          Save Item as Draft
+        </Button>
+      </Link>
+      <Link to="/myprofile/inventory">
+        <Button
+          onMouseEnter={() => {
+            props.setStatus('exception');
+            props.setProgress(0);
+          }}
+        >
+          Cancel
+        </Button>
+      </Link>
     </div>
   );
 

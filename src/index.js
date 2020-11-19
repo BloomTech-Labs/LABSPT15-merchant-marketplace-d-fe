@@ -23,6 +23,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 // Seller Imports
+import SellerProfile from './components/sellerPages/profile';
 import Inventory from './components/sellerPages/inventory';
 import CurrentInventory from './components/sellerPages/inventory/currentInventory';
 
@@ -64,8 +65,17 @@ function App() {
         <SecureRoute path="/example-list" component={ExampleListPage} />
         <SecureRoute path="/profile-list" component={ProfileListPage} />
         {/* Seller's  Routes */}
-        <SecureRoute exact path="/inventory" component={CurrentInventory} />
-        <SecureRoute exact path="/inventory/additem" component={Inventory} />
+        <SecureRoute exact path="/myprofile" component={SellerProfile} />
+        <SecureRoute
+          exact
+          path="/myprofile/inventory"
+          component={CurrentInventory}
+        />
+        <SecureRoute
+          exact
+          path="/myprofile/inventory/additem"
+          component={Inventory}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </Security>
