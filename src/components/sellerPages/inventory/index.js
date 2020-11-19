@@ -7,8 +7,12 @@ import MoreInfo from './newItem/moreInfo';
 import AddPhotos from './newItem/photos';
 import Finalize from './newItem/finalize';
 import ProgressBar from '../../common/progressBar/progressBar';
+import { addProduct } from '../../../state/actions/index';
+import { connect } from 'react-redux';
+import { useOktaAuth } from '@okta/okta-react';
 
-function Inventory(props) {
+function Inventory({ status, addProduct }) {
+  const { authState } = useOktaAuth();
   // Final Data State
   const [newItemData, setNewItemData] = useState({});
 
@@ -25,7 +29,8 @@ function Inventory(props) {
       ...form3,
       ...form4,
     };
-    setNewItemData(completeObject);
+    setNewItemData(completeObject); //// I will review this later, I dont think we need a state here, we can just pass the object to the addProduct action-Pedro
+    addProduct(newItemData, authState);
   };
 
   // Progress Bar Sync
@@ -83,21 +88,11 @@ function Inventory(props) {
           />
         </Carousel>
       </div>
-
-      <Button
-        onClick={() => {
-          // For debuggin and may come usefull when attaching redux
-          console.log(form1);
-          console.log(form2);
-          console.log(form3);
-          console.log(form4);
-          console.log('final object:', newItemData);
-        }}
-      >
-        Console Log
-      </Button>
     </div>
   );
 }
+const mapStateToProps = state => ({
+  status: state.addProduct.getAddProductStatus, //We could use this status to see the status of the api call post request
+});
 
-export default Inventory;
+export default connect(mapStateToProps, { addProduct })(Inventory);
