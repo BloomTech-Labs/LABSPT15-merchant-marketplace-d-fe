@@ -1,0 +1,29 @@
+.orderCardContainer {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background-color: lightgray;
+  align-items: center;
+  padding: 5px;
+  height: 60px;
+}
+.orderInfo {
+}
+
+h4 {
+  margin-bottom: 2px;
+}
+p {
+  margin-bottom: 2px;
+}
+.activeLink {
+  text-align: right;
+  color: blue;
+  font-weight: 700;
+}
+.indicator {
+  width: 10px;
+  height: 60px;
+  height: 100%;
+  background-color: orange;
+}

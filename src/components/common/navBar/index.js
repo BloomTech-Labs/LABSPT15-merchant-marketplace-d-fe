@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Badge } from 'antd';
 import './navStyles.css';
-function NavBar(props) {
+
+function NavBar({ logo }) {
   return (
     <div className="navOuter">
       <div className="navContainer">
         <div className="leftNav">
-          <div className="logo">{props.logo}</div>
+          <div className="logo">{logo}</div>
           <Link to="/myprofile/inventory">Inventory</Link>
-          <Link>Oders</Link>
+          <Link>Orders</Link>
           <Link>Payment</Link>
         </div>
         <div className="rightNav">
           <Link to="/myprofile">My Profile</Link>
-          <Link>Messeges</Link>
+          <Badge count={10}>
+            <Link>Messeges</Link>
+          </Badge>
         </div>
       </div>
     </div>
