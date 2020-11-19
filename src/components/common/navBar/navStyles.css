@@ -1,0 +1,32 @@
+.navOuter{
+   background-color: lightgrey; 
+   position: absolute;
+   width: 100%;
+   top: 0;
+}
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.leftNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    width: 100px;
+    height: 50px;
+    background-color: pink;
+}
+
+a{
+    color: black;
+    margin-left: 15px;
+}
+a:hover{
+    text-decoration: underline;
+}

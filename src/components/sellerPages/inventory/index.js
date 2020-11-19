@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Button, Carousel } from 'antd';
 import './inventoryStyles.css';
-import CurrentInventory from './currentInventory';
 import NewItem from './newItem';
 import MoreInfo from './newItem/moreInfo';
 import AddPhotos from './newItem/photos';
 import Finalize from './newItem/finalize';
 import ProgressBar from '../../common/progressBar/progressBar';
+import NavBar from '../../common/navBar';
 import { addProduct } from '../../../state/actions/index';
 import { connect } from 'react-redux';
 import { useOktaAuth } from '@okta/okta-react';
@@ -37,58 +37,55 @@ function Inventory({ status, addProduct }) {
   const [progressPoint, setProgressPoint] = useState(1);
   const [progressStatus, setProgressStatus] = useState('active');
 
-  // View Status - For toggling between adding inv and reviewing
-  const [viewState, setViewState] = useState(false);
-  const [itemView, setItemView] = useState('inView');
-  const [addView, setAddView] = useState('displayedNone');
-
   // Form Pointer for antD
   const slider = useRef(null);
 
   return (
-    <div className="outerContainer">
-      {/* <div className={itemView}>
-        <div className="contents">
-          <CurrentInventory />
-          <Button
-            onClick={() => {
-              setViewState(true);
-            }}
-          >
-            +Add Item
-          </Button>
+    <>
+      <NavBar />
+      <div className="outerContainer">
+        <div className="formContainer">
+          <ProgressBar percent={progressPoint} status={progressStatus} />
+          <Carousel ref={slider}>
+            <NewItem
+              slider={slider}
+              setData={setForm1}
+              setProgress={setProgressPoint}
+            />
+            <MoreInfo
+              slider={slider}
+              setData={setForm2}
+              setProgress={setProgressPoint}
+            />
+            <AddPhotos
+              slider={slider}
+              setProgress={setProgressPoint}
+              setData={setForm3}
+            />
+            <Finalize
+              slider={slider}
+              setData={setForm4}
+              setStatus={setProgressStatus}
+              setProgress={setProgressPoint}
+              product={form1}
+              formCosolidate={formCosolidate}
+            />
+          </Carousel>
         </div>
-      </div> */}
 
-      <div className="formContainer">
-        <ProgressBar percent={progressPoint} status={progressStatus} />
-        <Carousel ref={slider}>
-          <NewItem
-            slider={slider}
-            setData={setForm1}
-            setProgress={setProgressPoint}
-          />
-          <MoreInfo
-            slider={slider}
-            setData={setForm2}
-            setProgress={setProgressPoint}
-          />
-          <AddPhotos
-            slider={slider}
-            setProgress={setProgressPoint}
-            setData={setForm3}
-          />
-          <Finalize
-            slider={slider}
-            setData={setForm4}
-            setStatus={setProgressStatus}
-            setProgress={setProgressPoint}
-            product={form1}
-            formCosolidate={formCosolidate}
-          />
-        </Carousel>
+        <Button
+          onClick={() => {
+            console.log(form1);
+            console.log(form2);
+            console.log(form3);
+            console.log(form4);
+            console.log('final object:', newItemData);
+          }}
+        >
+          Console Log
+        </Button>
       </div>
-    </div>
+    </>
   );
 }
 const mapStateToProps = state => ({
