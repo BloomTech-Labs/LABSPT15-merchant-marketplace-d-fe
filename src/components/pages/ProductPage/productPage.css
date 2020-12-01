@@ -1,0 +1,17 @@
+.product-page {
+
+    padding: 10%;
+    
+}
+
+.product-container {
+    border-top: 1px solid lightgray;
+    display: flex;
+
+}
+
+.carousel {
+
+    height: 300px;
+    width: auto;
+}
