@@ -1,0 +1,19 @@
+.nope{
+    display: none;
+}
+
+.searchOuter{
+    background-color: lightskyblue;
+    max-width: 1000px;
+    margin: 5px auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.searchBar{
+    max-width: 300px;
+}
+
+.searchButton{
+    margin-right: 5px;
+}
