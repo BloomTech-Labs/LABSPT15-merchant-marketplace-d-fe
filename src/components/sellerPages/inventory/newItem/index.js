@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Cascader, Button } from 'antd';
+import FormButton from '../../../common/FormButton/FormButton';
 import '../inventoryStyles.css';
 
 function NewItem(props) {
@@ -28,15 +29,11 @@ function NewItem(props) {
         <Form.Item name="tags">
           <Input placeholder="Create tags" />
         </Form.Item>
-        <Button
-          htmlType="submit"
-          onClick={() => {
-            props.setProgress(20);
-            props.slider.current.next();
-          }}
-        >
-          Next
-        </Button>
+        <FormButton
+          setProgress={props.setProgress}
+          slider={props.slider}
+          progressPercent={20}
+        />
       </Form>
     </div>
   );
