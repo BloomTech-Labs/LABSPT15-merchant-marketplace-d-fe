@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Carousel } from 'antd';
 import './inventoryStyles.css';
 import NewItem from './newItem';
-import MoreInfo from './newItem/moreInfo';
+import Specifications from './newItem/specifications';
 import AddPhotos from './newItem/photos';
 import Finalize from './newItem/finalize';
 import ProgressBar from '../../common/progressBar/progressBar';
@@ -52,7 +52,7 @@ function Inventory({ status, addProduct }) {
               setData={setForm1}
               setProgress={setProgressPoint}
             />
-            <MoreInfo
+            <Specifications
               slider={slider}
               setData={setForm2}
               setProgress={setProgressPoint}
