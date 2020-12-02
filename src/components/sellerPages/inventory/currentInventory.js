@@ -18,11 +18,13 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
       <NavBar />
       <div className="outerContainer">
         <div className="contents">
-          <ItemCard
-            name="testname"
-            description="test description text"
-            price="3.33"
-          />
+          {inventory.map(item => {
+            return (
+              <>
+                <ItemCard name={item.name} price={item.price} />
+              </>
+            );
+          })}
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>

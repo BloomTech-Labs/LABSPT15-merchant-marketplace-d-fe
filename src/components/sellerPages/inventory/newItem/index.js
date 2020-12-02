@@ -13,10 +13,10 @@ function NewItem(props) {
     <div className="contents">
       <h1>Main Information</h1>
       <Form form={form} onFinish={onFinish}>
-        <Form.Item name="product_name">
+        <Form.Item name="name">
           <Input placeholder="Name of Item" />
         </Form.Item>
-        <Form.Item name="product_synopsis">
+        <Form.Item name="description">
           <Input.TextArea placeholder="Short Description (Max 140 Characters)" />
         </Form.Item>
         <Form.Item name="tags">
