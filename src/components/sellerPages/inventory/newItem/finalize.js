@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import { Form, Popover, InputNumber } from 'antd';
-import ItemCard from '../../../common/cards/ItemCards';
+import ItemCard from '../../../common/cards/normalItem';
 import { Link } from 'react-router-dom';
 // May remove, I need to figure out passing props
 import popContent from './popContent';
