@@ -1,11 +1,14 @@
 import React from 'react';
 import { Button } from 'antd';
 
+import './FormButton.styles.css';
+
 const FormButton = props => {
   return (
-    <>
-      <Button>Cancel</Button>
+    <div className="Btn_Container">
+      <Button className="CancellBtn">Cancel</Button>
       <Button
+        className="NextBtn"
         htmlType="submit"
         onClick={() => {
           props.setProgress(props.progressPercent);
@@ -14,7 +17,7 @@ const FormButton = props => {
       >
         Next
       </Button>
-    </>
+    </div>
   );
 };
 

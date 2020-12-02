@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Input, Cascader, Button } from 'antd';
+import React from 'react';
+import { Form, Input, Cascader } from 'antd';
 import FormButton from '../../../common/FormButton/FormButton';
 import '../inventoryStyles.css';
 

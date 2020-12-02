@@ -1,6 +1,7 @@
 import React from 'react';
 import '../inventoryStyles.css';
-import { Form, Input, Button } from 'antd';
+import { Form, Input } from 'antd';
+import FormButton from '../../../common/FormButton/FormButton';
 
 function MoreInfo(props) {
   const onFinish = values => {
@@ -17,15 +18,11 @@ function MoreInfo(props) {
         <Form.Item name="custom_tags">
           <Input placeholder="Tags/Keywords" />
         </Form.Item>
-        <Button
-          htmlType="submit"
-          onClick={() => {
-            props.setProgress(40);
-            props.slider.current.next();
-          }}
-        >
-          Next
-        </Button>
+        <FormButton
+          setProgress={props.setProgress}
+          slider={props.slider}
+          progressPercent={40}
+        />
       </Form>
     </div>
   );

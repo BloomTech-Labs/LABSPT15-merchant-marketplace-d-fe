@@ -1,17 +1,14 @@
 import React from 'react';
-import { Button } from 'antd';
+import FormButton from '../../../common/FormButton/FormButton';
 function AddPhotos(props) {
   return (
     <div className="contents">
       <h1> TBD</h1>
-      <Button
-        onClick={() => {
-          props.setProgress(60);
-          props.slider.current.next();
-        }}
-      >
-        Next
-      </Button>
+      <FormButton
+        setProgress={props.setProgress}
+        slider={props.slider}
+        progressPercent={20}
+      />
     </div>
   );
 }
