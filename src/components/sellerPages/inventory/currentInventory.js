@@ -15,19 +15,30 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
   }, []);
   return (
     <>
-      <NavBar />
+      <NavBar searchVisible={true} />
       <div className="outerContainer">
         <div className="contents">
-          <ItemCard
-            name="testname"
-            description="test description text"
-            price="3.33"
-          />
+          {inventory.map(item => (
+            <ItemCard
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              description={item.description}
+            />
+          ))}
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>
         </div>
       </div>
+      <Button
+        onClick={() => {
+          console.log(inventory);
+          console.log(fetchProducts);
+        }}
+      >
+        Console Log
+      </Button>
     </>
   );
 }
