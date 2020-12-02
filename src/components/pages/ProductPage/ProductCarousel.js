@@ -1,31 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Carousel } from 'antd';
+import './productPage.css';
 
-const contentStyle = {
-  height: '160px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+export default class ProductCarousel extends Component {
+  constructor(props) {
+    super(props);
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
+    this.carousel = React.createRef();
+  }
+  next() {
+    this.carousel.next();
+  }
+  previous() {
+    this.carousel.prev();
+  }
 
-const ProductCarousel = () => {
-  return (
-    <Carousel autoplay>
+  render() {
+    const props = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+    return (
       <div>
-        <h3 style={contentStyle}>1</h3>
+        {/* <p onClick={this.previous}>previous</p> */}
+        <Carousel ref={node => (this.carousel = node)} {...props}>
+          <div>
+            <h3>1</h3>
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+        </Carousel>
+        {/* <p onClick={this.next}>next</p> */}
       </div>
-      <div>
-        <h3 style={contentStyle}>2</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>3</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>4</h3>
-      </div>
-    </Carousel>
-  );
-};
-
-export default ProductCarousel;
+    );
+  }
+}
