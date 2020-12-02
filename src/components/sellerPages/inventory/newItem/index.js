@@ -19,8 +19,14 @@ function NewItem(props) {
         <Form.Item name="description">
           <Input.TextArea placeholder="Short Description (Max 140 Characters)" />
         </Form.Item>
-        <Form.Item name="tags">
+        <Form.Item name="category">
           <Cascader />
+        </Form.Item>
+        <Form.Item name="price">
+          <Input placeholder="Price per item" />
+        </Form.Item>
+        <Form.Item name="tags">
+          <Input placeholder="Create tags" />
         </Form.Item>
         <Button
           htmlType="submit"

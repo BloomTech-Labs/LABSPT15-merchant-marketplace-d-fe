@@ -1,8 +1,10 @@
-.navOuter{
-   background-color: lightgrey; 
-   position: absolute;
+.navOuter{ 
+   position: fixed;
    width: 100%;
    top: 0;
+}
+.navBackground{
+    background-color: lightgray;
 }
 .navContainer{
     display: flex;
