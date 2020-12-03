@@ -64,7 +64,7 @@ function Finalize(props) {
 
   return (
     <div className="contents">
-      <h1>Price</h1>
+      <h1>Pricing for {props.product.name}</h1>
       <ItemCard
         price={price}
         name={props.product.name}

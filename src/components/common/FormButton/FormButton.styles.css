@@ -1,0 +1,14 @@
+.Btn_Container {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.NextBtn {
+ background-color: lightgray;
+ border: 1px solid black;
+
+
+}
+.CancellBtn {
+  border: 1px solid black;
+}

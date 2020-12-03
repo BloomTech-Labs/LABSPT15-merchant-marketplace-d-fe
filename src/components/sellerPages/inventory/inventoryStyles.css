@@ -22,3 +22,14 @@
 .displayedNone{
     display: none;
 }
+.spec-inputs {
+    margin: 10%
+}
+
+h1 {
+    text-align: center;
+}
+
+.supplement-detail{
+    color: lightgray;
+}
