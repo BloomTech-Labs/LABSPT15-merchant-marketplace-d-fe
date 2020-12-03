@@ -27,7 +27,7 @@ const ProductPage = () => {
               <Avatar size="small" icon={<GlobalOutlined />} />
               <h3>Store Name</h3>
             </div>
-            <p>Location</p>
+            <p>location</p>
             <section>
               <p>
                 (Short Description) Lorem ipsum dolor sit amet, consectetur
