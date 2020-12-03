@@ -25,6 +25,7 @@ import thunk from 'redux-thunk';
 import SellerProfile from './components/sellerPages/profile';
 import Inventory from './components/sellerPages/inventory';
 import CurrentInventory from './components/sellerPages/inventory/currentInventory';
+import { ProductPage } from './components/pages/ProductPage';
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
@@ -73,6 +74,11 @@ function App() {
           exact
           path="/myprofile/inventory/additem"
           component={Inventory}
+        />
+        <SecureRoute
+          exact
+          path="/myprofile/inventory/productpage"
+          component={ProductPage}
         />
         <Route component={NotFoundPage} />
       </Switch>
