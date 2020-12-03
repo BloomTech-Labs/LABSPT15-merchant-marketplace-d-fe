@@ -5,6 +5,7 @@ import ItemCard from '../../../common/cards/normalItem';
 import { Link } from 'react-router-dom';
 // May remove, I need to figure out passing props
 import popContent from './popContent';
+import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
 
 function Finalize(props) {
   const [price, setPrice] = useState();
@@ -64,16 +65,8 @@ function Finalize(props) {
 
   return (
     <div className="contents">
-      <h1>Pricing for {props.product.name}</h1>
-      <ItemCard
-        price={price}
-        name={props.product.name}
-        description={props.product.description}
-      />
+      <ProductInfo />
       <Form form={form} onFieldsChange={onChange} onFinish={onFinish}>
-        <Form.Item name="price">
-          <InputNumber />
-        </Form.Item>
         <Form.Item>
           <Popover content={popoverContent}>
             <Button
@@ -82,9 +75,7 @@ function Finalize(props) {
                 props.setProgress(80);
                 props.setData(form.getFieldsValue);
               }}
-            >
-              Confirm and Continue
-            </Button>
+            ></Button>
           </Popover>
         </Form.Item>
       </Form>
