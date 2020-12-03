@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Button, Carousel } from 'antd';
 import './inventoryStyles.css';
-import NewItem from './newItem';
+import NewItem from './newItem/main_info';
 import Specifications from './newItem/specifications';
 import AddPhotos from './newItem/photos';
-import Finalize from './newItem/finalize';
+import Finalize from './newItem/review_product';
 import ProgressBar from '../../common/progressBar/progressBar';
 import NavBar from '../../common/navBar';
 import { addProduct } from '../../../state/actions/index';

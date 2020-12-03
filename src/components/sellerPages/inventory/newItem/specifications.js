@@ -8,16 +8,28 @@ function MoreInfo(props) {
     props.setData(values);
   };
 
+  const AddDetail = () => {
+    console.log('Add Detail');
+  };
+
   return (
     <div className="contents">
-      <h1>More Information</h1>
+      <h1>Specifications</h1>
+      <p>
+        Buyers are more likely to buy an item that is described well. Add
+        specific details about your product here. These details should be short
+        and clear. Examples include weight, material, size, color, main purpose,
+        etc.
+      </p>
       <Form onFinish={onFinish}>
-        <Form.Item name="full_description">
-          <Input.TextArea placeholder="Full Description" />
-        </Form.Item>
-        <Form.Item name="custom_tags">
-          <Input placeholder="Tags/Keywords" />
-        </Form.Item>
+        <section className="spec-inputs">
+          <Form.Item name="specification">
+            <Input placeholder="Add a detail" />
+          </Form.Item>
+          <div className="supplement-detail" onClick={AddDetail}>
+            + Add another detail
+          </div>
+        </section>
         <FormButton
           setProgress={props.setProgress}
           slider={props.slider}
