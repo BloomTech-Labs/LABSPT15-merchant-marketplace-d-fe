@@ -1,11 +1,11 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import { Form, Popover, InputNumber } from 'antd';
-import ItemCard from '../../../common/cards/normalItem';
+import { Form, Popover } from 'antd';
 import { Link } from 'react-router-dom';
 // May remove, I need to figure out passing props
 import popContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
+import FormButton from '../../../common/FormButton/FormButton';
 
 function Finalize(props) {
   const [price, setPrice] = useState();
@@ -66,6 +66,7 @@ function Finalize(props) {
   return (
     <div className="contents">
       <ProductInfo />
+      <Button>Cancel</Button>
       <Form form={form} onFieldsChange={onChange} onFinish={onFinish}>
         <Form.Item>
           <Popover content={popoverContent}>
@@ -75,7 +76,9 @@ function Finalize(props) {
                 props.setProgress(80);
                 props.setData(form.getFieldsValue);
               }}
-            ></Button>
+            >
+              Save Product
+            </Button>
           </Popover>
         </Form.Item>
       </Form>
