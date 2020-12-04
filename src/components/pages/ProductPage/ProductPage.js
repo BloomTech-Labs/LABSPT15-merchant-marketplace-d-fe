@@ -6,7 +6,7 @@ const ProductPage = () => {
   return (
     <div>
       <NavBar />
-      <ProductInfo />ß
+      <ProductInfo />
     </div>
   );
 };

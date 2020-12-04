@@ -8,12 +8,12 @@ function Finalize(props) {
     props.formCosolidate();
   };
 
-  const ShowPopContent = () => {
+  const ShowPopContent = ({ setStatus, setProgress }) => {
     return (
       <>
         <PopContent
-          setProgress={props.setProgress}
-          setStatus={props.setStatus}
+          setProgress={setProgress}
+          setStatus={setStatus}
           formConfirm={formConfirm}
         />
       </>

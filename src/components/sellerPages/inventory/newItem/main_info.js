@@ -3,11 +3,11 @@ import { Form, Input, Cascader } from 'antd';
 import FormButton from '../../../common/FormButton/FormButton';
 import '../inventoryStyles.css';
 
-function NewItem(props) {
+function NewItem({ setProgress, slider, setData }) {
   const [form] = Form.useForm();
 
   const onFinish = values => {
-    props.setData(values);
+    setData(values);
   };
 
   return (
@@ -30,8 +30,8 @@ function NewItem(props) {
           <Input placeholder="Create tags" />
         </Form.Item>
         <FormButton
-          setProgress={props.setProgress}
-          slider={props.slider}
+          setProgress={setProgress}
+          slider={slider}
           progressPercent={20}
           text="Next"
         />
