@@ -1,7 +1,8 @@
 import React from 'react';
 import '../inventoryStyles.css';
-import { Form, Input } from 'antd';
 import FormButton from '../../../common/FormButton/FormButton';
+import { Form, Input, Button, Space } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 function MoreInfo(props) {
   const onFinish = values => {
@@ -26,9 +27,30 @@ function MoreInfo(props) {
           <Form.Item name="specification">
             <Input placeholder="Add a detail" />
           </Form.Item>
-          <div className="supplement-detail" onClick={AddDetail}>
-            + Add another detail
-          </div>
+          <Form.List name="specs">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(field => (
+                  <>
+                    <Form.Item
+                      {...field}
+                      name={[field.name, 'first']}
+                      fieldKey={[field.fieldKey, 'first']}
+                      rules={[{ required: true, message: 'Missing spec' }]}
+                    >
+                      <Input placeholder="Add another detail" />
+                      <MinusCircleOutlined onClick={() => remove(field.name)} />
+                    </Form.Item>
+                  </>
+                ))}
+                <Form.Item>
+                  <Button onClick={() => add()} block icon={<PlusOutlined />}>
+                    Add a detail
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
         </section>
         <FormButton
           setProgress={props.setProgress}

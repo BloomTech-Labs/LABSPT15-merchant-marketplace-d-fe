@@ -1,17 +1,21 @@
 import { Button } from 'antd';
 import React from 'react';
-import { Form } from 'antd';
-// May remove, I need to figure out passing props
 import PopContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
 
 function Finalize(props) {
-  const [form] = Form.useForm();
+  const formConfirm = () => {
+    props.formCosolidate();
+  };
 
   const ShowPopContent = () => {
     return (
       <>
-        <PopContent />
+        <PopContent
+          setProgress={props.setProgress}
+          setStatus={props.setStatus}
+          formConfirm={formConfirm}
+        />
       </>
     );
   };
@@ -19,18 +23,13 @@ function Finalize(props) {
     <div className="contents">
       <ProductInfo />
       <Button>Cancel</Button>
-      <Form form={form}>
-        <Form.Item>
-          <Button
-            htmlType="submit"
-            onClick={() => {
-              ShowPopContent();
-            }}
-          >
-            Save Product
-          </Button>
-        </Form.Item>
-      </Form>
+      <Button
+        onClick={() => {
+          ShowPopContent();
+        }}
+      >
+        Save Product
+      </Button>
     </div>
   );
 }
