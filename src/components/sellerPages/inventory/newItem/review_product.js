@@ -3,32 +3,30 @@ import PopContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
 import FormButton from '../../../common/FormButton/FormButton';
 
-function Finalize(props) {
+function Finalize({ setProgress, slider, formCosolidate, setStatus }) {
   const formConfirm = () => {
-    props.formCosolidate();
+    formCosolidate();
   };
 
   const ShowPopContent = ({ setStatus, setProgress }) => {
     return (
-      <>
-        <PopContent
-          setProgress={setProgress}
-          setStatus={setStatus}
-          formConfirm={formConfirm}
-        />
-      </>
+      <PopContent
+        setProgress={setProgress}
+        setStatus={setStatus}
+        formConfirm={formConfirm}
+      />
     );
   };
   return (
     <div className="contents">
       <ProductInfo />
       <FormButton
-        setProgress={props.setProgress}
-        slider={props.slider}
+        setProgress={setProgress}
+        slider={slider}
         progressPercent={100}
         text="Save Product"
         review="true"
-        popContent={ShowPopContent}
+        popContent={() => ShowPopContent(setStatus, setProgress, formConfirm)}
       />
     </div>
   );
