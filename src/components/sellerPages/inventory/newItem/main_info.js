@@ -21,7 +21,7 @@ function NewItem(props) {
           <Input.TextArea placeholder="Short Description (Max 140 Characters)" />
         </Form.Item>
         <Form.Item name="category">
-          <Cascader required />
+          <Cascader placeholder="Choose a category" required />
         </Form.Item>
         <Form.Item name="price">
           <Input placeholder="Price per item" />

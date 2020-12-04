@@ -1,85 +1,34 @@
 import { Button } from 'antd';
-import React, { useState } from 'react';
-import { Form, Popover } from 'antd';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Form } from 'antd';
 // May remove, I need to figure out passing props
-import popContent from './popContent';
+import PopContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
-import FormButton from '../../../common/FormButton/FormButton';
 
 function Finalize(props) {
-  const [price, setPrice] = useState();
-
   const [form] = Form.useForm();
 
-  const onFinish = values => {
-    props.setData(values);
+  const ShowPopContent = () => {
+    return (
+      <>
+        <PopContent />
+      </>
+    );
   };
-
-  const formConfirm = () => {
-    props.formCosolidate();
-  };
-
-  const onChange = values => {
-    setPrice(values.price);
-  };
-
-  const popoverContent = (
-    <div className="popContent">
-      <h2>What would you like to do with this item?</h2>
-      <Link to="/myprofile/inventory">
-        <Button
-          onMouseEnter={() => {
-            props.setStatus('');
-            props.setProgress(100);
-          }}
-          onClick={() => {
-            formConfirm();
-          }}
-        >
-          Create and Stock Item
-        </Button>
-      </Link>
-      <Link to="/myprofile/inventory">
-        <Button
-          onMouseEnter={() => {
-            props.setStatus('active');
-            props.setProgress(90);
-          }}
-        >
-          Save Item as Draft
-        </Button>
-      </Link>
-      <Link to="/myprofile/inventory">
-        <Button
-          onMouseEnter={() => {
-            props.setStatus('exception');
-            props.setProgress(0);
-          }}
-        >
-          Cancel
-        </Button>
-      </Link>
-    </div>
-  );
-
   return (
     <div className="contents">
       <ProductInfo />
       <Button>Cancel</Button>
-      <Form form={form} onFieldsChange={onChange} onFinish={onFinish}>
+      <Form form={form}>
         <Form.Item>
-          <Popover content={popoverContent}>
-            <Button
-              htmlType="submit"
-              onMouseEnter={() => {
-                props.setProgress(80);
-                props.setData(form.getFieldsValue);
-              }}
-            >
-              Save Product
-            </Button>
-          </Popover>
+          <Button
+            htmlType="submit"
+            onClick={() => {
+              ShowPopContent();
+            }}
+          >
+            Save Product
+          </Button>
         </Form.Item>
       </Form>
     </div>
