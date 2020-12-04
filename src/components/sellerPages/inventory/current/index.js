@@ -1,5 +1,5 @@
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 // import { useOktaAuth } from '@okta/okta-react';
 import { connect } from 'react-redux';
@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom';
 
 import ItemCard from '../../../common/cards/normalItem';
 import NavBar from '../../../common/navBar';
+import SearchResults from './searchResults';
 
 function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
   const { authState } = useOktaAuth();
+  const [searchResults, setSearch] = useState(inventory);
 
   useEffect(() => {
     fetchProducts(authState);
@@ -20,14 +22,16 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
       <NavBar searchVisible={true} />
       <div className="outerContainer">
         <div className="contents">
-          {inventory.map(item => (
+          <SearchResults />
+          {/* 
+          {searchResults.map(item => (
             <ItemCard
               id={item.id}
               name={item.name}
               price={item.price}
               description={item.description}
             />
-          ))}
+          ))} */}
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>
