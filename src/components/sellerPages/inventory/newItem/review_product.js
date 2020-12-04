@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import React from 'react';
 import PopContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
@@ -28,6 +27,8 @@ function Finalize(props) {
         slider={props.slider}
         progressPercent={100}
         text="Save Product"
+        review="true"
+        popContent={ShowPopContent}
       />
     </div>
   );
