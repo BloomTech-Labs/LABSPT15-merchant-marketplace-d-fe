@@ -56,6 +56,7 @@ function MoreInfo(props) {
           setProgress={props.setProgress}
           slider={props.slider}
           progressPercent={40}
+          text="Next"
         />
       </Form>
     </div>

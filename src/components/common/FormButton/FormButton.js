@@ -1,12 +1,19 @@
 import React from 'react';
 import { Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 import './FormButton.styles.css';
 
-const FormButton = ({ setProgress, slider, progressPercent }) => {
+const FormButton = ({ setProgress, slider, progressPercent, text }) => {
+  const history = useHistory();
   return (
     <div className="Btn_Container">
-      <Button className="CancellBtn">Cancel</Button>
+      <Button
+        className="CancellBtn"
+        onClick={() => history.push('/myprofile/inventory')}
+      >
+        Cancel
+      </Button>
       <Button
         className="NextBtn"
         htmlType="submit"
@@ -15,7 +22,7 @@ const FormButton = ({ setProgress, slider, progressPercent }) => {
           slider.current.next();
         }}
       >
-        Next
+        {text}
       </Button>
     </div>
   );

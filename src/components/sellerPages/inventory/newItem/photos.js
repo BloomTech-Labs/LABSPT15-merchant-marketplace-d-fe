@@ -8,6 +8,7 @@ function AddPhotos(props) {
         setProgress={props.setProgress}
         slider={props.slider}
         progressPercent={60}
+        text="Next"
       />
     </div>
   );

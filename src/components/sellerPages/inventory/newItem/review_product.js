@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import React from 'react';
 import PopContent from './popContent';
 import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
+import FormButton from '../../../common/FormButton/FormButton';
 
 function Finalize(props) {
   const formConfirm = () => {
@@ -22,14 +23,12 @@ function Finalize(props) {
   return (
     <div className="contents">
       <ProductInfo />
-      <Button>Cancel</Button>
-      <Button
-        onClick={() => {
-          ShowPopContent();
-        }}
-      >
-        Save Product
-      </Button>
+      <FormButton
+        setProgress={props.setProgress}
+        slider={props.slider}
+        progressPercent={100}
+        text="Save Product"
+      />
     </div>
   );
 }

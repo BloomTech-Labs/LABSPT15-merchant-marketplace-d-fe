@@ -33,6 +33,7 @@ function NewItem(props) {
           setProgress={props.setProgress}
           slider={props.slider}
           progressPercent={20}
+          text="Next"
         />
       </Form>
     </div>
