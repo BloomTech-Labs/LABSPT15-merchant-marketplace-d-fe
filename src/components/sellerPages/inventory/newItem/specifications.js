@@ -1,15 +1,12 @@
 import React from 'react';
 import '../inventoryStyles.css';
-import { Form, Input } from 'antd';
 import FormButton from '../../../common/FormButton/FormButton';
+import { Form, Input, Button } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-function MoreInfo(props) {
+function MoreInfo({ setData, setProgress, slider }) {
   const onFinish = values => {
-    props.setData(values);
-  };
-
-  const AddDetail = () => {
-    console.log('Add Detail');
+    setData(values);
   };
 
   return (
@@ -21,19 +18,47 @@ function MoreInfo(props) {
         and clear. Examples include weight, material, size, color, main purpose,
         etc.
       </p>
-      <Form onFinish={onFinish}>
+      <Form className="dynamic_form_nest_item" onFinish={onFinish}>
         <section className="spec-inputs">
           <Form.Item name="specification">
             <Input placeholder="Add a detail" />
           </Form.Item>
-          <div className="supplement-detail" onClick={AddDetail}>
-            + Add another detail
-          </div>
+          <Form.List name="additional">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(field => (
+                  <>
+                    <Form.Item
+                      key={field.key}
+                      {...field}
+                      name={[field.name, 'specs']}
+                      fieldKey={[field.fieldKey, 'specs']}
+                      rules={[{ required: true, message: 'Missing Detail' }]}
+                    >
+                      <Input placeholder="Add aditional detail" />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(field.name)} />
+                  </>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Add field
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
         </section>
         <FormButton
-          setProgress={props.setProgress}
-          slider={props.slider}
+          setProgress={setProgress}
+          slider={slider}
           progressPercent={40}
+          text="Next"
         />
       </Form>
     </div>

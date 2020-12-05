@@ -17,17 +17,15 @@ function Inventory({ status, addProduct }) {
   const [newItemData, setNewItemData] = useState({});
 
   // State for each form section
-  const [form1, setForm1] = useState({});
-  const [form2, setForm2] = useState({});
-  const [form3, setForm3] = useState({});
-  const [form4, setForm4] = useState({});
+  const [mainInfo, setMainInfo] = useState({});
+  const [specForm, setSpecForm] = useState({});
+  const [photos, setPhotos] = useState({});
 
   const formCosolidate = () => {
     let completeObject = {
-      ...form1,
-      ...form2,
-      ...form3,
-      ...form4,
+      ...mainInfo,
+      ...specForm,
+      ...photos,
     };
     setNewItemData(completeObject); //// I will review this later, I dont think we need a state here, we can just pass the object to the addProduct action-Pedro
     addProduct(newItemData, authState);
@@ -49,25 +47,23 @@ function Inventory({ status, addProduct }) {
           <Carousel ref={slider}>
             <NewItem
               slider={slider}
-              setData={setForm1}
+              setData={setMainInfo}
               setProgress={setProgressPoint}
             />
             <Specifications
               slider={slider}
-              setData={setForm2}
+              setData={setSpecForm}
               setProgress={setProgressPoint}
             />
             <AddPhotos
               slider={slider}
               setProgress={setProgressPoint}
-              setData={setForm3}
+              setData={setPhotos}
             />
             <Finalize
               slider={slider}
-              setData={setForm4}
               setStatus={setProgressStatus}
               setProgress={setProgressPoint}
-              product={form1}
               formCosolidate={formCosolidate}
             />
           </Carousel>
@@ -75,10 +71,9 @@ function Inventory({ status, addProduct }) {
 
         <Button
           onClick={() => {
-            console.log(form1);
-            console.log(form2);
-            console.log(form3);
-            console.log(form4);
+            console.log(mainInfo);
+            console.log(specForm);
+            console.log(photos);
             console.log('final object:', newItemData);
           }}
         >
