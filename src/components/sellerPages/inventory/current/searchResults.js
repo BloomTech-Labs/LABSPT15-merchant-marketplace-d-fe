@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ItemCard from '../../../common/cards/normalItem';
-import { connect } from 'react-redux';
-import { fetchProducts } from '../../../../state/actions';
-import { useOktaAuth } from '@okta/okta-react';
+import useSearch from '../../../common/customHooks/useSearch';
 
-function SearchResults({ inventory }) {
-  const { authState } = useOktaAuth();
-  useEffect(() => {
-    fetchProducts(authState);
-  }, []);
+function SearchResults({ data, filter }) {
+  const searchData = useSearch(data, 'name', filter);
 
   return (
     <div>
-      {inventory.map(item => (
+      {searchData.map(item => (
         <ItemCard
           id={item.id}
           name={item.name}
@@ -24,9 +19,4 @@ function SearchResults({ inventory }) {
   );
 }
 
-const mapStateToProps = state => ({
-  inventory: state.products.products,
-  getProductsStatus: state.products.getProductsStatus,
-});
-
-export default connect(mapStateToProps, { fetchProducts })(SearchResults);
+export default SearchResults;

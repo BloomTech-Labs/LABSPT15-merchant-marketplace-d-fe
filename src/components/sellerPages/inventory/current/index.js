@@ -1,50 +1,35 @@
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
-// import { useOktaAuth } from '@okta/okta-react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../../../state/actions';
 import { Link } from 'react-router-dom';
 
-import ItemCard from '../../../common/cards/normalItem';
 import NavBar from '../../../common/navBar';
 import SearchResults from './searchResults';
+import useSearch from '../../../common/customHooks/useSearch';
 
 function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
+  const [searchData, setSearchData] = useState({});
   const { authState } = useOktaAuth();
-  const [searchResults, setSearch] = useState(inventory);
 
   useEffect(() => {
     fetchProducts(authState);
   }, []);
+
+  const displayedData = useSearch(inventory, 'name', searchData);
+
   return (
     <>
-      <NavBar searchVisible={true} />
+      <NavBar searchVisible={true} setData={setSearchData} />
       <div className="outerContainer">
         <div className="contents">
-          <SearchResults />
-          {/* 
-          {searchResults.map(item => (
-            <ItemCard
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-            />
-          ))} */}
+          <SearchResults data={displayedData} filter={searchData} />
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>
         </div>
       </div>
-      <Button
-        onClick={() => {
-          console.log(inventory);
-          console.log(fetchProducts);
-        }}
-      >
-        Console Log
-      </Button>
     </>
   );
 }

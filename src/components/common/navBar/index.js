@@ -4,7 +4,7 @@ import { Badge } from 'antd';
 import './navStyles.css';
 import SearchBar from '../searchbar';
 
-function NavBar({ logo, searchVisible }) {
+function NavBar({ logo, searchVisible, data, setData }) {
   return (
     <div className="navOuter">
       <div className="navBackground">
@@ -23,7 +23,7 @@ function NavBar({ logo, searchVisible }) {
           </div>
         </div>
       </div>
-      <SearchBar searchVisible={searchVisible} />
+      <SearchBar searchVisible={searchVisible} setData={setData} data={data} />
     </div>
   );
 }
