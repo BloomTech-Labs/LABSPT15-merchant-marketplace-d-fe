@@ -10,9 +10,11 @@ function SearchResults({ data, filter }) {
       {searchData.map(item => (
         <ItemCard
           id={item.id}
+          key={item.id}
           name={item.name}
           price={item.price}
           description={item.description}
+          image={item.img_url}
         />
       ))}
     </div>

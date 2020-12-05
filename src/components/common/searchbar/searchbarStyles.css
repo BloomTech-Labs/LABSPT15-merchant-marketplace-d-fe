@@ -5,7 +5,7 @@
 .searchOuter{
     background-color: lightskyblue;
     max-width: 1000px;
-    margin: 5px auto;
+    margin: 0 auto;
     padding: 5px;
     display: flex;
     justify-content: space-between;

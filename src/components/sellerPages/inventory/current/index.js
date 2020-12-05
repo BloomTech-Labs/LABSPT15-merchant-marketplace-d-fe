@@ -18,7 +18,7 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
   }, []);
 
   const displayedData = useSearch(inventory, 'name', searchData);
-
+  console.log(inventory);
   return (
     <>
       <NavBar searchVisible={true} setData={setSearchData} />
