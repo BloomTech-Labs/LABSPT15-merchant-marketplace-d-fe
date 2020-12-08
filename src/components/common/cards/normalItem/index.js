@@ -1,16 +1,17 @@
 import React from 'react';
 import './itemCardStyles.css';
 
-function ItemCard(props) {
+function ItemCard({ name, description, price, image, count }) {
   return (
     <div className="cardContainer">
-      <div className="cardImage">PlaceHold</div>
+      <img src={image} className="cardImage" />
       <div className="cardDesc">
-        <h2 className="descText">{props.name}</h2>
-        <p className="descText">{props.description}</p>
+        <h2 className="descText">{name}</h2>
+        <p className="descText">{description}</p>
       </div>
       <div>
-        <h2 className="cardPrice">${props.price}</h2>
+        <h2 className="cardPrice">${price}</h2>
+        <h2># {count}</h2>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ import thunk from 'redux-thunk';
 // Seller Imports
 import SellerProfile from './components/sellerPages/profile';
 import Inventory from './components/sellerPages/inventory';
-import CurrentInventory from './components/sellerPages/inventory/currentInventory';
+import CurrentInventory from './components/sellerPages/inventory/current';
 import { ProductPage } from './components/pages/ProductPage';
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));

@@ -6,12 +6,13 @@
     justify-content: space-between;
     padding: 5px;
     margin: 10px 0 10px 0;
+   
 }
 .cardImage{
     width: 150px;
     height: 120px;
-    background-color: pink;
     border-radius: 6px;
+    object-fit: contain;
 }
 .cardDesc{
     width: 60%;
