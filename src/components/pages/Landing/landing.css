@@ -1,0 +1,60 @@
+.menu{
+    width: 200px;
+}
+.link {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.top-rated {
+  display: flex;
+  justify-content: center; 
+  
+}
+.title-2 {
+    margin-top: 5%;
+}
+.top-img {
+        height: 200px;
+        background-color: pink;
+        width: 300px;
+        margin-right: 2%;
+        margin-left: 2%;
+        box-shadow: 5px 10px gray;
+}
+.top-img:hover {
+    background-color: powderblue;
+}
+
+.browse {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: powderblue;
+    height: 300px;
+   
+  
+}
+
+.browse-bar {
+    display: flex;
+    justify-content: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .top-rated {
+        display: flex;
+        flex-direction: column;
+        padding: 10%;
+        margin-left: 2;
+        
+      }
+
+      .top-img {
+        height: 200px;
+        background-color: pink;
+        margin: 2%;
+        box-shadow: 5px 10px gray;
+}
+}

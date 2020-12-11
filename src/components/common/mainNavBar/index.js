@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from 'antd';
 import { Button } from '../../common';
@@ -7,7 +7,7 @@ import { useOktaAuth } from '@okta/okta-react';
 
 function MainNavBar() {
   const { authState, authService } = useOktaAuth();
-  console.log(authService);
+
   return (
     <div className="nav-bar">
       {/* logo */}
@@ -22,15 +22,10 @@ function MainNavBar() {
           <Button
             handleClick={() => authService.logout()}
             buttonText="Logout"
-            className="link"
           />
         )}
         {!authState.isAuthenticated && (
-          <Button
-            handleClick={() => authService.login()}
-            buttonText="Login"
-            className="link"
-          />
+          <Button handleClick={() => authService.login()} buttonText="Login" />
         )}
       </div>
     </div>
