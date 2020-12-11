@@ -1,0 +1,30 @@
+.nav-bar {
+
+    height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.menu{
+    width: 200px;
+}
+.link {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.top-rated {
+  display: flex;
+  justify-content: center; 
+}
+
+.top-img {
+        height: 200px;
+        background-color: pink;
+        width: 300px;
+        margin-right: 2%;
+        margin-left: 2%;
+}

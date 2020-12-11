@@ -20,6 +20,7 @@ import reducer from './state/reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import Landing from './components/pages/Landing/Landing';
 
 // Seller Imports
 import SellerProfile from './components/sellerPages/profile';
@@ -58,10 +59,11 @@ function App() {
         <Route path="/implicit/callback" component={LoginCallback} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <SecureRoute
-          path="/"
+          path="/home"
           exact
           component={() => <HomePage LoadingComponent={LoadingComponent} />}
         />
+        <Route exact path="/" component={Landing} />
         <SecureRoute path="/profile-list" component={ProfileListPage} />
         {/* Seller's  Routes */}
         <SecureRoute exact path="/myprofile" component={SellerProfile} />
