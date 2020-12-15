@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from 'antd';
+import { Button } from '../../common';
 import './navStyles.css';
 import SearchBar from '../searchbar';
+import { useOktaAuth } from '@okta/okta-react';
 
 function NavBar({ logo, searchVisible, data, setData }) {
+  const { authState, authService } = useOktaAuth();
   return (
     <div className="navOuter">
       <div className="navBackground">
@@ -20,6 +23,10 @@ function NavBar({ logo, searchVisible, data, setData }) {
             <Badge count={10}>
               <Link>Messeges</Link>
             </Badge>
+            <Button
+              handleClick={() => authService.logout()}
+              buttonText="Logout"
+            />
           </div>
         </div>
       </div>

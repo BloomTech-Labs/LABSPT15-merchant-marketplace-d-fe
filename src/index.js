@@ -11,15 +11,14 @@ import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
-import { HomePage } from './components/pages/Home';
-import { ProfileListPage } from './components/pages/ProfileList';
+
 import { LoginPage } from './components/pages/Login';
 import { config } from './utils/oktaConfig';
-import { LoadingComponent } from './components/common';
 import reducer from './state/reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import Landing from './components/pages/Landing/Landing';
 
 // Seller Imports
 import SellerProfile from './components/sellerPages/profile';
@@ -57,13 +56,7 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
-        <SecureRoute
-          path="/"
-          exact
-          component={() => <HomePage LoadingComponent={LoadingComponent} />}
-        />
-        <SecureRoute path="/profile-list" component={ProfileListPage} />
-        {/* Seller's  Routes */}
+        <Route exact path="/" component={Landing} />
         <SecureRoute exact path="/myprofile" component={SellerProfile} />
         <SecureRoute
           exact

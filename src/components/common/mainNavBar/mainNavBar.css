@@ -1,0 +1,10 @@
+.nav-bar {
+
+    height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
