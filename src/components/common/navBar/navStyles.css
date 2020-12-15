@@ -1,12 +1,10 @@
-.navOuter{ 
-   position: fixed;
-   width: 100%;
-   top: 0;
-}
-.navBackground{
-    background-color: lightgray;
-}
-.navContainer{
+
+.nav-container{
+    background-color:rgb(50, 72, 168);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 4;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,7 +12,7 @@
     max-width: 1000px;
     margin: 0 auto;
 }
-.leftNav{
+.nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,22 +21,17 @@
 .logo{
     width: 100px;
     height: 50px;
-    background-color: pink;
+    background-color: white;
 }
 
 a{
-    color: black;
+    color: white;
     margin-left: 15px;
 }
 a:hover{
-    text-decoration: underline;
+    font-weight: bold;
+    color: white;
 }
-
-button {
-    background-color: lightgray;
-    color: black;
-}
-
-button:hover {
-    background-color: pink;
+.message {
+    margin-right: auto;
 }
