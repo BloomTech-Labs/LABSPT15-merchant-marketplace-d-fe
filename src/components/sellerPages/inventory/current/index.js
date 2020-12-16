@@ -21,7 +21,7 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
   console.log(inventory);
   return (
     <>
-      <NavBar searchVisible={true} setData={setSearchData} />
+      <NavBar searchVisible={false} setData={setSearchData} />
       <div className="outerContainer">
         <div className="contents">
           <SearchResults data={displayedData} filter={searchData} />
