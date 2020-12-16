@@ -12,7 +12,7 @@ function SearchBar({ searchVisible, setData }) {
   }
 
   useEffect(() => {
-    if (searchVisible === true) {
+    if (searchVisible === false) {
       setInView('inView');
     }
   });
