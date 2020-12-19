@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Button, Select } from 'antd';
+import { Link } from 'react-router-dom';
 import './searchbarStyles.css';
 
 function SearchBar({ searchVisible, setData }) {
@@ -42,7 +43,9 @@ function SearchBar({ searchVisible, setData }) {
           </Select>
         </div>
         <div>
-          <Button className="searchButton">+ Add Item</Button>
+          <Link to="/myprofile/inventory/additem">
+            <Button className="searchButton">+ Add Item</Button>
+          </Link>
         </div>
       </div>
     </div>
