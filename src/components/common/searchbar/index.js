@@ -29,6 +29,7 @@ function SearchBar({ searchVisible, setData }) {
   return (
     <div className={inView}>
       <div className="searchOuter">
+        <div className="searchBtns"></div>
         <Search
           defaultValue="Search through your inventory"
           className="searchBar"
@@ -44,9 +45,14 @@ function SearchBar({ searchVisible, setData }) {
         </div>
         <div>
           <Link to="/myprofile/inventory/additem">
-            <Button className="searchButton">+ Add Item</Button>
+            <Button className="add-item-button">+ Add Item</Button>
           </Link>
         </div>
+      </div>
+      <div className="searchBtns">
+        <Button>Main</Button>
+        <Button>Drafts</Button>
+        <Button>Archives</Button>
       </div>
     </div>
   );
