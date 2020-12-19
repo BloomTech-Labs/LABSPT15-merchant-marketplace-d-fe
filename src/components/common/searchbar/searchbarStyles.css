@@ -3,10 +3,10 @@
 }
 
 .searchOuter{
-    background-color: lightskyblue;
+    background-color: white;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 5px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -16,4 +16,6 @@
 
 .searchButton{
     margin-right: 5px;
+    background-color: rgb(19, 75, 29);
+    color: white;
 }

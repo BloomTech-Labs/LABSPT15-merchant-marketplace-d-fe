@@ -11,6 +11,14 @@ function SearchBar({ searchVisible, setData }) {
     setData(values);
   }
 
+  function sortChange(value) {
+    console.log(`selected sortBy: ${value}`);
+  }
+
+  function categoryChange(value) {
+    console.log(`selected category: ${value}`);
+  }
+
   useEffect(() => {
     if (searchVisible === false) {
       setInView('inView');
@@ -20,13 +28,20 @@ function SearchBar({ searchVisible, setData }) {
   return (
     <div className={inView}>
       <div className="searchOuter">
-        <Search className="searchBar" onSearch={onSearch} />
+        <Search
+          defaultValue="Search through your inventory"
+          className="searchBar"
+          onSearch={onSearch}
+        />
         <div>
-          <Option>Sort By</Option>
-          <Option>Catagory</Option>
+          <Select defaultValue="Sort By" onChange={sortChange}>
+            <Option value="cat">Category</Option>
+          </Select>
+          <Select defaultValue="Category" onChange={categoryChange}>
+            <Option value="candy">Candy</Option>
+          </Select>
         </div>
         <div>
-          <Button className="searchButton"> Manage</Button>
           <Button className="searchButton">+ Add Item</Button>
         </div>
       </div>
