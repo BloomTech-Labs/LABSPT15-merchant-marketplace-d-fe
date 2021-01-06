@@ -1,44 +1,43 @@
-.navOuter{ 
-   position: fixed;
-   width: 100%;
-   top: 0;
-}
-.navBackground{
-    background-color: lightgray;
-}
-.navContainer{
-    display: flex;
-    justify-content: space-between;
+
+.nav-container{
+    background-color: rebeccapurple;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 4;
     align-items: center;
-    height: 50px;
-    max-width: 1000px;
-    margin: 0 auto;
 }
-.leftNav{
+.nav{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
 }
 
 .logo{
-    width: 100px;
+    width: 140px;
     height: 50px;
-    background-color: pink;
+    background-color: white;
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    margin-left: 10%;
+    padding-left: 40px;
+    font-weight: 400;
+    color: black;
+    font-size: smaller
 }
 
-a{
-    color: black;
+.logo > span {
+    color: rebeccapurple;
+}
+.nav > a{
+    color: white;
     margin-left: 15px;
 }
-a:hover{
-    text-decoration: underline;
+.nav > a:hover{
+    font-weight: bold;
+    color: white;
 }
 
-button {
-    background-color: lightgray;
-    color: black;
-}
-
-button:hover {
-    background-color: pink;
+.nav > a:last-child{
+    margin-left: auto;
+    padding-right: 10%;
 }

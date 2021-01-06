@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Button, Select } from 'antd';
+import { Link } from 'react-router-dom';
 import './searchbarStyles.css';
 
 function SearchBar({ searchVisible, setData }) {
@@ -11,8 +12,16 @@ function SearchBar({ searchVisible, setData }) {
     setData(values);
   }
 
+  function sortChange(value) {
+    console.log(`selected sortBy: ${value}`);
+  }
+
+  function categoryChange(value) {
+    console.log(`selected category: ${value}`);
+  }
+
   useEffect(() => {
-    if (searchVisible === true) {
+    if (searchVisible === false) {
       setInView('inView');
     }
   });
@@ -20,15 +29,30 @@ function SearchBar({ searchVisible, setData }) {
   return (
     <div className={inView}>
       <div className="searchOuter">
-        <Search className="searchBar" onSearch={onSearch} />
+        <div className="searchBtns"></div>
+        <Search
+          defaultValue="Search through your inventory"
+          className="searchBar"
+          onSearch={onSearch}
+        />
         <div>
-          <Option>Sort By</Option>
-          <Option>Catagory</Option>
+          <Select defaultValue="Sort By" onChange={sortChange}>
+            <Option value="cat">Category</Option>
+          </Select>
+          <Select defaultValue="Category" onChange={categoryChange}>
+            <Option value="candy">Candy</Option>
+          </Select>
         </div>
         <div>
-          <Button className="searchButton"> Manage</Button>
-          <Button className="searchButton">+ Add Item</Button>
+          <Link to="/myprofile/inventory/additem">
+            <Button className="add-item-button">+ Add Item</Button>
+          </Link>
         </div>
+      </div>
+      <div className="searchBtns">
+        <Button>Main</Button>
+        <Button>Drafts</Button>
+        <Button>Archives</Button>
       </div>
     </div>
   );

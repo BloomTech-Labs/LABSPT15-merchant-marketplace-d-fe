@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import productsReducer from './productsReducer';
-import addProductRedcuer from './addProductReducer';
+import addProductReducer from './addProductReducer';
+import addItemImageReducer from './addItemImageReducer';
 
 const reducers = combineReducers({
   products: productsReducer,
-  addProduct: addProductRedcuer,
+  addProduct: addProductReducer,
+  addItemImage: addItemImageReducer,
 });
 
 export default reducers;

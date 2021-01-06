@@ -15,6 +15,10 @@ export const ADD_PRODUCT_START = 'ADD_PRODUCT_START';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_ERROR = 'ADD_PRODUCT_ERROR';
 
+export const ADD_ITEM_IMAGE_START = 'ADD_ITEM_IMAGE_START';
+export const ADD_ITEM_IMAGE_SUCCESS = 'ADD_ITEM_IMAGE_SUCCESS';
+export const ADD_ITEM_IMAGE_ERROR = 'ADD_ITEM_IMAGE_ERROR';
+
 export const fetchProducts = authState => dispatch => {
   let oktaStore = JSON.parse(localStorage['okta-token-storage']);
   let oktaId = oktaStore.idToken.claims.sub;
@@ -25,6 +29,27 @@ export const fetchProducts = authState => dispatch => {
     })
     .catch(err => {
       dispatch({ type: FETCH_PRODUCTS_ERROR, payload: err });
+    });
+};
+
+export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
+  dispatch({ type: ADD_ITEM_IMAGE_START });
+
+  console.log('addItemImage');
+  postData(
+    process.env.REACT_APP_API_URI + 'photos',
+    {
+      url: photoUrl,
+      item_id: itemId,
+    },
+    authState
+  )
+    .then(response => {
+      console.log('success response', response);
+      dispatch({ type: ADD_ITEM_IMAGE_SUCCESS, payload: response });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_ITEM_IMAGE_ERROR, payload: err });
     });
 };
 
