@@ -1,9 +1,11 @@
 .menu{
     width: 200px;
+    padding-top: 10px;
 }
 .link {
     margin-left: 1%;
     margin-right: 1%;
+    text-decoration: none;
 }
 
 .top-rated {
@@ -11,12 +13,15 @@
   justify-content: center; 
   
 }
+.title-1 {
+    margin-top: 5%;
+}
 .title-2 {
     margin-top: 5%;
 }
 .top-img {
         height: 200px;
-        background-color: pink;
+        background-color: rebeccapurple;
         width: 300px;
         margin-right: 2%;
         margin-left: 2%;
@@ -30,10 +35,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: powderblue;
     height: 300px;
-   
-  
 }
 
 .browse-bar {
@@ -53,7 +55,7 @@
 
       .top-img {
         height: 200px;
-        background-color: pink;
+        background-color: rebeccapurple;
         margin: 2%;
         box-shadow: 5px 10px gray;
 }

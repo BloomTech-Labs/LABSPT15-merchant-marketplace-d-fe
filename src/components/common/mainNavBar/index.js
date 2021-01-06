@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Badge } from 'antd';
 import { Button } from '../../common';
 import './mainNavBar.css';
@@ -11,12 +11,18 @@ function MainNavBar() {
   return (
     <div className="nav-bar">
       {/* logo */}
-      <h1>Merchant</h1>
+      <div className="logo">
+        <span>MERCHANT</span> MARKETPLACE
+      </div>
       <div className="menu">
         {authState.isAuthenticated && (
-          <Link className="link" to="/myprofile">
+          <NavLink
+            className="link"
+            activeStyle={{ color: 'white' }}
+            to="/myprofile"
+          >
             My Profile
-          </Link>
+          </NavLink>
         )}
         {authState.isAuthenticated && (
           <Button
