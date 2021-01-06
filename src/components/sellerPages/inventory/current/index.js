@@ -28,6 +28,13 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>
+          <Button
+            onClick={() => {
+              console.log(inventory);
+            }}
+          >
+            Console.log
+          </Button>
         </div>
       </div>
     </>

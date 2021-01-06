@@ -16,13 +16,10 @@ export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_ERROR = 'ADD_PRODUCT_ERROR';
 
 export const fetchProducts = authState => dispatch => {
+  let oktaStore = JSON.parse(localStorage['okta-token-storage']);
+  let oktaId = oktaStore.idToken.claims.sub;
   dispatch({ type: FETCH_PRODUCTS_START });
-  //I am using a random API (actually mine) to test the action and see if I am able to connect redux to components
-
-  getDSData(
-    'https://strings-music-instruments-api.herokuapp.com/api/instruments',
-    authState
-  )
+  getDSData(`http://localhost:8000/items/profile/${oktaId}`, authState)
     .then(response => {
       dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response });
     })
