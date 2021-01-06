@@ -21,13 +21,10 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
   console.log(inventory);
   return (
     <>
-      <NavBar searchVisible={true} setData={setSearchData} />
+      <NavBar searchVisible={false} setData={setSearchData} />
       <div className="outerContainer">
         <div className="contents">
           <SearchResults data={displayedData} filter={searchData} />
-          <Link to="/myprofile/inventory/additem">
-            <Button>+Add Item</Button>
-          </Link>
         </div>
       </div>
     </>

@@ -3,17 +3,29 @@
 }
 
 .searchOuter{
-    background-color: lightskyblue;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 5px;
+    background-color: white;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
+    border: 1px solid lightgray;
+    padding-bottom: 10px
 }
 .searchBar{
+    padding: 0 5px 0 50px;
     max-width: 300px;
 }
 
-.searchButton{
-    margin-right: 5px;
+.add-item-button{
+    margin-right: 20px;
+    background-color: rgb(19, 75, 29);
+    color: white;
+}
+.searchBtns {
+    display: flex;
+    background-color: white;
+}
+
+.searchBtns button{
+    background-color: rebeccapurple;
+    color: white;
 }
