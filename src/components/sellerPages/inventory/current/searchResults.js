@@ -4,7 +4,6 @@ import useSearch from '../../../common/customHooks/useSearch';
 
 function SearchResults({ data, filter }) {
   const searchData = useSearch(data, 'name', filter);
-
   return (
     <div>
       {searchData.map(item => (
@@ -14,7 +13,7 @@ function SearchResults({ data, filter }) {
           name={item.name}
           price={item.price}
           description={item.description}
-          image={item.img_url}
+          image={item.id}
         />
       ))}
     </div>
