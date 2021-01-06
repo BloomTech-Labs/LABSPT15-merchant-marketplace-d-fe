@@ -39,7 +39,7 @@ function TestItemImageUpload({ addItemImage }) {
         clearable
         data-images-only
       />
-      <div class="test-upload" onClick={openUploadDialog}>
+      <div className="test-upload" onClick={openUploadDialog}>
         Test upload
       </div>
     </>
