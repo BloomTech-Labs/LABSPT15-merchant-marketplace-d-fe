@@ -25,6 +25,10 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
       <div className="outerContainer">
         <div className="contents">
           <SearchResults data={displayedData} filter={searchData} />
+          <Link to="/myprofile/inventory/additem">
+            <Button>+Add Item</Button>
+          </Link>
+
         </div>
       </div>
     </>
