@@ -71,8 +71,10 @@ function App() {
         />
         <SecureRoute
           exact
-          path="/myprofile/inventory/productpage"
-          component={ProductPage}
+          path="/myprofile/inventory/productpage/:id"
+          render={routeProps => {
+            return <ProductPage match={routeProps.match} />;
+          }}
         />
         <SecureRoute
           exact

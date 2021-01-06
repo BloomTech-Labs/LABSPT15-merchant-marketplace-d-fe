@@ -1,20 +1,38 @@
-import React from 'react';
+import { useOktaAuth } from '@okta/okta-react';
+import React, { useEffect, useState } from 'react';
+import { getDSData } from '../../../api';
 import ProductCarousel from '../ProductPage/ProductCarousel';
 import { Rate, Avatar, Tag } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
 
-const ProductInfo = () => {
+const ProductInfo = ({ item }) => {
+  const [img, setImg] = useState('');
+  const { authState } = useOktaAuth();
+  const imgGet = id => {
+    getDSData(`http://localhost:8000/photo/${id}`, authState)
+      .then(res => setImg(res[0]['url']))
+      .catch(err => {
+        console.log('Img get fail.');
+      });
+  };
+  useEffect(() => {
+    imgGet(item.id);
+  }, []);
+
+  let dollars = item.price_in_cents / 100;
   return (
     <div className="product-page">
       <div className="product-container">
-        <div className="carousel-container">
-          <ProductCarousel />
+        <div>
+          {/* <ProductCarousel /> */}
+          {/* {The carrousel avobe can be implemented later} */}
+          <img src={img} />
         </div>
 
         <div className="item">
           <div className="name-price">
-            <p>Item Name</p>
-            <p>$XX.XX</p>
+            <p>{item.item_name}</p>
+            <p>${dollars}</p>
           </div>
           <div className="rating">
             <Rate />
@@ -25,12 +43,12 @@ const ProductInfo = () => {
           </div>
           <p>location</p>
           <section>
-            <p>
-              (Short Description) Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Quisque a eleifend ante. Curabitur ac tincidunt
-              eros. Phasellus quis magna id massa iaculis congue. Integer
-              dapibus ullamcorper velit, in congue ex euismod at.
-            </p>
+            <p>{item.description}</p>
+            {item.quantity_available !== 0 ? (
+              <h2 style={{ color: 'green' }}>QTY: {item.quantity_available}</h2>
+            ) : (
+              <h2 style={{ color: 'red' }}>QTY: {item.quantity_available}</h2>
+            )}
           </section>
         </div>
       </div>

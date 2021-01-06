@@ -10,10 +10,20 @@
 
 }
 
-.carousel-container {
+/* .carousel-container {
   height: 300px;
   background-color: lightpink;
   width: 50%;
+} */
+
+.item-image {
+  height: 100px;
+  width: auto;
+}
+img {
+  height: 300px;
+  width: auto;
+  text-align: center;
 }
 
 .tags-container {
