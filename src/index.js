@@ -25,6 +25,7 @@ import SellerProfile from './components/sellerPages/profile';
 import Inventory from './components/sellerPages/inventory';
 import CurrentInventory from './components/sellerPages/inventory/current';
 import { ProductPage } from './components/pages/ProductPage';
+import { TestItemImageUpload } from './components/common';
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
@@ -72,6 +73,11 @@ function App() {
           exact
           path="/myprofile/inventory/productpage"
           component={ProductPage}
+        />
+        <SecureRoute
+          exact
+          path="/test_image_upload"
+          component={TestItemImageUpload}
         />
         <Route component={NotFoundPage} />
       </Switch>
