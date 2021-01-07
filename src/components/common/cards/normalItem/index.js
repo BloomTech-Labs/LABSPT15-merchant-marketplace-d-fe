@@ -8,7 +8,7 @@ function ItemCard({ name, description, price, image, count }) {
   const { authState } = useOktaAuth();
   let dollars = price / 100;
   const imgGet = id => {
-    getDSData(`http://localhost:8000/photo/${id}`, authState)
+    getDSData(`${process.env.REACT_APP_API_URI}photo/${id}`, authState)
       .then(res => setImg(res[0]['url']))
       .catch(err => {
         console.log('Img get fail.');

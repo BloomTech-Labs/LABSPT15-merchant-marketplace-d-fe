@@ -23,7 +23,10 @@ export const fetchProducts = authState => dispatch => {
   let oktaStore = JSON.parse(localStorage['okta-token-storage']);
   let oktaId = oktaStore.idToken.claims.sub;
   dispatch({ type: FETCH_PRODUCTS_START });
-  getDSData(`http://localhost:8000/items/profile/${oktaId}`, authState)
+  getDSData(
+    `${process.env.REACT_APP_API_URI}items/profile/${oktaId}`,
+    authState
+  )
     .then(response => {
       dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: response });
     })
