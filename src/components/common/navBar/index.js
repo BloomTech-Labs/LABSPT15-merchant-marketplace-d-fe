@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Badge } from 'antd';
 import { Button } from '../../common';
 import './navStyles.css';
@@ -13,7 +13,9 @@ function NavBar({ searchVisible, data, setData }) {
     <div className="nav-container">
       <div className="nav">
         <div className="logo">
-          <span>MERCHANT</span> MARKETPLACE
+          <NavLink to="/" activeStyle={{ color: 'black' }}>
+            <span style={{ color: 'rebeccapurple' }}>MERCHANT</span> MARKETPLACE
+          </NavLink>
         </div>
         <Link to="/myprofile/inventory">Inventory</Link>
         <Link>Orders</Link>

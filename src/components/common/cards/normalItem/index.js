@@ -6,6 +6,7 @@ import './itemCardStyles.css';
 function ItemCard({ name, description, price, image, count }) {
   const [img, setImg] = useState('');
   const { authState } = useOktaAuth();
+  let dollars = price / 100;
   const imgGet = id => {
     getDSData(`http://localhost:8000/photo/${id}`, authState)
       .then(res => setImg(res[0]['url']))
@@ -22,11 +23,17 @@ function ItemCard({ name, description, price, image, count }) {
       <img src={img} className="cardImage" />
       <div className="cardDesc">
         <h2 className="descText">{name}</h2>
-        <p className="descText">{description}</p>
+        <p className="descText" activeStyle={{ color: 'black' }}>
+          {description}
+        </p>
       </div>
       <div>
-        <h2 className="cardPrice">${price}</h2>
-        <h2># {count}</h2>
+        <h2 className="cardPrice">${dollars}</h2>
+        {count !== 0 ? (
+          <h2 style={{ color: 'green' }}>QTY: {count}</h2>
+        ) : (
+          <h2 style={{ color: 'red' }}>QTY: {count}</h2>
+        )}
       </div>
     </div>
   );

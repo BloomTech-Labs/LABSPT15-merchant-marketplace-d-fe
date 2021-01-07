@@ -23,6 +23,8 @@
 }
 .descText{
     margin-bottom: .125rem;
+    color: black;
+    text-decoration: none;
 }
 .cardPrice{
     margin-top: 10%;
