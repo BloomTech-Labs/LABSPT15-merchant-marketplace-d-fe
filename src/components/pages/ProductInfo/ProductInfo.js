@@ -9,7 +9,7 @@ const ProductInfo = ({ item }) => {
   const [img, setImg] = useState('');
   const { authState } = useOktaAuth();
   const imgGet = id => {
-    getDSData(`http://localhost:8000/photo/${id}`, authState)
+    getDSData(`${process.env.REACT_APP_API_URI}photo/${id}`, authState)
       .then(res => setImg(res[0]['url']))
       .catch(err => {
         console.log('Img get fail.');
