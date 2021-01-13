@@ -1,19 +1,16 @@
 # merchant-marketplace
 
-- Welcome to your `Basic Single Page Application Repository`. Use this to start your own Greenfield Project using ReactJS and common industry standards.
+🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your first Pull-Request is merged. This is intended to be a guideline. Feel free to add your own flare to it.
 
-- This repository assumes a handful of industry practices and standards. We strive to keep you on the bleeding edge of the industry and as a result, we have made some opinions for you so that you don't have to; you're welcome.
+# Project
 
-- The following was built using [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) for base boiler-plating. We will maintain the dependencies as according to their specifications as an Engineering Organization.
+You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-## StoryBook
+## Contributors
 
-- All of the reusable components for this repository can be [found here using a Storybook](https://lambda-school-labs.github.io/labs-spa-starter/?path=/story/form-button--basic-usage).
-- For more information on contributing to our Storybook for this application [you can see here](./src/stories/README.md).
+🚫Add link to seperate contributor page
 
-## Requirements
-
-- [Labs Engineering Standard requirements found here](https://labs.lambdaschool.com/topics/node-js/)
+<br/>
 
 ## Getting Started
 
