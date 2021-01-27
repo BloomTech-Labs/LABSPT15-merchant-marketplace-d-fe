@@ -18,7 +18,7 @@ function InvSection({ inventory, fetchProducts, getProductsStatus }) {
     <>
       <h2>Inventory</h2>
       <h4>Details</h4>
-      {inventory.map((item) => (
+      {inventory.map(item => (
         <SmallItemCard
           headerText={item.item_name}
           descText={item.description}
@@ -28,9 +28,9 @@ function InvSection({ inventory, fetchProducts, getProductsStatus }) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   inventory: state.products.products,
-  getProductsStatus: state.products.getProductsStatus
+  getProductsStatus: state.products.getProductsStatus,
 });
 
 export default connect(mapStateToProps, { fetchProducts })(InvSection);
