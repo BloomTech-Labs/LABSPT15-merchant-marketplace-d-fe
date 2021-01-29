@@ -17,18 +17,15 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
     fetchProducts(authState);
   }, []);
 
-  const displayedData = useSearch(inventory, 'name', searchData);
-  console.log(inventory);
   return (
     <>
       <NavBar searchVisible={false} setData={setSearchData} />
       <div className="outerContainer">
         <div className="contents">
-          <SearchResults data={displayedData} filter={searchData} />
+          <SearchResults data={inventory} filter={searchData} />
           <Link to="/myprofile/inventory/additem">
             <Button>+Add Item</Button>
           </Link>
-
         </div>
       </div>
     </>

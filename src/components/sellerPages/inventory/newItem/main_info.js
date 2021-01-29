@@ -9,6 +9,7 @@ function NewItem({ setProgress, slider, setData }) {
   const onFinish = values => {
     setData(values);
   };
+  // form names/labels need to match back-end table columns
 
   return (
     <div className="contents">
@@ -26,6 +27,7 @@ function NewItem({ setProgress, slider, setData }) {
         <Form.Item name="price">
           <Input placeholder="Price per item" />
         </Form.Item>
+        {/* quantity goes here */}
         <Form.Item name="tags">
           <Input placeholder="Create tags" />
         </Form.Item>

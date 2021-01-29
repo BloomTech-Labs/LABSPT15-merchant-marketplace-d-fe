@@ -59,14 +59,12 @@ export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
 export const addProduct = (newProduct, authState) => dispatch => {
   dispatch({ type: ADD_PRODUCT_START });
 
-  // Here will do the post request to the API
-
-  // postData('http://localhost:8000', newProduct, authState) //Post request, placeholder url
-  //   .then(response => {
-  //     dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
-  //   })
-  //   .catch(err => {
-  //     dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
-  //   });
+  postData(process.env.REACT_APP_API_URI + 'item', newProduct, authState)
+    .then(response => {
+      dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
+    });
   dispatch({ type: ADD_PRODUCT_SUCCESS, payload: newProduct }); //This is for testing purposes
 };

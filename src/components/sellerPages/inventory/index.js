@@ -65,6 +65,9 @@ function Inventory({ status, addProduct }) {
               setStatus={setProgressStatus}
               setProgress={setProgressPoint}
               formCosolidate={formCosolidate}
+              mainInfo={mainInfo}
+              specForm={specForm}
+              photos={photos}
             />
           </Carousel>
         </div>
