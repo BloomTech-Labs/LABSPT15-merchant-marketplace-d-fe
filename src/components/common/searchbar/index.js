@@ -31,7 +31,7 @@ function SearchBar({ searchVisible, setData }) {
       <div className="searchOuter">
         <div className="searchBtns"></div>
         <Search
-          defaultValue="Search through your inventory"
+          placeholder="Search through your inventory"
           className="searchBar"
           onSearch={onSearch}
         />
