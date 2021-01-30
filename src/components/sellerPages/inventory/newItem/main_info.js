@@ -15,22 +15,25 @@ function NewItem({ setProgress, slider, setData }) {
     <div className="contents">
       <h1>Main Information</h1>
       <Form form={form} onFinish={onFinish}>
-        <Form.Item name="name">
+        <Form.Item name="item_name">
           <Input placeholder="Name of Item" />
         </Form.Item>
         <Form.Item name="description">
           <Input.TextArea placeholder="Short Description (Max 140 Characters)" />
         </Form.Item>
-        <Form.Item name="category">
-          <Cascader placeholder="Choose a category" required />
+        {/* <Form.Item name="category">
+          we need to change or delete it later
+          <Cascader placeholder="Choose a category" />
+        </Form.Item> */}
+        <Form.Item name="price_in_cents">
+          <Input placeholder="Price per item in cents" />
         </Form.Item>
-        <Form.Item name="price">
-          <Input placeholder="Price per item" />
+        <Form.Item name="quantity_available">
+          <Input placeholder="Quantity Available" />
         </Form.Item>
-        {/* quantity goes here */}
-        <Form.Item name="tags">
+        {/* <Form.Item name="tags">
           <Input placeholder="Create tags" />
-        </Form.Item>
+        </Form.Item> */}
         <FormButton
           setProgress={setProgress}
           slider={slider}

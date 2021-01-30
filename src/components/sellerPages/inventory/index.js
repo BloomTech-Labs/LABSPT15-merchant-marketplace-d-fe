@@ -13,8 +13,6 @@ import { useOktaAuth } from '@okta/okta-react';
 
 function Inventory({ status, addProduct }) {
   const { authState } = useOktaAuth();
-  // Final Data State
-  const [newItemData, setNewItemData] = useState({});
 
   // State for each form section
   const [mainInfo, setMainInfo] = useState({});
@@ -23,12 +21,18 @@ function Inventory({ status, addProduct }) {
 
   const formCosolidate = () => {
     let completeObject = {
-      ...mainInfo,
-      ...specForm,
-      ...photos,
+      item: {
+        ...mainInfo,
+        published: true,
+      },
+      photos: {
+        ...photos,
+      },
+      spec: {
+        ...specForm,
+      },
     };
-    setNewItemData(completeObject); //// I will review this later, I dont think we need a state here, we can just pass the object to the addProduct action-Pedro
-    addProduct(newItemData, authState);
+    addProduct(completeObject, authState);
   };
 
   // Progress Bar Sync
@@ -71,17 +75,6 @@ function Inventory({ status, addProduct }) {
             />
           </Carousel>
         </div>
-
-        <Button
-          onClick={() => {
-            console.log(mainInfo);
-            console.log(specForm);
-            console.log(photos);
-            console.log('final object:', newItemData);
-          }}
-        >
-          Console Log
-        </Button>
       </div>
     </>
   );

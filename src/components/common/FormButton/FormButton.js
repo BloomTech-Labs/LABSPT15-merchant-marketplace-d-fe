@@ -10,7 +10,7 @@ const FormButton = ({
   progressPercent,
   text,
   review,
-  popContent,
+  formSubmit,
 }) => {
   const history = useHistory();
   return (
@@ -37,8 +37,8 @@ const FormButton = ({
           className="NextBtn"
           htmlType="submit"
           onClick={() => {
-            console.log('showing pop content');
-            popContent();
+            formSubmit();
+            history.push('/myprofile/inventory');
           }}
         >
           {text}
