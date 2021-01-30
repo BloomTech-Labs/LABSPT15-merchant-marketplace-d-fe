@@ -25,9 +25,14 @@ const FormButton = ({
         <Button
           className="NextBtn"
           htmlType="submit"
-          onClick={() => {
-            setProgress(progressPercent);
-            slider.current.next();
+          onClick={async () => {
+            try {
+              const values = await formSubmit();
+              setProgress(progressPercent);
+              slider.current.next();
+            } catch (errorInfo) {
+              console.log(('Failed:', errorInfo));
+            }
           }}
         >
           {text}
