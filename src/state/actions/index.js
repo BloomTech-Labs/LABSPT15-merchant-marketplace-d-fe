@@ -57,14 +57,21 @@ export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
 };
 
 export const addProduct = (newProduct, authState) => dispatch => {
+  const oktaStore = JSON.parse(localStorage['okta-token-storage']);
+  const seller_profile_id = oktaStore.idToken.claims.sub;
+
   dispatch({ type: ADD_PRODUCT_START });
 
-  postData(process.env.REACT_APP_API_URI + 'item', newProduct, authState)
+  postData(
+    process.env.REACT_APP_API_URI + 'item',
+    { ...newProduct.item, seller_profile_id },
+    authState
+  )
     .then(response => {
       dispatch({ type: ADD_PRODUCT_SUCCESS, payload: response.data });
     })
     .catch(err => {
       dispatch({ type: ADD_PRODUCT_ERROR, payload: err });
     });
-  dispatch({ type: ADD_PRODUCT_SUCCESS, payload: newProduct }); //This is for testing purposes
+  // dispatch({ type: ADD_PRODUCT_SUCCESS, payload: newProduct }); //This is for testing purposes
 };

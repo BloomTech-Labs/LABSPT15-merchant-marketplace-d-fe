@@ -16,15 +16,6 @@ function Finalize({
     formCosolidate();
   };
 
-  const ShowPopContent = ({ setStatus, setProgress }) => {
-    return (
-      <PopContent
-        setProgress={setProgress}
-        setStatus={setStatus}
-        formConfirm={formConfirm}
-      />
-    );
-  };
   return (
     <div className="contents">
       <NewProductInfo
@@ -33,18 +24,13 @@ function Finalize({
         mainInfo={mainInfo}
         specForm={specForm}
       />
-      <PopContent
-        setProgress={setProgress}
-        setStatus={setStatus}
-        formConfirm={formConfirm}
-      />
       <FormButton
         setProgress={setProgress}
         slider={slider}
         progressPercent={100}
-        text="Save Product"
+        text="Add Product"
         review="true"
-        popContent={() => ShowPopContent(setStatus, setProgress, formConfirm)}
+        formSubmit={formConfirm}
       />
     </div>
   );

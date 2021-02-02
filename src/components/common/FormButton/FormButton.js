@@ -10,7 +10,7 @@ const FormButton = ({
   progressPercent,
   text,
   review,
-  popContent,
+  formSubmit,
 }) => {
   const history = useHistory();
   return (
@@ -25,9 +25,14 @@ const FormButton = ({
         <Button
           className="NextBtn"
           htmlType="submit"
-          onClick={() => {
-            setProgress(progressPercent);
-            slider.current.next();
+          onClick={async () => {
+            try {
+              const values = await formSubmit();
+              setProgress(progressPercent);
+              slider.current.next();
+            } catch (errorInfo) {
+              console.log(('Failed:', errorInfo));
+            }
           }}
         >
           {text}
@@ -37,8 +42,8 @@ const FormButton = ({
           className="NextBtn"
           htmlType="submit"
           onClick={() => {
-            console.log('showing pop content');
-            popContent();
+            formSubmit();
+            history.push('/myprofile/inventory');
           }}
         >
           {text}
