@@ -1,43 +1,45 @@
-import React, { useRef, useState } from 'react';
-import { Button, Carousel } from 'antd';
-import './inventoryStyles.css';
-import NewItem from './newItem/main_info';
-import Specifications from './newItem/specifications';
-import AddPhotos from './newItem/photos';
-import Finalize from './newItem/review_product';
-import ProgressBar from '../../common/progressBar/progressBar';
-import NavBar from '../../common/navBar';
-import { addProduct } from '../../../state/actions/index';
-import { connect } from 'react-redux';
-import { useOktaAuth } from '@okta/okta-react';
+import React, { useRef, useState } from "react";
+import { Button, Carousel } from "antd";
+import "./inventoryStyles.css";
+import NewItem from "./newItem/main_info";
+import Specifications from "./newItem/specifications";
+import AddPhotos from "./newItem/photos";
+import Finalize from "./newItem/review_product";
+import ProgressBar from "../../common/progressBar/progressBar";
+import NavBar from "../../common/navBar";
+import { addProduct, addItemImage } from "../../../state/actions/index";
+import { connect } from "react-redux";
+import { useOktaAuth } from "@okta/okta-react";
 
-function Inventory({ status, addProduct }) {
+function Inventory({ addProduct, addItemImage }) {
   const { authState } = useOktaAuth();
 
   // State for each form section
   const [mainInfo, setMainInfo] = useState({});
   const [specForm, setSpecForm] = useState({});
-  const [photos, setPhotos] = useState({});
-
-  const formCosolidate = () => {
+  const [photo, setPhoto] = useState(
+    "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
+  );
+  const formConsolidate = async () => {
     let completeObject = {
       item: {
         ...mainInfo,
-        published: true,
-      },
-      photos: {
-        ...photos,
+        published: true
       },
       spec: {
-        ...specForm,
-      },
+        ...specForm
+      }
     };
-    addProduct(completeObject, authState);
+
+    addProduct(completeObject, authState).then(response => {
+      console.log(response);
+      addItemImage(authState, response.id, photo);
+    });
   };
 
   // Progress Bar Sync
-  const [progressPoint, setProgressPoint] = useState(1);
-  const [progressStatus, setProgressStatus] = useState('active');
+  const [progressPoint, setProgressPoint] = useState(0);
+  const [progressStatus, setProgressStatus] = useState("active");
 
   // Form Pointer for antD
   const slider = useRef(null);
@@ -62,16 +64,16 @@ function Inventory({ status, addProduct }) {
             <AddPhotos
               slider={slider}
               setProgress={setProgressPoint}
-              setData={setPhotos}
+              setPhoto={setPhoto}
             />
             <Finalize
               slider={slider}
               setStatus={setProgressStatus}
               setProgress={setProgressPoint}
-              formCosolidate={formCosolidate}
+              formConsolidate={formConsolidate}
               mainInfo={mainInfo}
               specForm={specForm}
-              photos={photos}
+              photo={photo}
             />
           </Carousel>
         </div>
@@ -79,8 +81,5 @@ function Inventory({ status, addProduct }) {
     </>
   );
 }
-const mapStateToProps = state => ({
-  status: state.addProduct.getAddProductStatus, //We could use this status to see the status of the api call post request
-});
 
-export default connect(mapStateToProps, { addProduct })(Inventory);
+export default connect(null, { addProduct, addItemImage })(Inventory);

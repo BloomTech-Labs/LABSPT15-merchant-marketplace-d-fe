@@ -1,13 +1,13 @@
-import { requestStatus } from '../types/index';
+import { requestStatus } from "../types/index";
 import {
   ADD_PRODUCT_START,
   ADD_PRODUCT_SUCCESS,
-  ADD_PRODUCT_ERROR,
-} from '../actions/index';
+  ADD_PRODUCT_ERROR
+} from "../actions/index";
 
 const initialState = {
   newProduct: {},
-  getAddProductStatus: requestStatus.ready,
+  getAddProductStatus: requestStatus.ready
 };
 
 const addProductReducer = (state = initialState, action) => {
@@ -15,10 +15,9 @@ const addProductReducer = (state = initialState, action) => {
     case ADD_PRODUCT_START:
       return { ...state, getAddProductStatus: requestStatus.loading };
     case ADD_PRODUCT_SUCCESS:
-      console.log(action.payload);
       return {
         newProduct: action.payload,
-        getAddProductStatus: requestStatus.loading,
+        getAddProductStatus: requestStatus.loading
       };
     case ADD_PRODUCT_ERROR:
       return { ...state, getAddProductStatus: requestStatus.error };

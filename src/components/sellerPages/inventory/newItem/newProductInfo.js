@@ -1,25 +1,16 @@
-import { useOktaAuth } from '@okta/okta-react';
-import React, { useEffect, useState } from 'react';
-import { Rate, Avatar, Tag } from 'antd';
-import { GlobalOutlined } from '@ant-design/icons';
+import { useOktaAuth } from "@okta/okta-react";
+import React, { useEffect, useState } from "react";
+import { Rate, Avatar, Tag } from "antd";
+import { GlobalOutlined } from "@ant-design/icons";
 
-const NewProductInfo = ({ photos, mainInfo, specForm }) => {
-  const [img, setImg] = useState('');
-  const { authState } = useOktaAuth();
-
+const NewProductInfo = ({ photo, mainInfo, specForm }) => {
   let dollars = mainInfo.price;
-
-  useEffect(() => {
-    setImg(
-      'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fe%2Feb%2FAsh_Tree_-_geograph.org.uk_-_590710.jpg%2F220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTree&tbnid=43XoZSLI7MfEHM&vet=12ahUKEwiGzZrr6r3uAhXDsFMKHU2jA3YQMygAegUIARDTAQ..i&docid=wHCoEH9G9w_hKM&w=220&h=293&q=tree&safe=off&ved=2ahUKEwiGzZrr6r3uAhXDsFMKHU2jA3YQMygAegUIARDTAQ'
-    );
-  }, []);
 
   return (
     <div className="product-page">
       <div className="product-container">
         <div>
-          <img src={img} />
+          <img src={photo} />
         </div>
 
         <div className="item">
@@ -38,11 +29,11 @@ const NewProductInfo = ({ photos, mainInfo, specForm }) => {
           <section>
             <p>{mainInfo.description}</p>
             {mainInfo.quantity_available !== 0 ? (
-              <h2 style={{ color: 'green' }}>
+              <h2 style={{ color: "green" }}>
                 QTY: {mainInfo.quantity_available}
               </h2>
             ) : (
-              <h2 style={{ color: 'red' }}>
+              <h2 style={{ color: "red" }}>
                 QTY: {mainInfo.quantity_available}
               </h2>
             )}

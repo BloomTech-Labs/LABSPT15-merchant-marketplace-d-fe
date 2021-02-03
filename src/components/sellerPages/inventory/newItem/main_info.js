@@ -1,7 +1,7 @@
-import React from 'react';
-import { Form, Input, Cascader } from 'antd';
-import FormButton from '../../../common/FormButton/FormButton';
-import '../inventoryStyles.css';
+import React from "react";
+import { Form, Input, Cascader } from "antd";
+import FormButton from "../../../common/FormButton/FormButton";
+import "../inventoryStyles.css";
 
 function NewItem({ setProgress, slider, setData }) {
   const [form] = Form.useForm();
@@ -9,7 +9,6 @@ function NewItem({ setProgress, slider, setData }) {
   const onFinish = async values => {
     setData(values);
   };
-  // form names/labels need to match back-end table columns
 
   // positive interger validation
   let checkQuantity = (rule, value, callback) => {
@@ -40,8 +39,8 @@ function NewItem({ setProgress, slider, setData }) {
           rules={[
             {
               required: true,
-              message: 'Please enter a product name',
-            },
+              message: "Please enter a product name"
+            }
           ]}
         >
           <Input placeholder="Name of Item" />
@@ -51,12 +50,12 @@ function NewItem({ setProgress, slider, setData }) {
           rules={[
             {
               required: true,
-              message: 'Please enter a product description',
+              message: "Please enter a product description"
             },
             {
-              message: 'No more than 140 characters',
-              max: 140,
-            },
+              message: "No more than 140 characters",
+              max: 140
+            }
           ]}
         >
           <Input.TextArea placeholder="Short Description (Max 140 Characters)" />
@@ -70,15 +69,15 @@ function NewItem({ setProgress, slider, setData }) {
           rules={[
             {
               required: true,
-              message: 'Please enter a product price in cents',
+              message: "Please enter a product price in cents"
             },
             {
-              validator: checkPrice,
+              validator: checkPrice
             },
             {
               min: 1,
-              message: "Price can't be less than 1 cent",
-            },
+              message: "Price can't be less than 1 cent"
+            }
           ]}
         >
           <Input placeholder="Price per item in cents" />
@@ -88,26 +87,23 @@ function NewItem({ setProgress, slider, setData }) {
           rules={[
             {
               required: true,
-              message: 'Please enter a product quantity',
+              message: "Please enter a product quantity"
             },
             {
-              validator: checkQuantity,
+              validator: checkQuantity
             },
             {
               min: 0,
-              message: "Quantity can't be less than 0",
-            },
+              message: "Quantity can't be less than 0"
+            }
           ]}
         >
           <Input placeholder="Quantity Available" />
         </Form.Item>
-        {/* <Form.Item name="tags">
-          <Input placeholder="Create tags" />
-        </Form.Item> */}
         <FormButton
           setProgress={setProgress}
           slider={slider}
-          progressPercent={20}
+          progressPercent={25}
           text="Next"
           review={false}
           formSubmit={form.validateFields}
