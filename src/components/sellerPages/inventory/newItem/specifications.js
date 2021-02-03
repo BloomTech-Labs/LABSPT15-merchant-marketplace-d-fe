@@ -1,13 +1,14 @@
-import React from 'react';
-import '../inventoryStyles.css';
-import FormButton from '../../../common/FormButton/FormButton';
-import { Form, Input, Button } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import React from "react";
+import "../inventoryStyles.css";
+import FormButton from "../../../common/FormButton/FormButton";
+import { Form, Input, Button } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 function MoreInfo({ setData, setProgress, slider }) {
   const onFinish = values => {
     setData(values);
   };
+  // Next UPDATE: This component will be used to create and add tags to the item, instead of used for specifications
 
   return (
     <div className="contents">
@@ -31,9 +32,9 @@ function MoreInfo({ setData, setProgress, slider }) {
                     <Form.Item
                       key={field.key}
                       {...field}
-                      name={[field.name, 'specs']}
-                      fieldKey={[field.fieldKey, 'specs']}
-                      rules={[{ required: true, message: 'Missing Detail' }]}
+                      name={[field.name, "specs"]}
+                      fieldKey={[field.fieldKey, "specs"]}
+                      rules={[{ required: true, message: "Missing Detail" }]}
                     >
                       <Input placeholder="Add aditional detail" />
                     </Form.Item>
@@ -57,7 +58,7 @@ function MoreInfo({ setData, setProgress, slider }) {
         <FormButton
           setProgress={setProgress}
           slider={slider}
-          progressPercent={40}
+          progressPercent={50}
           text="Next"
         />
       </Form>

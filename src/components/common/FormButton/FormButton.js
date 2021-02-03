@@ -1,8 +1,8 @@
-import React from 'react';
-import { Button } from 'antd';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { Button } from "antd";
+import { useHistory } from "react-router-dom";
 
-import './FormButton.styles.css';
+import "./FormButton.styles.css";
 
 const FormButton = ({
   setProgress,
@@ -10,14 +10,14 @@ const FormButton = ({
   progressPercent,
   text,
   review,
-  formSubmit,
+  formSubmit = () => {}
 }) => {
   const history = useHistory();
   return (
     <div className="Btn_Container">
       <Button
         className="CancellBtn"
-        onClick={() => history.push('/myprofile/inventory')}
+        onClick={() => history.push("/myprofile/inventory")}
       >
         Cancel
       </Button>
@@ -27,11 +27,11 @@ const FormButton = ({
           htmlType="submit"
           onClick={async () => {
             try {
-              const values = await formSubmit();
+              await formSubmit();
               setProgress(progressPercent);
               slider.current.next();
             } catch (errorInfo) {
-              console.log(('Failed:', errorInfo));
+              console.log(("Failed:", errorInfo));
             }
           }}
         >
@@ -41,9 +41,9 @@ const FormButton = ({
         <Button
           className="NextBtn"
           htmlType="submit"
-          onClick={() => {
-            formSubmit();
-            history.push('/myprofile/inventory');
+          onClick={async () => {
+            await formSubmit();
+            history.push("/myprofile/inventory");
           }}
         >
           {text}

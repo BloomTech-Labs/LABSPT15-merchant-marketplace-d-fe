@@ -1,26 +1,24 @@
-import React from 'react';
-import PopContent from './popContent';
-import NewProductInfo from './newProductInfo';
-import FormButton from '../../../common/FormButton/FormButton';
+import React from "react";
+import NewProductInfo from "./newProductInfo";
+import FormButton from "../../../common/FormButton/FormButton";
 
 function Finalize({
   setProgress,
   slider,
-  formCosolidate,
-  setStatus,
-  photos,
+  formConsolidate,
+  photo,
   mainInfo,
-  specForm,
+  specForm
 }) {
-  const formConfirm = () => {
-    formCosolidate();
+  const formConfirm = async () => {
+    await formConsolidate();
   };
 
   return (
     <div className="contents">
       <NewProductInfo
-        item={''}
-        photos={photos}
+        item={""}
+        photo={photo}
         mainInfo={mainInfo}
         specForm={specForm}
       />
