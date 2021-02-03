@@ -33,3 +33,16 @@ h1 {
 .supplement-detail{
     color: lightgray;
 }
+.product-container {
+    flex-direction: column;
+}
+.product-container .ant-typography strong{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.product-container button {
+    min-width: 80px;
+    margin-left: 5px;
+}
+

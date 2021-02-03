@@ -20,11 +20,13 @@ function Inventory({ addProduct, addItemImage }) {
   const [photo, setPhoto] = useState(
     "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
   );
+  const [published, setPublished] = useState(true);
+
   const formConsolidate = async () => {
     let completeObject = {
       item: {
         ...mainInfo,
-        published: true
+        published
       },
       spec: {
         ...specForm
@@ -74,6 +76,7 @@ function Inventory({ addProduct, addItemImage }) {
               mainInfo={mainInfo}
               specForm={specForm}
               photo={photo}
+              setPublished={setPublished}
             />
           </Carousel>
         </div>
