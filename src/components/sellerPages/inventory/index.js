@@ -1,56 +1,56 @@
-import React, { useRef, useState } from "react";
-import { Button, Carousel } from "antd";
-import "./inventoryStyles.css";
-import NewItem from "./newItem/main_info";
-import Specifications from "./newItem/specifications";
-import AddPhotos from "./newItem/photos";
-import Finalize from "./newItem/review_product";
-import ProgressBar from "../../common/progressBar/progressBar";
-import NavBar from "../../common/navBar";
-import { addProduct, addItemImage } from "../../../state/actions/index";
-import { connect } from "react-redux";
-import { useOktaAuth } from "@okta/okta-react";
+import React, { useRef, useState } from 'react'
+import { Button, Carousel } from 'antd'
+import './inventoryStyles.css'
+import NewItem from './newItem/main_info'
+import TagsForm from './newItem/tagsForm'
+import AddPhotos from './newItem/photos'
+import Finalize from './newItem/review_product'
+import ProgressBar from '../../common/progressBar/progressBar'
+import NavBar from '../../common/navBar'
+import { addProduct, addItemImage } from '../../../state/actions/index'
+import { connect } from 'react-redux'
+import { useOktaAuth } from '@okta/okta-react'
 
 function Inventory({ addProduct, addItemImage }) {
-  const { authState } = useOktaAuth();
+  const { authState } = useOktaAuth()
 
   // State for each form section
-  const [mainInfo, setMainInfo] = useState({});
-  const [specForm, setSpecForm] = useState({});
+  const [mainInfo, setMainInfo] = useState({})
+  const [specForm, setSpecForm] = useState({})
   const [photo, setPhoto] = useState(
-    "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
-  );
-  const [published, setPublished] = useState(true);
+    'http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png'
+  )
+  const [published, setPublished] = useState(true)
 
   const formConsolidate = async () => {
     let completeObject = {
       item: {
         ...mainInfo,
-        published
+        published,
       },
       spec: {
-        ...specForm
-      }
-    };
+        ...specForm,
+      },
+    }
 
-    addProduct(completeObject, authState).then(response => {
-      console.log(response);
-      addItemImage(authState, response.id, photo);
-    });
-  };
+    addProduct(completeObject, authState).then((response) => {
+      console.log(response)
+      addItemImage(authState, response.id, photo)
+    })
+  }
 
   // Progress Bar Sync
-  const [progressPoint, setProgressPoint] = useState(0);
-  const [progressStatus, setProgressStatus] = useState("active");
+  const [progressPoint, setProgressPoint] = useState(0)
+  const [progressStatus, setProgressStatus] = useState('active')
 
   // Form Pointer for antD
-  const slider = useRef(null);
+  const slider = useRef(null)
 
   return (
     <>
       <NavBar />
-      <div className="outerContainer">
-        <div className="formContainer">
+      <div className='outerContainer'>
+        <div className='formContainer'>
           <ProgressBar percent={progressPoint} status={progressStatus} />
           <Carousel ref={slider}>
             <NewItem
@@ -58,7 +58,7 @@ function Inventory({ addProduct, addItemImage }) {
               setData={setMainInfo}
               setProgress={setProgressPoint}
             />
-            <Specifications
+            <TagsForm
               slider={slider}
               setData={setSpecForm}
               setProgress={setProgressPoint}
@@ -82,7 +82,7 @@ function Inventory({ addProduct, addItemImage }) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default connect(null, { addProduct, addItemImage })(Inventory);
+export default connect(null, { addProduct, addItemImage })(Inventory)
