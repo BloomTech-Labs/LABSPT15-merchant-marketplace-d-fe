@@ -6,9 +6,10 @@ function Finalize({
   setProgress,
   slider,
   formConsolidate,
-  photo,
   mainInfo,
-  specForm
+  specForm,
+  photo,
+  setPublished
 }) {
   const formConfirm = async () => {
     await formConsolidate();
@@ -17,10 +18,10 @@ function Finalize({
   return (
     <div className="contents">
       <NewProductInfo
-        item={""}
         photo={photo}
         mainInfo={mainInfo}
         specForm={specForm}
+        setPublished={setPublished}
       />
       <FormButton
         setProgress={setProgress}
