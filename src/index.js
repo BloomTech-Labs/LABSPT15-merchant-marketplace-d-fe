@@ -27,6 +27,9 @@ import CurrentInventory from './components/sellerPages/inventory/current';
 import { ProductPage } from './components/pages/ProductPage';
 import { TestItemImageUpload } from './components/common';
 
+// Shopper
+import ShopperView from './components/shopperView';
+
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
@@ -59,6 +62,7 @@ function App() {
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <Route exact path="/" component={Landing} />
         <SecureRoute exact path="/myprofile" component={SellerProfile} />
+        <SecureRoute exact path="/createProfile" component={ShopperView} />
         <SecureRoute
           exact
           path="/myprofile/inventory"
