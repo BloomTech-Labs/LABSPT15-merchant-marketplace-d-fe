@@ -7,7 +7,7 @@ function Finalize({
   slider,
   formConsolidate,
   mainInfo,
-  specForm,
+  tagsText,
   photo,
   setPublished
 }) {
@@ -20,7 +20,7 @@ function Finalize({
       <NewProductInfo
         photo={photo}
         mainInfo={mainInfo}
-        specForm={specForm}
+        tagsText={tagsText}
         setPublished={setPublished}
       />
       <FormButton
