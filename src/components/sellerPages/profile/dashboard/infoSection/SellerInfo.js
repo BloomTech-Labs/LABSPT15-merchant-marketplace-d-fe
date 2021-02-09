@@ -7,6 +7,7 @@ import {
   fetchSellerProfile,
   updateSellerProfile,
 } from '../../../../../state/actions';
+import '../dashboard.css';
 
 const SellerInfo = ({
   sellerInfo,
@@ -27,6 +28,8 @@ const SellerInfo = ({
   useEffect(() => {
     fetchSellerProfile(authState);
   }, []);
+
+  console.log(sellerInfo);
 
   const onEditButtonClick = () => {
     setVisible(true);
@@ -107,7 +110,16 @@ const SellerInfo = ({
 
   return (
     <>
-      <h2>Seller Info</h2>
+      <div className="dashHeader">
+        <h2>Seller Info</h2>
+        <Button
+          className="edit-button"
+          icon={<EditOutlined />}
+          size="small"
+          onClick={onEditButtonClick}
+        />
+      </div>
+      {/* <img src={sellerInfo.avatar} */}
       <h4>{sellerInfo.seller_name}</h4>
       <p>{sellerInfo.description}</p>
       <br />
@@ -116,10 +128,6 @@ const SellerInfo = ({
       <p>{sellerInfo.phone_number}</p>
       <br />
       <p>{sellerInfo.email_address}</p>
-      <br />
-      <Button icon={<EditOutlined />} size="small" onClick={onEditButtonClick}>
-        edit
-      </Button>
       <EditProfileForm
         fields={fields}
         onChange={newFields => {
