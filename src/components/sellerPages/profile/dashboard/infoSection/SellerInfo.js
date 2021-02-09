@@ -1,111 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
-import { Button, Modal, Input, Form } from 'antd';
+import { Button } from 'antd';
+
 import { EditOutlined } from '@ant-design/icons';
 import {
   fetchSellerProfile,
   updateSellerProfile,
 } from '../../../../../state/actions';
+import EditProfileForm from './EditProfileForm';
 import '../dashboard.css';
 
 const SellerInfo = ({
   sellerInfo,
   fetchSellerProfile,
   updateSellerProfile,
-  updateSellerProfileStatus,
 }) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
   const { authState } = useOktaAuth();
-
-  const onSubmit = values => {
-    setVisible(false);
-    updateSellerProfile(values, authState);
-    fetchSellerProfile(authState);
-  };
 
   useEffect(() => {
     fetchSellerProfile(authState);
-  }, []);
+  }, [submitted]);
 
-  console.log(sellerInfo);
+  const onSubmit = async values => {
+    setVisible(false);
+    updateSellerProfile(values, authState);
+    setSubmitted(!submitted);
+  };
 
   const onEditButtonClick = () => {
+    const {
+      seller_name,
+      description,
+      physical_address,
+      phone_number,
+      email_address,
+    } = sellerInfo;
+
     setVisible(true);
     setFields([
       {
         name: ['seller_name'],
-        value: sellerInfo.seller_name,
+        value: seller_name,
       },
       {
         name: ['description'],
-        value: sellerInfo.description,
+        value: description,
       },
       {
         name: ['physical_address'],
-        value: sellerInfo.physical_address,
+        value: physical_address,
       },
       {
         name: ['phone_number'],
-        value: sellerInfo.phone_number,
+        value: phone_number,
       },
       {
         name: ['email_address'],
-        value: sellerInfo.email_address,
+        value: email_address,
       },
     ]);
-  };
-
-  const EditProfileForm = ({ visible, fields, onSubmit, onCancel }) => {
-    const [form] = Form.useForm();
-
-    return (
-      <Modal
-        visible={visible}
-        title="Edit Profile Info"
-        okText="submit"
-        cancelText="cancel"
-        onCancel={onCancel}
-        onOk={() => {
-          form
-            .validateFields()
-            .then(values => {
-              form.resetFields();
-              onSubmit(values);
-            })
-            .catch(info => {
-              console.log('Validation failed:', info);
-            });
-        }}
-      >
-        <Form
-          form={form}
-          fields={fields}
-          layout="horizontal"
-          name="form_in_modal"
-          initialValues={{
-            modifier: 'public',
-          }}
-        >
-          <Form.Item name="seller_name" label="Name">
-            <Input />
-          </Form.Item>
-          <Form.Item name="description" label="Description">
-            <Input.TextArea />
-          </Form.Item>
-          <Form.Item name="physical_address" label="Address">
-            <Input />
-          </Form.Item>
-          <Form.Item name="phone_number" label="Phone">
-            <Input />
-          </Form.Item>
-          <Form.Item name="email_address" label="Email">
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
-    );
   };
 
   return (
@@ -119,7 +76,6 @@ const SellerInfo = ({
           onClick={onEditButtonClick}
         />
       </div>
-      {/* <img src={sellerInfo.avatar} */}
       <h4>{sellerInfo.seller_name}</h4>
       <p>{sellerInfo.description}</p>
       <br />
@@ -145,7 +101,6 @@ const SellerInfo = ({
 
 const mapStateToProps = state => ({
   sellerInfo: state.sellerInfo.sellerInfo,
-  updateSellerProfileStatus: state.sellerInfo.updateSellerProfileStatus,
 });
 
 export default connect(mapStateToProps, {

@@ -69,16 +69,18 @@ export const updateSellerProfile = (newData, authState) => dispatch => {
   )
     .then(response => {
       dispatch({ type: UPDATE_SELLER_INFO_SUCCESS, payload: response });
+      fetchSellerProfile(authState);
     })
     .catch(err => {
       dispatch({ type: UPDATE_SELLER_INFO_ERROR, payload: err });
     });
+
+  fetchSellerProfile(authState);
 };
 
 export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
   dispatch({ type: ADD_ITEM_IMAGE_START });
 
-  console.log('addItemImage');
   postData(
     process.env.REACT_APP_API_URI + 'photos',
     {
