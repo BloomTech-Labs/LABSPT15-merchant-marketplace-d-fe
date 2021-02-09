@@ -1,16 +1,101 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Modal, Input, Form } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { fetchSellerProfile } from '../../../../../state/actions';
 
 const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
+  const [visible, setVisible] = useState(false);
+  const [fields, setFields] = useState([]);
+
   const { authState } = useOktaAuth();
+
+  const onSubmit = values => {
+    setVisible(false);
+    // make a put request to the backend
+  };
 
   useEffect(() => {
     fetchSellerProfile(authState);
   }, []);
+
+  const onEditButtonClick = () => {
+    setVisible(true);
+    setFields([
+      {
+        name: ['name'],
+        value: sellerInfo.seller_name,
+      },
+      {
+        name: ['description'],
+        value: sellerInfo.description,
+      },
+      {
+        name: ['address'],
+        value: sellerInfo.physical_address,
+      },
+      {
+        name: ['phone'],
+        value: sellerInfo.phone_number,
+      },
+      {
+        name: ['email'],
+        value: sellerInfo.email_address,
+      },
+    ]);
+  };
+
+  const EditProfileForm = ({ visible, fields, onSubmit, onCancel }) => {
+    const [form] = Form.useForm();
+
+    return (
+      <Modal
+        visible={visible}
+        title="Edit Profile Info"
+        okText="submit"
+        cancelText="cancel"
+        onCancel={onCancel}
+        onOk={() => {
+          form
+            .validateFields()
+            .then(values => {
+              form.resetFields();
+              onSubmit(values);
+            })
+            .catch(info => {
+              console.log('Validation failed:', info);
+            });
+        }}
+      >
+        <Form
+          form={form}
+          fields={fields}
+          layout="horizontal"
+          name="form_in_modal"
+          initialValues={{
+            modifier: 'public',
+          }}
+        >
+          <Form.Item name="name" label="Name">
+            <Input />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item name="address" label="Address">
+            <Input />
+          </Form.Item>
+          <Form.Item name="phone" label="Phone">
+            <Input />
+          </Form.Item>
+          <Form.Item name="email" label="Email">
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+    );
+  };
 
   return (
     <>
@@ -24,16 +109,26 @@ const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
       <br />
       <p>{sellerInfo.email_address}</p>
       <br />
-      <Button icon={<EditOutlined />} size="small">
+      <Button icon={<EditOutlined />} size="small" onClick={onEditButtonClick}>
         edit
       </Button>
+      <EditProfileForm
+        fields={fields}
+        onChange={newFields => {
+          setFields(newFields);
+        }}
+        visible={visible}
+        onSubmit={onSubmit}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
     </>
   );
 };
 
 const mapStateToProps = state => ({
   sellerInfo: state.sellerInfo.sellerInfo,
-  getSellerInfoStatus: state.sellerInfo.getSellerInfoStatus,
 });
 
 export default connect(mapStateToProps, { fetchSellerProfile })(SellerInfo);
