@@ -3,17 +3,25 @@ import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button, Modal, Input, Form } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import { fetchSellerProfile } from '../../../../../state/actions';
+import {
+  fetchSellerProfile,
+  updateSellerProfile,
+} from '../../../../../state/actions';
 
-const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
+const SellerInfo = ({
+  sellerInfo,
+  fetchSellerProfile,
+  updateSellerProfile,
+  updateSellerProfileStatus,
+}) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
-
   const { authState } = useOktaAuth();
 
   const onSubmit = values => {
     setVisible(false);
-    // make a put request to the backend
+    updateSellerProfile(values, authState);
+    fetchSellerProfile(authState);
   };
 
   useEffect(() => {
@@ -24,7 +32,7 @@ const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
     setVisible(true);
     setFields([
       {
-        name: ['name'],
+        name: ['seller_name'],
         value: sellerInfo.seller_name,
       },
       {
@@ -32,15 +40,15 @@ const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
         value: sellerInfo.description,
       },
       {
-        name: ['address'],
+        name: ['physical_address'],
         value: sellerInfo.physical_address,
       },
       {
-        name: ['phone'],
+        name: ['phone_number'],
         value: sellerInfo.phone_number,
       },
       {
-        name: ['email'],
+        name: ['email_address'],
         value: sellerInfo.email_address,
       },
     ]);
@@ -77,19 +85,19 @@ const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
             modifier: 'public',
           }}
         >
-          <Form.Item name="name" label="Name">
+          <Form.Item name="seller_name" label="Name">
             <Input />
           </Form.Item>
           <Form.Item name="description" label="Description">
             <Input.TextArea />
           </Form.Item>
-          <Form.Item name="address" label="Address">
+          <Form.Item name="physical_address" label="Address">
             <Input />
           </Form.Item>
-          <Form.Item name="phone" label="Phone">
+          <Form.Item name="phone_number" label="Phone">
             <Input />
           </Form.Item>
-          <Form.Item name="email" label="Email">
+          <Form.Item name="email_address" label="Email">
             <Input />
           </Form.Item>
         </Form>
@@ -129,6 +137,10 @@ const SellerInfo = ({ sellerInfo, fetchSellerProfile }) => {
 
 const mapStateToProps = state => ({
   sellerInfo: state.sellerInfo.sellerInfo,
+  updateSellerProfileStatus: state.sellerInfo.updateSellerProfileStatus,
 });
 
-export default connect(mapStateToProps, { fetchSellerProfile })(SellerInfo);
+export default connect(mapStateToProps, {
+  fetchSellerProfile,
+  updateSellerProfile,
+})(SellerInfo);

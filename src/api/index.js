@@ -59,4 +59,15 @@ const postData = (url, newData, authState) => {
     .catch(err => err);
 };
 
-export { sleep, getExampleData, getProfileData, getDSData, postData };
+const putData = (url, newData, authState) => {
+  const headers = getAuthHeader(authState);
+  if (!url) {
+    throw new Error('No URL provided');
+  }
+  return axios
+    .put(url, newData, { headers })
+    .then(res => res)
+    .catch(err => err);
+};
+
+export { sleep, getExampleData, getProfileData, getDSData, postData, putData };
