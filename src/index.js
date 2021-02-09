@@ -85,6 +85,7 @@ function App() {
           path="/test_image_upload"
           component={TestItemImageUpload}
         />
+        <Route path="/create-profile" component={ShopperView} />
         <Route component={NotFoundPage} />
       </Switch>
     </Security>
