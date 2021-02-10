@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { config } from '../../../../utils/oktaConfig';
+
 import './form.css';
 
 const Form = () => {
@@ -8,12 +10,32 @@ const Form = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [userId, setUserId] = useState('');
 
-  const newUser = { email, firstName, lastName, password, confirmPassword };
+  const newUser = {
+    userId,
+    email,
+    firstName,
+    lastName,
+    password,
+    confirmPassword,
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(newUser);
+
+    fetch(`${process.env.REACT_APP_API_URI}/profile`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then(user => {
+        console.log(user);
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -62,7 +84,7 @@ const Form = () => {
         <div className="form-element">
           <input
             className="formInput"
-            type="confirmPassword"
+            type="password"
             id="confirmPassword"
             value={confirmPassword}
             placeholder="Confirm Password"
