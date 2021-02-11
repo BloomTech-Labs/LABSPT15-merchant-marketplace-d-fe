@@ -1,15 +1,15 @@
-import React, { useRef, useState } from "react";
-import { Button, Carousel } from "antd";
-import "./inventoryStyles.css";
-import NewItem from "./newItem/main_info";
-import Specifications from "./newItem/specifications";
-import AddPhotos from "./newItem/photos";
-import Finalize from "./newItem/review_product";
-import ProgressBar from "../../common/progressBar/progressBar";
-import NavBar from "../../common/navBar";
-import { addProduct, addItemImage } from "../../../state/actions/index";
-import { connect } from "react-redux";
-import { useOktaAuth } from "@okta/okta-react";
+import React, { useRef, useState } from 'react';
+import { Button, Carousel } from 'antd';
+import './inventoryStyles.css';
+import NewItem from './newItem/main_info';
+import Specifications from './newItem/specifications';
+import AddPhotos from './newItem/photos';
+import Finalize from './newItem/review_product';
+import ProgressBar from '../../common/progressBar/progressBar';
+import NavBar from '../../common/navBar';
+import { addProduct, addItemImage } from '../../../state/actions/index';
+import { connect } from 'react-redux';
+import { useOktaAuth } from '@okta/okta-react';
 
 function Inventory({ addProduct, addItemImage }) {
   const { authState } = useOktaAuth();
@@ -18,7 +18,7 @@ function Inventory({ addProduct, addItemImage }) {
   const [mainInfo, setMainInfo] = useState({});
   const [specForm, setSpecForm] = useState({});
   const [photo, setPhoto] = useState(
-    "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
+    'http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png'
   );
   const [published, setPublished] = useState(true);
 
@@ -26,22 +26,21 @@ function Inventory({ addProduct, addItemImage }) {
     let completeObject = {
       item: {
         ...mainInfo,
-        published
+        published,
       },
       spec: {
-        ...specForm
-      }
+        ...specForm,
+      },
     };
 
     addProduct(completeObject, authState).then(response => {
-      console.log(response);
       addItemImage(authState, response.id, photo);
     });
   };
 
   // Progress Bar Sync
   const [progressPoint, setProgressPoint] = useState(0);
-  const [progressStatus, setProgressStatus] = useState("active");
+  const [progressStatus, setProgressStatus] = useState('active');
 
   // Form Pointer for antD
   const slider = useRef(null);

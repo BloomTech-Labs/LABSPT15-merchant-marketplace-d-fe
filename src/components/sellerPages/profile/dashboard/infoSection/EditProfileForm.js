@@ -1,7 +1,17 @@
-import React from 'react';
-import { Modal, Input, Form } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Modal, Input, Form, Typography } from 'antd';
+import AutoComplete from 'react-google-autocomplete';
 
 const EditProfileForm = ({ visible, fields, onSubmit, onCancel }) => {
+  const [address, setAddress] = useState('');
+  const [addressValue, setAddressValue] = useState('');
+  const { Text } = Typography;
+
+  useEffect(() => {
+    setAddress(fields.length > 0 ? fields[2].value : '');
+    setAddressValue(fields.length > 0 ? fields[2].value : '');
+  }, [fields]);
+
   const [form] = Form.useForm();
 
   const validatePhone = (rule, value, callback) => {
@@ -25,6 +35,7 @@ const EditProfileForm = ({ visible, fields, onSubmit, onCancel }) => {
           .validateFields()
           .then(values => {
             form.resetFields();
+            values.physical_address = address;
             onSubmit(values);
           })
           .catch(info => {
@@ -65,18 +76,17 @@ const EditProfileForm = ({ visible, fields, onSubmit, onCancel }) => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item
-          name="physical_address"
-          label="Address"
-          rules={[
-            {
-              required: true,
-              message: 'Please enter an address',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+        <Text>Address: </Text>
+        <AutoComplete
+          apiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}
+          types={['address']}
+          onPlaceSelected={place => {
+            setAddress(place.formatted_address);
+            setAddressValue(place.formatted_address);
+          }}
+          value={addressValue}
+          onChange={e => setAddressValue(e.target.value)}
+        />
         <Form.Item
           name="phone_number"
           label="Phone"
