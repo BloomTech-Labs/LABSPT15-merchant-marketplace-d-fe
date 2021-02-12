@@ -5,6 +5,7 @@ import './itemCardStyles.css';
 
 function ItemCard({ name, description, price, image, count }) {
   const [img, setImg] = useState('');
+
   const { authState } = useOktaAuth();
   let dollars = (price / 100).toFixed(2);
   const imgGet = id => {
