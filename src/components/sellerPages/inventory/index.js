@@ -2,21 +2,26 @@ import React, { useRef, useState } from "react";
 import { Button, Carousel } from "antd";
 import "./inventoryStyles.css";
 import NewItem from "./newItem/main_info";
-import Specifications from "./newItem/specifications";
+import TagsForm from "./newItem/tagsForm";
 import AddPhotos from "./newItem/photos";
 import Finalize from "./newItem/review_product";
 import ProgressBar from "../../common/progressBar/progressBar";
 import NavBar from "../../common/navBar";
-import { addProduct, addItemImage } from "../../../state/actions/index";
+import {
+  addProduct,
+  addItemImage,
+  addItemTag
+} from "../../../state/actions/index";
 import { connect } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
 
-function Inventory({ addProduct, addItemImage }) {
+function Inventory({ addProduct, addItemImage, addItemTag }) {
   const { authState } = useOktaAuth();
 
   // State for each form section
   const [mainInfo, setMainInfo] = useState({});
-  const [specForm, setSpecForm] = useState({});
+  const [tags, setTags] = useState([]);
+  const [tagsText, setTagsText] = useState([]);
   const [photo, setPhoto] = useState(
     "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
   );
@@ -27,14 +32,13 @@ function Inventory({ addProduct, addItemImage }) {
       item: {
         ...mainInfo,
         published
-      },
-      spec: {
-        ...specForm
       }
     };
 
     addProduct(completeObject, authState).then(response => {
-      console.log(response);
+      tags.forEach(tag => {
+        addItemTag(authState, response.id, tag);
+      });
       addItemImage(authState, response.id, photo);
     });
   };
@@ -45,7 +49,6 @@ function Inventory({ addProduct, addItemImage }) {
 
   // Form Pointer for antD
   const slider = useRef(null);
-
   return (
     <>
       <NavBar />
@@ -58,9 +61,10 @@ function Inventory({ addProduct, addItemImage }) {
               setData={setMainInfo}
               setProgress={setProgressPoint}
             />
-            <Specifications
+            <TagsForm
               slider={slider}
-              setData={setSpecForm}
+              setTags={setTags}
+              setTagsText={setTagsText}
               setProgress={setProgressPoint}
             />
             <AddPhotos
@@ -74,7 +78,7 @@ function Inventory({ addProduct, addItemImage }) {
               setProgress={setProgressPoint}
               formConsolidate={formConsolidate}
               mainInfo={mainInfo}
-              specForm={specForm}
+              tagsText={tagsText}
               photo={photo}
               setPublished={setPublished}
             />
@@ -85,4 +89,6 @@ function Inventory({ addProduct, addItemImage }) {
   );
 }
 
-export default connect(null, { addProduct, addItemImage })(Inventory);
+export default connect(null, { addProduct, addItemImage, addItemTag })(
+  Inventory
+);

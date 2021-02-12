@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Rate, Avatar, Tag, Switch, Typography } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
 
-const NewProductInfo = ({ photo, mainInfo, specForm, setPublished }) => {
+const NewProductInfo = ({ photo, mainInfo, tagsText, setPublished }) => {
   let dollars = mainInfo.price_in_cents;
   let { Text } = Typography;
   const [switchButton, setSwitchButton] = useState(true);
@@ -54,10 +54,9 @@ const NewProductInfo = ({ photo, mainInfo, specForm, setPublished }) => {
         </div>
       </div>
       <section className="tags-container">
-        <Tag className="tags">Tag</Tag>
-        <Tag className="tags">Tag</Tag>
-        <Tag className="tags">Tag</Tag>
-        <Tag className="tags">Tag</Tag>
+        {tagsText.map(tag => (
+          <Tag className="tags">{tag}</Tag>
+        ))}
       </section>
     </div>
   );
