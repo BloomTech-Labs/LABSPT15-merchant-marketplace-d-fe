@@ -23,7 +23,7 @@ function Inventory({ addProduct, addItemImage, addItemTag }) {
   const [tags, setTags] = useState([]);
   const [tagsText, setTagsText] = useState([]);
   const [photo, setPhoto] = useState(
-    "http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png"
+    'http://superprosamui.com/2016/wp-content/plugins/ap_background/images/default/default_large.png'
   );
   const [published, setPublished] = useState(true);
 
@@ -31,6 +31,7 @@ function Inventory({ addProduct, addItemImage, addItemTag }) {
     let completeObject = {
       item: {
         ...mainInfo,
+
         published
       }
     };
@@ -45,7 +46,7 @@ function Inventory({ addProduct, addItemImage, addItemTag }) {
 
   // Progress Bar Sync
   const [progressPoint, setProgressPoint] = useState(0);
-  const [progressStatus, setProgressStatus] = useState("active");
+  const [progressStatus, setProgressStatus] = useState('active');
 
   // Form Pointer for antD
   const slider = useRef(null);

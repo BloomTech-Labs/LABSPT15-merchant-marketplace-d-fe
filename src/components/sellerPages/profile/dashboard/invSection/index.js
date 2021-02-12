@@ -12,8 +12,6 @@ function InvSection({ inventory, fetchProducts, getProductsStatus }) {
     fetchProducts(authState);
   }, []);
 
-  console.log(inventory);
-
   return (
     <>
       <h2>Inventory</h2>
