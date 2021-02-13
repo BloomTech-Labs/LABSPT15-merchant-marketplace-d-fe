@@ -1,32 +1,35 @@
-import React from 'react';
-import PopContent from './popContent';
-import ProductInfo from '../../../pages/ProductInfo/ProductInfo';
-import FormButton from '../../../common/FormButton/FormButton';
+import React from "react";
+import NewProductInfo from "./newProductInfo";
+import FormButton from "../../../common/FormButton/FormButton";
 
-function Finalize({ setProgress, slider, formCosolidate, setStatus }) {
-  const formConfirm = () => {
-    formCosolidate();
+function Finalize({
+  setProgress,
+  slider,
+  formConsolidate,
+  mainInfo,
+  tagsText,
+  photo,
+  setPublished
+}) {
+  const formConfirm = async () => {
+    await formConsolidate();
   };
 
-  const ShowPopContent = ({ setStatus, setProgress }) => {
-    return (
-      <PopContent
-        setProgress={setProgress}
-        setStatus={setStatus}
-        formConfirm={formConfirm}
-      />
-    );
-  };
   return (
     <div className="contents">
-      <ProductInfo />
+      <NewProductInfo
+        photo={photo}
+        mainInfo={mainInfo}
+        tagsText={tagsText}
+        setPublished={setPublished}
+      />
       <FormButton
         setProgress={setProgress}
         slider={slider}
         progressPercent={100}
-        text="Save Product"
+        text="Add Product"
         review="true"
-        popContent={() => ShowPopContent(setStatus, setProgress, formConfirm)}
+        formSubmit={formConfirm}
       />
     </div>
   );
