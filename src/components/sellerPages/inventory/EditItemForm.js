@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Input, Form, Typography } from 'antd';
+import React from 'react';
+import { Modal, Input, Form } from 'antd';
 
 const EditItemForm = ({ visible, fields, onSubmit, onCancel }) => {
-  const { Text } = Typography;
-
   const [form] = Form.useForm();
 
   return (
@@ -38,6 +36,12 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel }) => {
           <Input />
         </Form.Item>
         <Form.Item name="description" label="Description">
+          <Input />
+        </Form.Item>
+        <Form.Item name="photo_url" label="Photo URL">
+          <Input />
+        </Form.Item>
+        <Form.Item name="tags" label="Tags">
           <Input />
         </Form.Item>
         <Form.Item name="quantity_available" label="Quantity">

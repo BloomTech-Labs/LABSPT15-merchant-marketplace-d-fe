@@ -26,6 +26,14 @@ function SearchResults({ data, filter }) {
         value: item.description,
       },
       {
+        name: ['photo_url'],
+        value: item.photo_url,
+      },
+      {
+        name: ['tags'],
+        value: item.tags,
+      },
+      {
         name: ['quantity_available'],
         value: item.quantity_available,
       },
