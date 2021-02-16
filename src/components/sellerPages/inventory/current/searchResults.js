@@ -15,7 +15,6 @@ function SearchResults({ data, filter }) {
 
   const onEditButtonClick = item => {
     setVisible(true);
-    console.log('item', item);
     setFields([
       {
         name: ['item_name'],
@@ -48,8 +47,11 @@ function SearchResults({ data, filter }) {
     ]);
   };
 
-  const onSubmit = () => {
+  const onSubmit = values => {
     setVisible(false);
+    // update item props on backend
+    // delete all the tags for this item that are in the db
+    // add the new tags
   };
 
   return (
@@ -77,6 +79,7 @@ function SearchResults({ data, filter }) {
       ))}
       <EditItemForm
         fields={fields}
+        setFields={setFields}
         onChange={newFields => {
           setFields(newFields);
         }}
