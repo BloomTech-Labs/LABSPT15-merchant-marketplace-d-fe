@@ -39,5 +39,5 @@
 
 .nav > a:last-child{
     margin-left: auto;
-    padding-right: 10%;
+    padding-right: 0;
 }

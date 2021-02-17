@@ -6,6 +6,7 @@ import './navStyles.css';
 import SearchBar from '../searchbar';
 import { useOktaAuth } from '@okta/okta-react';
 import logo from '../inventory-logo.png';
+import OrderCart from '../orderCart';
 
 function NavBar({ searchVisible, data, setData }) {
   const { authState, authService } = useOktaAuth();
@@ -21,6 +22,7 @@ function NavBar({ searchVisible, data, setData }) {
         <Link>Orders</Link>
         <Link>Payment</Link>
         <Link>Messages</Link>
+        <OrderCart />
       </div>
       <SearchBar searchVisible={searchVisible} setData={setData} data={data} />
     </div>
