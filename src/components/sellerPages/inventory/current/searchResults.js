@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import { updateProduct } from '../../../../state/actions';
+import { updateProduct, fetchProducts } from '../../../../state/actions';
 import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
 import { NavLink } from 'react-router-dom';
 import EditItemForm from '../../../sellerPages/inventory/EditItemForm';
 
-const SearchResults = ({ data, filter, updateProduct, updatedProduct }) => {
+const SearchResults = ({
+  data,
+  filter,
+  updateProduct,
+  updatedProduct,
+  fetchProducts,
+}) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
-
+  const [submitted, setSubmitted] = useState(false);
   const { authState } = useOktaAuth();
+
+  useEffect(() => {
+    fetchProducts(authState);
+  }, [submitted]);
 
   const searchData = useSearch(data, 'item_name', filter);
 
@@ -62,31 +72,34 @@ const SearchResults = ({ data, filter, updateProduct, updatedProduct }) => {
     updateProduct(values, authState);
     // delete all the tags for this item that are in the db
     // add the new tags
+    setSubmitted(!submitted);
   };
 
   return (
     <div>
-      {searchData.map(item => (
-        <div>
-          <Button
-            className="edit-button"
-            icon={<EditOutlined />}
-            size="small"
-            onClick={() => onEditButtonClick(item)}
-          />
-          <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
-            <ItemCard
-              id={item.id}
-              key={item.id}
-              name={item.item_name}
-              price={item.price_in_cents}
-              description={item.description}
-              count={item.quantity_available}
-              image={item.id}
+      {searchData
+        .sort((a, b) => a.id - b.id)
+        .map(item => (
+          <div>
+            <Button
+              className="edit-button"
+              icon={<EditOutlined />}
+              size="small"
+              onClick={() => onEditButtonClick(item)}
             />
-          </NavLink>
-        </div>
-      ))}
+            <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
+              <ItemCard
+                id={item.id}
+                key={item.id}
+                name={item.item_name}
+                price={item.price_in_cents}
+                description={item.description}
+                count={item.quantity_available}
+                image={item.id}
+              />
+            </NavLink>
+          </div>
+        ))}
       <EditItemForm
         fields={fields}
         setFields={setFields}
@@ -107,4 +120,6 @@ const mapStateToProps = state => ({
   updatedProduct: state.updatedProduct.updatedProduct,
 });
 
-export default connect(mapStateToProps, { updateProduct })(SearchResults);
+export default connect(mapStateToProps, { updateProduct, fetchProducts })(
+  SearchResults
+);
