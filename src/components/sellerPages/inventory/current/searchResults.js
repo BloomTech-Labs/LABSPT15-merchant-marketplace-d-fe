@@ -3,7 +3,11 @@ import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import { updateProduct, fetchProducts } from '../../../../state/actions';
+import {
+  updateProduct,
+  fetchProducts,
+  addItemImage,
+} from '../../../../state/actions';
 import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
 import { NavLink } from 'react-router-dom';
@@ -15,6 +19,7 @@ const SearchResults = ({
   updateProduct,
   updatedProduct,
   fetchProducts,
+  addItemImage,
 }) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
@@ -65,11 +70,16 @@ const SearchResults = ({
     ]);
   };
 
-  const onSubmit = values => {
+  const onSubmit = async values => {
     setVisible(false);
     console.log('values', values);
     // update item props on backend
-    updateProduct(values, authState);
+    const upatedProduct = await updateProduct(values, authState);
+
+    console.log('upProd', upatedProduct);
+
+    await addItemImage(authState, updatedProduct.id, values.photo_url);
+
     // delete all the tags for this item that are in the db
     // add the new tags
     setSubmitted(!submitted);
@@ -95,7 +105,7 @@ const SearchResults = ({
                 price={item.price_in_cents}
                 description={item.description}
                 count={item.quantity_available}
-                image={item.id}
+                image={item.photo_url}
               />
             </NavLink>
           </div>
@@ -116,10 +126,8 @@ const SearchResults = ({
   );
 };
 
-const mapStateToProps = state => ({
-  updatedProduct: state.updatedProduct.updatedProduct,
-});
-
-export default connect(mapStateToProps, { updateProduct, fetchProducts })(
-  SearchResults
-);
+export default connect(null, {
+  updateProduct,
+  fetchProducts,
+  addItemImage,
+})(SearchResults);
