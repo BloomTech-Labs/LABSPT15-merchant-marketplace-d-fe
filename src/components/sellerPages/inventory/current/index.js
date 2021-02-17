@@ -15,7 +15,6 @@ function CurrentInventory({ inventory, fetchProducts, fetchTags }) {
 
   useEffect(() => {
     fetchProducts(authState);
-    // fetchTags(authState)
   }, []);
 
   return (

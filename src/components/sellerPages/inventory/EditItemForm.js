@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, Input, Form, Button, AutoComplete } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { useOktaAuth } from '@okta/okta-react';
-import { fetchTags } from '../../../state/actions/index';
+import { fetchTags, updateProduct } from '../../../state/actions/index';
 
 const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
   const { authState } = useOktaAuth();
@@ -56,6 +56,7 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
           .validateFields()
           .then(values => {
             form.resetFields();
+            values.id = fields[0].value;
             values.tags = tags;
             onSubmit(values);
           })

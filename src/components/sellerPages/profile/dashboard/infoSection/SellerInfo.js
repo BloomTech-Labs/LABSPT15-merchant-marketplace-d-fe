@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
-
 import { EditOutlined } from '@ant-design/icons';
+
 import {
   fetchSellerProfile,
   updateSellerProfile,

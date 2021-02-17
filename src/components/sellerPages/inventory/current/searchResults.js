@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
+import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-
+import { updateProduct } from '../../../../state/actions';
 import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
 import { NavLink } from 'react-router-dom';
 import EditItemForm from '../../../sellerPages/inventory/EditItemForm';
 
-function SearchResults({ data, filter }) {
+const SearchResults = ({ data, filter, updateProduct, updatedProduct }) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
+
+  const { authState } = useOktaAuth();
 
   const searchData = useSearch(data, 'item_name', filter);
 
   const onEditButtonClick = item => {
     setVisible(true);
     setFields([
+      {
+        name: ['id'],
+        value: item.id,
+      },
       {
         name: ['item_name'],
         value: item.item_name,
@@ -49,7 +57,9 @@ function SearchResults({ data, filter }) {
 
   const onSubmit = values => {
     setVisible(false);
+    console.log('values', values);
     // update item props on backend
+    updateProduct(values, authState);
     // delete all the tags for this item that are in the db
     // add the new tags
   };
@@ -91,6 +101,10 @@ function SearchResults({ data, filter }) {
       />
     </div>
   );
-}
+};
 
-export default SearchResults;
+const mapStateToProps = state => ({
+  updatedProduct: state.updatedProduct.updatedProduct,
+});
+
+export default connect(mapStateToProps, { updateProduct })(SearchResults);
