@@ -6,6 +6,9 @@ import {
   FETCH_ITEM_PHOTOS_START,
   FETCH_ITEM_PHOTOS_SUCCESS,
   FETCH_ITEM_PHOTOS_ERROR,
+  DELETE_ITEM_TAGS_START,
+  DELETE_ITEM_TAGS_SUCCESS,
+  DELETE_ITEM_TAGS_ERROR,
 } from '../actions/index';
 
 const initialState = {
@@ -13,6 +16,7 @@ const initialState = {
   itemPhotos: [],
   getProductsStatus: requestStatus.ready,
   getItemPhotosStatus: requestStatus.ready,
+  deleteItemTagsStatus: requestStatus.ready,
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -38,7 +42,15 @@ const productsReducer = (state = initialState, action) => {
       };
     case FETCH_ITEM_PHOTOS_ERROR:
       return { ...state, getItemPhotosStatus: requestStatus.error };
-
+    case DELETE_ITEM_TAGS_START:
+      return { ...state, deleteItemTagsStatus: requestStatus.loading };
+    case DELETE_ITEM_TAGS_SUCCESS:
+      return {
+        ...state,
+        deleteItemTagsStatus: requestStatus.success,
+      };
+    case DELETE_ITEM_TAGS_ERROR:
+      return { ...state, deleteItemTagsStatus: requestStatus.error };
     default:
       return state;
   }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Input, Form, Button, AutoComplete } from 'antd';
+import { Modal, Input, Form, Button, AutoComplete, Switch } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { useOktaAuth } from '@okta/okta-react';
-import { fetchTags, updateProduct } from '../../../state/actions/index';
+import { fetchTags } from '../../../state/actions/index';
 
 const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
   const { authState } = useOktaAuth();
@@ -11,7 +11,12 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
   const [tags, setTags] = useState([]);
   const [tagsList, setTagsList] = useState([]);
   const [newTagName, setNewTagName] = useState('');
+  const [published, setPublished] = useState(false);
   const [form] = Form.useForm();
+
+  function onChangeSwitch(checked) {
+    setPublished(checked);
+  }
 
   useEffect(() => {
     fetchTags(authState).then(res => {
@@ -24,6 +29,10 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
   }, []);
 
   useEffect(() => {
+    if (fields.length > 0) {
+      setPublished(fields[7].value);
+    }
+
     const tagsArr = fields.filter(field => field.name[0] === 'tags');
 
     if (tagsArr.length > 0) {
@@ -58,6 +67,7 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
             form.resetFields();
             values.id = fields[0].value;
             values.tags = tags;
+            values.published = published;
             onSubmit(values);
           })
           .catch(info => {
@@ -127,7 +137,12 @@ const EditItemForm = ({ visible, fields, onSubmit, onCancel, fetchTags }) => {
           <Input />
         </Form.Item>
         <Form.Item name="published" label="Published">
-          <Input />
+          <Switch
+            defaultChecked={published}
+            checkedChildren="True"
+            unCheckedChildren="False"
+            onChange={onChangeSwitch}
+          />
         </Form.Item>
       </Form>
     </Modal>

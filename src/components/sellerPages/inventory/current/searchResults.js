@@ -8,6 +8,8 @@ import {
   fetchProducts,
   fetchItemPhotos,
   addItemImage,
+  deleteItemTags,
+  addItemTag,
 } from '../../../../state/actions';
 import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
@@ -18,19 +20,19 @@ const SearchResults = ({
   data,
   filter,
   updateProduct,
-  updatedProduct,
-  products,
   fetchProducts,
   fetchItemPhotos,
   itemPhotos,
   addItemImage,
+  deleteItemTags,
+  addItemTag,
 }) => {
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const { authState } = useOktaAuth();
 
-  const searchData = useSearch(products, 'item_name', filter);
+  const searchData = useSearch(data, 'item_name', filter);
 
   useEffect(() => {
     fetchProducts(authState);
@@ -77,7 +79,6 @@ const SearchResults = ({
 
   const onSubmit = async values => {
     setVisible(false);
-    console.log('values', values);
 
     await updateProduct(values, authState);
 
@@ -94,61 +95,55 @@ const SearchResults = ({
       JSON.stringify(oldTags.sort((a, b) => a.id - b.id)) !==
       JSON.stringify(newTags.sort((a, b) => a.id - b.id))
     ) {
-      // delete all the tags for this item that are in the db
-      // add the new tags
+      await deleteItemTags(authState, values.id);
+      newTags.forEach(tag => addItemTag(authState, values.id, tag.id));
     }
 
     setSubmitted(!submitted);
   };
 
-  if (searchData) {
-    return (
-      <div>
-        {searchData
-          .sort((a, b) => a.id - b.id)
-          .map(item => (
-            <div>
-              <Button
-                className="edit-button"
-                icon={<EditOutlined />}
-                size="small"
-                onClick={() => onEditButtonClick(item)}
+  return (
+    <div>
+      {searchData
+        .sort((a, b) => a.id - b.id)
+        .map(item => (
+          <div>
+            <Button
+              className="edit-button"
+              icon={<EditOutlined />}
+              size="small"
+              onClick={() => onEditButtonClick(item)}
+            />
+            <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
+              <ItemCard
+                id={item.id}
+                key={item.id}
+                name={item.item_name}
+                price={item.price_in_cents}
+                description={item.description}
+                count={item.quantity_available}
+                image={item.photos[0]}
               />
-              <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
-                <ItemCard
-                  id={item.id}
-                  key={item.id}
-                  name={item.item_name}
-                  price={item.price_in_cents}
-                  description={item.description}
-                  count={item.quantity_available}
-                  image={item.photos[0]}
-                />
-              </NavLink>
-            </div>
-          ))}
-        <EditItemForm
-          fields={fields}
-          setFields={setFields}
-          onChange={newFields => {
-            setFields(newFields);
-          }}
-          visible={visible}
-          onSubmit={onSubmit}
-          onCancel={() => {
-            setVisible(false);
-          }}
-        />
-      </div>
-    );
-  } else {
-    return null;
-  }
+            </NavLink>
+          </div>
+        ))}
+      <EditItemForm
+        fields={fields}
+        setFields={setFields}
+        onChange={newFields => {
+          setFields(newFields);
+        }}
+        visible={visible}
+        onSubmit={onSubmit}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({
-  updatedProduct: state.updatedProduct.updatedProduct,
-  products: state.products.products,
   itemPhotos: state.products.itemPhotos,
 });
 
@@ -157,4 +152,6 @@ export default connect(mapStateToProps, {
   fetchProducts,
   fetchItemPhotos,
   addItemImage,
+  deleteItemTags,
+  addItemTag,
 })(SearchResults);
