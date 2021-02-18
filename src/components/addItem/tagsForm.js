@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../inventoryStyles.css';
-import FormButton from '../../../common/FormButton/FormButton';
+import '../../styles/inventory.css';
+import FormButton from '../common/FormButton/FormButton';
 import { Form, Button, AutoComplete, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { fetchTags, addTag } from '../../../../state/actions/index';
+import { fetchTags, addTag } from '../../state/actions/index';
 import { connect } from 'react-redux';
 import { useOktaAuth } from '@okta/okta-react';
 
