@@ -25,7 +25,7 @@ const SellerInfo = ({
     fetchSellerProfile(authState);
   }, [submitted]);
 
-  const onSubmit = async values => {
+  const onSubmit = values => {
     setVisible(false);
     updateSellerProfile(values, authState);
     setSubmitted(!submitted);

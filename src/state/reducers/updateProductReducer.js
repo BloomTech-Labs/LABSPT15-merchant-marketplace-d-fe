@@ -16,6 +16,7 @@ const updateProductReducer = (state = initialState, action) => {
       return { ...state, getUpdatedProductStatus: requestStatus.loading };
     case UPDATE_PRODUCT_SUCCESS:
       return {
+        ...state,
         updatedProduct: action.payload,
         getUpdatedProductStatus: requestStatus.success,
       };

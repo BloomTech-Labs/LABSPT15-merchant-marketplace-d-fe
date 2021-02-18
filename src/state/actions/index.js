@@ -12,6 +12,10 @@ export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
 
+export const FETCH_ITEM_PHOTOS_START = 'FETCH_ITEM_PHOTOS_START';
+export const FETCH_ITEM_PHOTOS_SUCCESS = 'FETCH_ITEM_PHOTOS_SUCCESS';
+export const FETCH_ITEM_PHOTOS_ERROR = 'FETCH_PRODUCTS_ERROR';
+
 export const FETCH_SELLER_INFO_START = 'FETCH_SELLER_INFO_START';
 export const FETCH_SELLER_INFO_SUCCESS = 'FETCH_SELLER_INFO_SUCCESS';
 export const FETCH_SELLER_INFO_ERROR = 'FETCH_SELLER_INFO_ERROR';
@@ -109,6 +113,17 @@ export const fetchTags = authState => dispatch => {
     });
 };
 
+export const fetchItemPhotos = (authState, itemId) => dispatch => {
+  dispatch({ type: FETCH_ITEM_PHOTOS_START });
+  getDSData(`${process.env.REACT_APP_API_URI}photos/${itemId}`, authState)
+    .then(response => {
+      dispatch({ type: FETCH_ITEM_PHOTOS_SUCCESS, payload: response });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_ITEM_PHOTOS_ERROR, payload: err });
+    });
+};
+
 // Add an Image to a product
 export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
   dispatch({ type: ADD_ITEM_IMAGE_START });
@@ -196,8 +211,8 @@ export const addProduct = (newProduct, authState) => dispatch => {
 
 export const updateProduct = (updatedProduct, authState) => dispatch => {
   dispatch({ type: UPDATE_PRODUCT_START });
-  return putData(
-    process.env.REACT_APP_API_URI + 'item/' + updatedProduct.id,
+  putData(
+    `${process.env.REACT_APP_API_URI}item/${updatedProduct.id}`,
     {
       item_name: updatedProduct.item_name,
       quantity_available: updatedProduct.quantity_available,
@@ -208,11 +223,12 @@ export const updateProduct = (updatedProduct, authState) => dispatch => {
     authState
   )
     .then(response => {
-      dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: response.data });
-      return response.data[0];
+      dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: response.data[0] });
     })
     .catch(err => {
       dispatch({ type: UPDATE_PRODUCT_ERROR, payload: err });
       return err;
     });
+
+  fetchItemPhotos(authState, updatedProduct.id);
 };
