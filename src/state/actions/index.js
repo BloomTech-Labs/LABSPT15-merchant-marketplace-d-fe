@@ -13,10 +13,6 @@ export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
 
-export const FETCH_ITEM_PHOTOS_START = 'FETCH_ITEM_PHOTOS_START';
-export const FETCH_ITEM_PHOTOS_SUCCESS = 'FETCH_ITEM_PHOTOS_SUCCESS';
-export const FETCH_ITEM_PHOTOS_ERROR = 'FETCH_PRODUCTS_ERROR';
-
 export const FETCH_SELLER_INFO_START = 'FETCH_SELLER_INFO_START';
 export const FETCH_SELLER_INFO_SUCCESS = 'FETCH_SELLER_INFO_SUCCESS';
 export const FETCH_SELLER_INFO_ERROR = 'FETCH_SELLER_INFO_ERROR';
@@ -40,6 +36,10 @@ export const UPDATE_SELLER_INFO_ERROR = 'UPDATE_SELLER_INFO_ERROR';
 export const ADD_ITEM_IMAGE_START = 'ADD_ITEM_IMAGE_START';
 export const ADD_ITEM_IMAGE_SUCCESS = 'ADD_ITEM_IMAGE_SUCCESS';
 export const ADD_ITEM_IMAGE_ERROR = 'ADD_ITEM_IMAGE_ERROR';
+
+export const FETCH_ITEM_PHOTOS_START = 'FETCH_ITEM_PHOTOS_START';
+export const FETCH_ITEM_PHOTOS_SUCCESS = 'FETCH_ITEM_PHOTOS_SUCCESS';
+export const FETCH_ITEM_PHOTOS_ERROR = 'FETCH_ITEM_PHOTOS_ERROR';
 
 export const ADD_ITEM_TAG_START = 'ADD_ITEM_TAG_START';
 export const ADD_ITEM_TAG_SUCCESS = 'ADD_ITEM_TAG_SUCCESS';
@@ -154,6 +154,7 @@ export const addItemImage = (authState, itemId, photoUrl) => dispatch => {
 export const addItemTag = (authState, itemId, tagId) => dispatch => {
   dispatch({ type: ADD_ITEM_TAG_START });
 
+  console.log('ITEM: id(', itemId, ')');
   postData(
     `${process.env.REACT_APP_API_URI}items/${itemId}/tag/${tagId}`,
     {
@@ -163,6 +164,7 @@ export const addItemTag = (authState, itemId, tagId) => dispatch => {
     authState
   )
     .then(response => {
+      console.log('Tag success response', response);
       dispatch({ type: ADD_ITEM_TAG_SUCCESS, payload: response });
     })
     .catch(err => {
