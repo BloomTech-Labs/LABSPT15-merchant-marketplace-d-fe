@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { ProfileListPage } from '../components/ProfileList';
+import ProfileListPage from '../components/ProfileList';
 jest.mock('../api', () => {
   return { getProfileData: () => Promise.resolve([]) };
 });
