@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import {
   updateProduct,
+  deleteProduct,
   fetchProducts,
   fetchItemPhotos,
   addItemImage,
@@ -20,6 +21,7 @@ const SearchResults = ({
   data,
   filter,
   updateProduct,
+  deleteProduct,
   fetchProducts,
   fetchItemPhotos,
   itemPhotos,
@@ -77,6 +79,11 @@ const SearchResults = ({
     ]);
   };
 
+  const onDeleteButtonClick = async item => {
+    await deleteProduct(authState, item.id);
+    fetchProducts(authState);
+  };
+
   const onSubmit = async values => {
     setVisible(false);
 
@@ -114,6 +121,11 @@ const SearchResults = ({
               size="small"
               onClick={() => onEditButtonClick(item)}
             />
+            <Button
+              icon={<DeleteOutlined />}
+              size="small"
+              onClick={() => onDeleteButtonClick(item)}
+            />
             <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
               <ItemCard
                 id={item.id}
@@ -149,6 +161,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   updateProduct,
+  deleteProduct,
   fetchProducts,
   fetchItemPhotos,
   addItemImage,
