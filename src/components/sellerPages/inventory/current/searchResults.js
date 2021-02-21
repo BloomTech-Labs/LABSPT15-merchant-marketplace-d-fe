@@ -194,7 +194,11 @@ const SearchResults = ({
 
   return (
     <div className="outerContainer">
-      <Table dataSource={dataSource} columns={columns} />
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        pagination={{ pageSize: 5 }}
+      />
       <EditItemForm
         fields={fields}
         setFields={setFields}

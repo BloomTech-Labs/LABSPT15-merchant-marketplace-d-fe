@@ -94,9 +94,6 @@ function CurrentInventory({ inventory, fetchProducts }) {
       <NavBar searchVisible={false} setData={setSearchData} />
 
       <SearchResults data={inventory} filter={searchData} />
-      <Link to="/myprofile/inventory/additem">
-        <Button>+Add Item</Button>
-      </Link>
     </>
   );
 }
