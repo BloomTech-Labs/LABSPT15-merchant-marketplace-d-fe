@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Image, Space, Tag, Table } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import {
   updateProduct,
@@ -16,6 +16,7 @@ import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
 import { NavLink } from 'react-router-dom';
 import EditItemForm from '../../../sellerPages/inventory/EditItemForm';
+import '../inventoryStyles.css';
 
 const SearchResults = ({
   data,
@@ -29,6 +30,7 @@ const SearchResults = ({
   deleteItemTags,
   addItemTag,
 }) => {
+  const [dataSource, setDataSource] = useState([]);
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
   const [submitted, setSubmitted] = useState(false);
@@ -40,8 +42,89 @@ const SearchResults = ({
     fetchProducts(authState);
   }, [submitted]);
 
-  const onEditButtonClick = item => {
-    fetchItemPhotos(authState, item.id);
+  useEffect(() => {
+    if (searchData.length > 0) {
+      setDataSource(
+        searchData
+          .sort((a, b) => a.id - b.id)
+          .map(item => ({
+            ...item,
+            image: item.photos[0],
+            tags: item.tags.map(tag => tag.value),
+          }))
+      );
+    }
+  }, [searchData]);
+
+  console.log('dataSource', dataSource);
+
+  const columns = [
+    {
+      title: 'Image',
+      dataIndex: 'image',
+      key: 'image',
+      render: image => (
+        <Image width={50} height={50} src="error" fallback={image} />
+      ),
+    },
+    {
+      title: 'Name',
+      dataIndex: 'item_name',
+      key: 'name',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      key: 'tags',
+      render: tags => (
+        <>
+          {tags.map(tag => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </>
+      ),
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price_in_cents',
+      key: 'price',
+      render: price => <>${price / 100}</>,
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity_available',
+      key: 'quantity',
+    },
+    {
+      title: 'Action',
+      dataIndex: 'id',
+      key: 'action',
+      render: itemId => (
+        <Space size="middle">
+          <Button
+            className="edit-button"
+            icon={<EditOutlined />}
+            size="small"
+            onClick={() => onEditButtonClick(itemId)}
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            size="small"
+            onClick={() => onDeleteButtonClick(itemId)}
+          />
+        </Space>
+      ),
+    },
+  ];
+
+  const onEditButtonClick = itemId => {
+    const item = dataSource.filter(e => e.id === itemId)[0];
+    fetchItemPhotos(authState, itemId);
     setVisible(true);
     setFields([
       {
@@ -79,8 +162,8 @@ const SearchResults = ({
     ]);
   };
 
-  const onDeleteButtonClick = async item => {
-    await deleteProduct(authState, item.id);
+  const onDeleteButtonClick = async itemId => {
+    await deleteProduct(authState, itemId);
     fetchProducts(authState);
   };
 
@@ -110,35 +193,8 @@ const SearchResults = ({
   };
 
   return (
-    <div>
-      {searchData
-        .sort((a, b) => a.id - b.id)
-        .map(item => (
-          <div>
-            <Button
-              className="edit-button"
-              icon={<EditOutlined />}
-              size="small"
-              onClick={() => onEditButtonClick(item)}
-            />
-            <Button
-              icon={<DeleteOutlined />}
-              size="small"
-              onClick={() => onDeleteButtonClick(item)}
-            />
-            <NavLink to={`/myprofile/inventory/productpage/${item.id}`}>
-              <ItemCard
-                id={item.id}
-                key={item.id}
-                name={item.item_name}
-                price={item.price_in_cents}
-                description={item.description}
-                count={item.quantity_available}
-                image={item.photos[0]}
-              />
-            </NavLink>
-          </div>
-        ))}
+    <div className="outerContainer">
+      <Table dataSource={dataSource} columns={columns} />
       <EditItemForm
         fields={fields}
         setFields={setFields}
