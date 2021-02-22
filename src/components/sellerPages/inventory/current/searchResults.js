@@ -119,7 +119,10 @@ const SearchResults = ({
           <Button
             icon={<DeleteOutlined />}
             size="small"
-            onClick={() => onDeleteButtonClick(itemId)}
+            onClick={e => {
+              e.stopPropagation();
+              onDeleteButtonClick(itemId);
+            }}
           />
         </Space>
       ),
