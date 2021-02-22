@@ -92,7 +92,6 @@ function CurrentInventory({ inventory, fetchProducts }) {
   return (
     <>
       <NavBar searchVisible={false} setData={setSearchData} />
-
       <SearchResults data={inventory} filter={searchData} />
     </>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
 import { Button, Image, Space, Tag, Table } from 'antd';
@@ -38,6 +39,8 @@ const SearchResults = ({
 
   const searchData = useSearch(data, 'item_name', filter);
 
+  const history = useHistory();
+
   useEffect(() => {
     fetchProducts(authState);
   }, [submitted]);
@@ -50,13 +53,11 @@ const SearchResults = ({
           .map(item => ({
             ...item,
             image: item.photos[0],
-            tags: item.tags.map(tag => tag.value),
+            tags: item.tags,
           }))
       );
     }
   }, [searchData]);
-
-  console.log('dataSource', dataSource);
 
   const columns = [
     {
@@ -84,7 +85,7 @@ const SearchResults = ({
       render: tags => (
         <>
           {tags.map(tag => (
-            <Tag key={tag}>{tag}</Tag>
+            <Tag key={tag.id}>{tag.value}</Tag>
           ))}
         </>
       ),
@@ -110,7 +111,10 @@ const SearchResults = ({
             className="edit-button"
             icon={<EditOutlined />}
             size="small"
-            onClick={() => onEditButtonClick(itemId)}
+            onClick={e => {
+              e.stopPropagation();
+              onEditButtonClick(itemId);
+            }}
           />
           <Button
             icon={<DeleteOutlined />}
@@ -177,7 +181,6 @@ const SearchResults = ({
       await addItemImage(authState, values.id, values.photo_url);
     }
 
-    console.log(fields);
     const oldTags = fields.filter(e => e.name[0] === 'tags')[0].value;
     const newTags = values.tags;
 
@@ -197,6 +200,10 @@ const SearchResults = ({
       <Table
         dataSource={dataSource}
         columns={columns}
+        onRow={r => ({
+          onClick: () =>
+            history.push(`/myprofile/inventory/productpage/${r.id}`),
+        })}
         pagination={{ pageSize: 5 }}
       />
       <EditItemForm
