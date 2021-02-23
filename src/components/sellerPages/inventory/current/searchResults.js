@@ -108,7 +108,6 @@ const SearchResults = ({
       render: itemId => (
         <Space size="middle">
           <Button
-            className="edit-button"
             icon={<EditOutlined />}
             size="small"
             onClick={e => {
