@@ -1,0 +1,12 @@
+.productListWrapper {
+    width: 100%;
+}
+
+.productsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productCard {
+    width: 10rem;
+}

@@ -62,7 +62,7 @@ function App() {
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <Route exact path="/" component={Landing} />
         <SecureRoute exact path="/myprofile" component={SellerProfile} />
-        <SecureRoute exact path="/createProfile" component={ShopperView} />
+        <Route path="/shop" component={ShopperView} />
         <SecureRoute
           exact
           path="/myprofile/inventory"

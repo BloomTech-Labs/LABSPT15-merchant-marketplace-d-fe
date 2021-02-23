@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Form from './form';
+import Form from './form/Form';
 
 import './createProfile.css';
 

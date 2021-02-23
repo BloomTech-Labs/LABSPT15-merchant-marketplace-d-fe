@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../common/navBar';
-import CreateProfile from './createProfile';
+import ProductList from './productList/ProductList';
 
 import './shopperView.css';
 
@@ -9,7 +9,7 @@ const ShopperView = () => {
     <>
       <NavBar />
       <div className="shopperViewWrapper">
-        <CreateProfile />
+        <ProductList />
       </div>
     </>
   );
