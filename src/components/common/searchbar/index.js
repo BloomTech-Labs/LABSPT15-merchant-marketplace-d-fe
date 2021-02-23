@@ -4,9 +4,19 @@ import { Link } from 'react-router-dom';
 import './searchbarStyles.css';
 
 function SearchBar({ searchVisible, setData }) {
-  const [inView, setInView] = useState('nope');
+  const [inView, setInView] = useState('');
   const { Search } = Input;
   const { Option } = Select;
+
+  // const [searchItem, setSearchItem] = useState('')
+
+  // const handleChangeSearchItem = (e) => {
+  //   setSearchItem(...searchItem, e.target.value)
+  // }
+
+  // useEffect(() => {
+
+  // },[])
 
   function onSearch(values) {
     setData(values);
@@ -30,8 +40,13 @@ function SearchBar({ searchVisible, setData }) {
     <div className={inView}>
       <div className="searchOuter">
         <div className="searchBtns"></div>
+        {/* <Search 
+          placeholder="Search Item"  
+          className="searchBar"
+          onChange={handleChangeSearchItem} 
+        /> */}
         <Search
-          placeholder="Search through your inventory"
+          placeholder="Search Items"
           className="searchBar"
           onSearch={onSearch}
         />
