@@ -8,11 +8,11 @@
     display: flex;
     justify-content: space-between;
     border: 1px solid lightgray;
-    padding-bottom: 10px
+    padding-bottom: 10px;
 }
 .searchBar{
     padding: 0 5px 0 50px;
-    max-width: 300px;
+    max-width: 40%;
 }
 
 .add-item-button{
@@ -28,4 +28,5 @@
 .searchBtns button{
     background-color: rebeccapurple;
     color: white;
+    margin: 2px;
 }

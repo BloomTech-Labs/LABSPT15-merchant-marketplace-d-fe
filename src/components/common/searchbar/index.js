@@ -11,7 +11,8 @@ function SearchBar({ searchVisible, setData }) {
   // const [searchItem, setSearchItem] = useState('')
 
   // const handleChangeSearchItem = (e) => {
-  //   setSearchItem(...searchItem, e.target.value)
+  //   setInView(...inVew, e.target.value)
+
   // }
 
   // useEffect(() => {
@@ -39,16 +40,15 @@ function SearchBar({ searchVisible, setData }) {
   return (
     <div className={inView}>
       <div className="searchOuter">
-        <div className="searchBtns"></div>
-        {/* <Search 
-          placeholder="Search Item"  
-          className="searchBar"
-          onChange={handleChangeSearchItem} 
-        /> */}
+        <div className="searchBtns">
+          <Button>Main</Button>
+          <Button>Drafts</Button>
+          <Button>Archives</Button>
+        </div>
         <Search
           placeholder="Search Items"
           className="searchBar"
-          onSearch={onSearch}
+          onChange={e => onSearch(e.target.value)}
         />
         <div>
           <Select defaultValue="Sort By" onChange={sortChange}>
@@ -63,11 +63,6 @@ function SearchBar({ searchVisible, setData }) {
             <Button className="add-item-button">+ Add Item</Button>
           </Link>
         </div>
-      </div>
-      <div className="searchBtns">
-        <Button>Main</Button>
-        <Button>Drafts</Button>
-        <Button>Archives</Button>
       </div>
     </div>
   );
