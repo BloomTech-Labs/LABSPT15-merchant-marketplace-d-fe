@@ -1,7 +1,8 @@
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
 import { connect } from 'react-redux';
+import { Button, Table, Image, Tag, Space } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { fetchProducts, fetchTags } from '../../../../state/actions';
 import { Link } from 'react-router-dom';
 
@@ -19,14 +20,7 @@ function CurrentInventory({ inventory, fetchProducts }) {
   return (
     <>
       <NavBar searchVisible={false} setData={setSearchData} />
-      <div className="outerContainer">
-        <div className="contents">
-          <SearchResults data={inventory} filter={searchData} />
-          <Link to="/myprofile/inventory/additem">
-            <Button>+Add Item</Button>
-          </Link>
-        </div>
-      </div>
+      <SearchResults data={inventory} filter={searchData} />
     </>
   );
 }
