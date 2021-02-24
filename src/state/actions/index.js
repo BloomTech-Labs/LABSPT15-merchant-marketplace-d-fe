@@ -33,6 +33,10 @@ export const UPDATE_PRODUCT_START = 'UPDATE_PRODUCT_START';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 
+export const DELETE_PRODUCT_START = 'DELETE_PRODUCT_START';
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
+
 export const UPDATE_SELLER_INFO_START = 'UPDATE_SELLER_INFO_START';
 export const UPDATE_SELLER_INFO_SUCCESS = 'UPDATE_SELLER_INFO_SUCCESS';
 export const UPDATE_SELLER_INFO_ERROR = 'UPDATE_SELLER_INFO_ERROR';
@@ -234,6 +238,18 @@ export const updateProduct = (updatedProduct, authState) => dispatch => {
     });
 
   fetchItemPhotos(authState, updatedProduct.id);
+};
+
+export const deleteProduct = (authState, itemId) => dispatch => {
+  dispatch({ type: DELETE_PRODUCT_START });
+  deleteData(`${process.env.REACT_APP_API_URI}item/${itemId}`, authState)
+    .then(response => {
+      dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: response });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PRODUCT_ERROR, payload: err });
+      return err;
+    });
 };
 
 export const deleteItemTags = (authState, itemId) => dispatch => {

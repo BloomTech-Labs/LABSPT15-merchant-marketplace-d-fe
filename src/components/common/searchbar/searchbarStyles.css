@@ -1,5 +1,5 @@
-.nope{
-    display: none;
+.nope {
+  display: none;
 }
 
 .searchOuter{
@@ -15,14 +15,14 @@
     max-width: 40%;
 }
 
-.add-item-button{
-    margin-right: 20px;
-    background-color: rgb(19, 75, 29);
-    color: white;
+.add-item-button {
+  margin-right: 20px;
+  background-color: rgb(19, 75, 29);
+  color: white;
 }
 .searchBtns {
-    display: flex;
-    background-color: white;
+  display: flex;
+  background-color: white;
 }
 
 .searchBtns button{

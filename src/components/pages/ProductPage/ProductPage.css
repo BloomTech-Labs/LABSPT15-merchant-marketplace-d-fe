@@ -1,0 +1,83 @@
+.product-page {
+  padding: 100px 0 0 0;
+}
+.product-page .product-name {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 3px
+}
+.product-page h1 {
+  margin-bottom: 3px
+}
+.product-page .product-name .ant-btn-icon-only > * {
+  font-size: 24px;
+  line-height: 1.8;
+}
+.product-page .product-name button {
+  margin-left: auto;
+  margin-top: 5px;
+  width: 42px;
+  height: 42px;
+}
+.product-page .product-name .ant-col:last-child {
+  text-align: right;
+}
+
+.product-page .total-votes {
+  text-align: right;
+  padding-top: 7px
+}
+
+.product-page .header {
+  margin-top: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 5px;
+}
+.product-page .header h4{
+  margin-bottom: 5px;
+}
+
+.product-page .MapContainer-container {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  height: 350px;
+}
+
+.product-page .tags-container {
+  display: flex;
+  flex-wrap: wrap;
+ }
+ 
+.product-page .tags-container span {
+  margin-bottom: 5px;
+ }
+
+ .product-page .product-content {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .product-page .buy-content {
+   border-top: 1px solid rgba(0, 0, 0, 0.15);
+   padding-top: 5px;
+  margin-top: auto;
+}
+
+.product-page .buy-content .ant-typography{
+  text-align: right;
+}
+
+.product-page .buy-content button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.product-page .buy-content .shopping-button {
+  background-color: #ff9822;
+  border-color: #c78b13;
+}
+
+.product-page .buy-content .buy-button {
+  background-color: #52c41a;
+  border-color: #388412;
+}

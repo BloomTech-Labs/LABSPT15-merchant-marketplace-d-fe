@@ -1,0 +1,28 @@
+.carousel-container {
+    height: 400px;
+    text-align: center;
+    margin: 20px 0 10px;
+  } 
+.carousel-container img {
+    height: 350px;
+    width: 250px;
+}
+
+.ant-carousel .slick-dots li button {
+  background: dimgray;
+  opacity: 0.4;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.ant-carousel .slick-dots li.slick-active {
+
+  width: 18px;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  opacity: 1;
+  width: 14px;
+  height: 14px;
+  background: dimgray;
+}

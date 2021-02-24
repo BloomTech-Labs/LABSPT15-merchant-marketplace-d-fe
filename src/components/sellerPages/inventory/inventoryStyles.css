@@ -1,5 +1,6 @@
 .outerContainer {
-  margin-top: 7rem;
+  margin: 9rem auto 0 auto;
+  width: 90%;
 }
 .contents {
   margin: 0 auto;
@@ -24,10 +25,6 @@
 }
 .tag-inputs {
   margin: 10%;
-}
-
-h1 {
-  text-align: center;
 }
 
 .supplement-detail {
