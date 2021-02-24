@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom';
 
 import NavBar from '../../../common/navBar';
 import SearchResults from './searchResults';
-import useSearch from '../../../common/customHooks/useSearch';
 
-function CurrentInventory({ inventory, fetchProducts, fetchTags }) {
+function CurrentInventory({ inventory, fetchProducts }) {
   const [searchData, setSearchData] = useState({});
   const { authState } = useOktaAuth();
 
