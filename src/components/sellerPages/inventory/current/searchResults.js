@@ -238,8 +238,9 @@ const SearchResults = ({
     ]);
   };
 
-  const onDeleteButtonClick = async itemId => {
-    await deleteProduct(authState, itemId);
+  const onDeleteButtonClick = async item => {
+    await deleteProduct(authState, item.id);
+
     fetchProducts(authState);
   };
 
