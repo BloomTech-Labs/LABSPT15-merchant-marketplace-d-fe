@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import { connect } from 'react-redux';
-import { Button, Image, Space, Tag, Table } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Button, Image, Space, Tag, Table, Input } from 'antd';
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from '@ant-design/icons';
 import {
   updateProduct,
   deleteProduct,
@@ -12,6 +16,7 @@ import {
   addItemImage,
   deleteItemTags,
   addItemTag,
+  fetchTags,
 } from '../../../../state/actions';
 import ItemCard from '../../../common/cards/normalItem';
 import useSearch from '../../../common/customHooks/useSearch';
@@ -30,11 +35,14 @@ const SearchResults = ({
   addItemImage,
   deleteItemTags,
   addItemTag,
+  fetchTags,
+  allTags,
 }) => {
   const [dataSource, setDataSource] = useState([]);
   const [visible, setVisible] = useState(false);
   const [fields, setFields] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  const [searchText, setSearchText] = useState('');
   const { authState } = useOktaAuth();
 
   const searchData = useSearch(data, 'item_name', filter);
@@ -72,6 +80,50 @@ const SearchResults = ({
       title: 'Name',
       dataIndex: 'item_name',
       key: 'name',
+      sorter: (a, b) => a.item_name.localeCompare(b.item_name),
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder={'Search name'}
+            value={selectedKeys[0]}
+            onChange={e =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => handleSearch(selectedKeys, confirm)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => handleReset(clearFilters)}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: filtered => (
+        <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+      ),
+      onFilter: (value, record) =>
+        record
+          ? record.item_name.toLowerCase().includes(value.toLowerCase())
+          : '',
     },
     {
       title: 'Description',
@@ -82,6 +134,12 @@ const SearchResults = ({
       title: 'Tags',
       dataIndex: 'tags',
       key: 'tags',
+      filters: allTags.map(tag => ({
+        text: tag.tag_name,
+        value: tag.tag_name,
+      })),
+      onFilter: (value, record) =>
+        record.tags.filter(tag => tag.value === value).length > 0,
       render: tags => (
         <>
           {tags.map(tag => (
@@ -94,12 +152,14 @@ const SearchResults = ({
       title: 'Price',
       dataIndex: 'price_in_cents',
       key: 'price',
+      sorter: (a, b) => a.price_in_cents - b.price_in_cents,
       render: price => <>${price / 100}</>,
     },
     {
       title: 'Quantity',
       dataIndex: 'quantity_available',
       key: 'quantity',
+      sorter: (a, b) => a.quantity_available - b.quantity_available,
     },
     {
       title: 'Action',
@@ -127,6 +187,16 @@ const SearchResults = ({
       ),
     },
   ];
+
+  const handleSearch = (selectedKeys, confirm) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('');
+  };
 
   const onEditButtonClick = itemId => {
     const item = dataSource.filter(e => e.id === itemId)[0];
@@ -226,6 +296,7 @@ const SearchResults = ({
 
 const mapStateToProps = state => ({
   itemPhotos: state.products.itemPhotos,
+  allTags: state.tags.allTags,
 });
 
 export default connect(mapStateToProps, {
@@ -236,4 +307,5 @@ export default connect(mapStateToProps, {
   addItemImage,
   deleteItemTags,
   addItemTag,
+  fetchTags,
 })(SearchResults);

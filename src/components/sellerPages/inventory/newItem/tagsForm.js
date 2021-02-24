@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import "../inventoryStyles.css";
-import FormButton from "../../../common/FormButton/FormButton";
-import { Form, Input, Button, AutoComplete, Tag } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { fetchTags, addTag } from "../../../../state/actions/index";
-import { connect } from "react-redux";
-import { useOktaAuth } from "@okta/okta-react";
+import React, { useEffect, useState } from 'react';
+import '../inventoryStyles.css';
+import FormButton from '../../../common/FormButton/FormButton';
+import { Form, Input, Button, AutoComplete, Tag } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { fetchTags, addTag } from '../../../../state/actions/index';
+import { connect } from 'react-redux';
+import { useOktaAuth } from '@okta/okta-react';
 
 function TagsForm({
   setTags,
@@ -13,7 +13,7 @@ function TagsForm({
   slider,
   fetchTags,
   addTag,
-  setTagsText
+  setTagsText,
 }) {
   const { authState } = useOktaAuth();
 
@@ -21,7 +21,7 @@ function TagsForm({
     setTags(addedTagsId);
     setTagsText(addedTagsValue);
   };
-  const [tagValue, setTagValue] = useState("");
+  const [tagValue, setTagValue] = useState('');
   const [addedTagsId, setAddedTagsId] = useState([]);
   const [addedTagsValue, setAddedTagsValue] = useState([]);
   const [options, setOptions] = useState([]);
@@ -37,7 +37,7 @@ function TagsForm({
   }, []);
 
   let verifyTag = () => {
-    if (tagValue !== "") {
+    if (tagValue !== '') {
       let needToAdd = true;
       let needToInsertInDB = true;
       let tagId = null;
@@ -61,7 +61,7 @@ function TagsForm({
         }
         setAddedTagsId([...addedTagsId, tagId]);
         setAddedTagsValue([...addedTagsValue, tagValue]);
-        setTagValue("");
+        setTagValue('');
       }
     }
   };
@@ -120,8 +120,8 @@ function TagsForm({
 }
 
 const mapStateToProps = state => ({
-  tags: state.tags.tags,
-  getTagsStatus: state.tags.getTagsStatus
+  tags: state.tags.allTags,
+  getTagsStatus: state.tags.getTagsStatus,
 });
 
 export default connect(mapStateToProps, { fetchTags, addTag })(TagsForm);
