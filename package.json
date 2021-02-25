@@ -13,6 +13,7 @@
     "antd": "^4.4.3",
     "axios": "^0.19.2",
     "craco-less": "^1.17.0",
+    "google-maps-react": "^2.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-autocomplete": "^1.2.6",
