@@ -5,7 +5,7 @@ export default function useSearch(initialData, category, searchData) {
 
     initialData.map(item => {
       console.log(item);
-      if (item[category].includes(searchData)) {
+      if (item[category].toLowerCase().includes(searchData.toLowerCase())) {
         result.push(item);
       }
     });
