@@ -22,7 +22,6 @@ function NavBar({ searchVisible, data, setData }) {
         <Link>Payment</Link>
         <Link>Messages</Link>
       </div>
-      <SearchBar searchVisible={searchVisible} setData={setData} data={data} />
     </div>
   );
 }

@@ -19,6 +19,11 @@ function CurrentInventory({ inventory, fetchProducts }) {
 
   return (
     <>
+      <Link to="/myprofile/inventory/additem">
+        <Button className="add-item-button" style={{ margin: '70px 0 0 5%' }}>
+          + Add Item
+        </Button>
+      </Link>
       <NavBar searchVisible={false} setData={setSearchData} />
       <SearchResults data={inventory} filter={searchData} />
     </>

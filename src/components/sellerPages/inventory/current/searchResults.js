@@ -238,8 +238,8 @@ const SearchResults = ({
     ]);
   };
 
-  const onDeleteButtonClick = async item => {
-    await deleteProduct(authState, item.id);
+  const onDeleteButtonClick = async itemId => {
+    await deleteProduct(authState, itemId);
 
     fetchProducts(authState);
   };
