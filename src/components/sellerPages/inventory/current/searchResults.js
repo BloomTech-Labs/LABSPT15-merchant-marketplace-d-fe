@@ -37,6 +37,7 @@ const SearchResults = ({
   addItemTag,
   fetchTags,
   allTags,
+  onDeleteButtonClick,
 }) => {
   const [dataSource, setDataSource] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -236,12 +237,6 @@ const SearchResults = ({
         value: item.published,
       },
     ]);
-  };
-
-  const onDeleteButtonClick = async itemId => {
-    await deleteProduct(authState, itemId);
-
-    fetchProducts(authState);
   };
 
   const onSubmit = async values => {
