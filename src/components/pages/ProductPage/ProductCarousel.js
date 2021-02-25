@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Image } from 'antd';
 import './ProductPage.css';
 
 
