@@ -16,12 +16,13 @@ function InvSection({ inventory, fetchProducts, getProductsStatus }) {
     <>
       <h2>Inventory</h2>
       <h4>Details</h4>
-      {inventory.map(item => (
-        <SmallItemCard
-          headerText={item.item_name}
-          descText={item.description}
-        />
-      ))}
+      {inventory &&
+        inventory.map(item => (
+          <SmallItemCard
+            headerText={item.item_name}
+            descText={item.description}
+          />
+        ))}
     </>
   );
 }
