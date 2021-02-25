@@ -1,7 +1,8 @@
+
+import React, { Component } from 'react';
 import { Carousel, Image } from 'antd';
-import React from 'react';
-import { ReactReduxContext } from 'react-redux';
-import './Carousel.css';
+import './ProductPage.css';
+
 
 function ProductCarousel({ images }) {
   return (

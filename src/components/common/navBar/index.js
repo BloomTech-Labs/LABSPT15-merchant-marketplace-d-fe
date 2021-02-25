@@ -23,8 +23,8 @@ function NavBar({ searchVisible, data, setData }) {
         <Link>Payment</Link>
         <Link>Messages</Link>
         <OrderCart />
+
       </div>
-      <SearchBar searchVisible={searchVisible} setData={setData} data={data} />
     </div>
   );
 }

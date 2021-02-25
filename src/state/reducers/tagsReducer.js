@@ -1,17 +1,17 @@
-import { requestStatus } from "../types/index";
+import { requestStatus } from '../types/index';
 import {
   FETCH_TAGS_START,
   FETCH_TAGS_SUCCESS,
   FETCH_TAGS_ERROR,
   ADD_TAGS_START,
   ADD_TAGS_SUCCESS,
-  ADD_TAGS_ERROR
-} from "../actions/index";
+  ADD_TAGS_ERROR,
+} from '../actions/index';
 
 const initialState = {
-  tags: [],
+  allTags: [],
   getTagsStatus: requestStatus.ready,
-  addTagStatus: requestStatus.ready
+  addTagStatus: requestStatus.ready,
 };
 
 const tagsReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ const tagsReducer = (state = initialState, action) => {
       return { ...state, getTagsStatus: requestStatus.loading };
     case FETCH_TAGS_SUCCESS:
       const newState = action.payload;
-      return { tags: newState, getTagsStatus: requestStatus.success };
+      return { allTags: newState, getTagsStatus: requestStatus.success };
     case FETCH_TAGS_ERROR:
       return { ...state, getTagsStatus: requestStatus.error };
     case ADD_TAGS_START:
@@ -28,8 +28,8 @@ const tagsReducer = (state = initialState, action) => {
     case ADD_TAGS_SUCCESS:
       console.log(action.payload);
       return {
-        tags: [...state.tags, action.payload.data[0]],
-        addTagStatus: requestStatus.loading
+        allTags: [...state.allTags, action.payload.data[0]],
+        addTagStatus: requestStatus.loading,
       };
     case ADD_TAGS_ERROR:
       return { ...state, addTagStatus: requestStatus.error };
