@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd';
-import './productPage.css';
+import './ProductPage.css';
 
 export default class ProductCarousel extends Component {
   constructor(props) {
