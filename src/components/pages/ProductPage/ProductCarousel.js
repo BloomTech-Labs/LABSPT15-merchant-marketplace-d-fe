@@ -1,8 +1,6 @@
-
 import React, { Component } from 'react';
 import { Carousel, Image } from 'antd';
 import './ProductPage.css';
-
 
 function ProductCarousel({ images }) {
   return (

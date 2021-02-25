@@ -8,17 +8,6 @@ function SearchBar({ searchVisible, setData }) {
   const { Search } = Input;
   const { Option } = Select;
 
-  // const [searchItem, setSearchItem] = useState('')
-
-  // const handleChangeSearchItem = (e) => {
-  //   setInView(...inVew, e.target.value)
-
-  // }
-
-  // useEffect(() => {
-
-  // },[])
-
   function onSearch(values) {
     setData(values);
   }
