@@ -3,6 +3,9 @@ import {
   FETCH_PRODUCTS_START,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_ERROR,
+  DELETE_PRODUCT_START,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_ERROR,
   FETCH_ITEM_PHOTOS_START,
   FETCH_ITEM_PHOTOS_SUCCESS,
   FETCH_ITEM_PHOTOS_ERROR,
@@ -15,6 +18,7 @@ const initialState = {
   products: [],
   itemPhotos: [],
   getProductsStatus: requestStatus.ready,
+  deleteProductStatus: requestStatus.ready,
   getItemPhotosStatus: requestStatus.ready,
   deleteItemTagsStatus: requestStatus.ready,
 };
@@ -32,6 +36,12 @@ const productsReducer = (state = initialState, action) => {
       };
     case FETCH_PRODUCTS_ERROR:
       return { ...state, getProductsStatus: requestStatus.error };
+    case DELETE_PRODUCT_START:
+      return { ...state, deleteProductStatus: requestStatus.loading };
+    case DELETE_PRODUCT_SUCCESS:
+      return { ...state, deleteProductStatus: requestStatus.success };
+    case DELETE_PRODUCT_ERROR:
+      return { ...state, deleteProductStatus: requestStatus.error };
     case FETCH_ITEM_PHOTOS_START:
       return { ...state, getItemPhotosStatus: requestStatus.loading };
     case FETCH_ITEM_PHOTOS_SUCCESS:

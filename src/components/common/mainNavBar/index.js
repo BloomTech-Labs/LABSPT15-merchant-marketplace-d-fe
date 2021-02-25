@@ -31,7 +31,19 @@ function MainNavBar() {
           />
         )}
         {!authState.isAuthenticated && (
-          <Button handleClick={() => authService.login()} buttonText="Login" />
+          <>
+            <Button
+              handleClick={() => authService.login()}
+              buttonText="Login"
+            />
+            <NavLink
+              className="link"
+              activeStyle={{ color: 'white' }}
+              to="/create-profile"
+            >
+              Sign Up
+            </NavLink>
+          </>
         )}
       </div>
     </div>
