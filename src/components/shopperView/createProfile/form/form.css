@@ -1,0 +1,18 @@
+.formInput {
+    width: 25rem;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: .75rem;
+    border-style: none;
+    background-color: rgb(238, 213, 255);
+}
+
+#submit {
+    margin: .75rem;
+    padding: 1rem;
+    width: 25rem;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    background-color: lightgrey;
+}
