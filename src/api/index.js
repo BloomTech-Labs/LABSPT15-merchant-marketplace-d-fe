@@ -70,4 +70,23 @@ const putData = (url, newData, authState) => {
     .catch(err => err);
 };
 
-export { sleep, getExampleData, getProfileData, getDSData, postData, putData };
+const deleteData = (url, authState) => {
+  const headers = getAuthHeader(authState);
+  if (!url) {
+    throw new Error('No URL provided');
+  }
+  return axios
+    .delete(url, { headers })
+    .then(res => res)
+    .catch(err => err);
+};
+
+export {
+  sleep,
+  getExampleData,
+  getProfileData,
+  getDSData,
+  postData,
+  putData,
+  deleteData,
+};

@@ -1,42 +1,34 @@
-import { useOktaAuth } from '@okta/okta-react/src/OktaContext'
-import React, { useEffect, useState } from 'react'
-import { Button } from 'antd'
-import { connect } from 'react-redux'
-import { fetchProducts, fetchTags } from '../../../../state/actions'
-import { Link } from 'react-router-dom'
+import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Button, Table, Image, Tag, Space } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { fetchProducts, fetchTags } from '../../../../state/actions';
+import { Link } from 'react-router-dom';
 
-import NavBar from '../../../common/navBar'
-import SearchResults from './searchResults'
-import useSearch from '../../../common/customHooks/useSearch'
+import NavBar from '../../../common/navBar';
+import SearchResults from './searchResults';
 
-function CurrentInventory({ inventory, fetchProducts, fetchTags }) {
-  const [searchData, setSearchData] = useState({})
-  const { authState } = useOktaAuth()
+function CurrentInventory({ inventory, fetchProducts }) {
+  const [searchData, setSearchData] = useState({});
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
-    fetchProducts(authState)
-    // fetchTags(authState)
-  }, [])
+    fetchProducts(authState);
+  }, []);
 
   return (
     <>
       <NavBar searchVisible={false} setData={setSearchData} />
-      <div className='outerContainer'>
-        <div className='contents'>
-          <SearchResults data={inventory} filter={searchData} />
-          <Link to='/myprofile/inventory/additem'>
-            <Button>+Add Item</Button>
-          </Link>
-        </div>
-      </div>
+      <SearchResults data={inventory} filter={searchData} />
     </>
-  )
+  );
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   inventory: state.products.products,
   getProductsStatus: state.products.getProductsStatus,
-})
+});
 
 export default connect(mapStateToProps, { fetchProducts, fetchTags })(
   CurrentInventory
-)
+);
