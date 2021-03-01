@@ -63,18 +63,10 @@ const ProductList = () => {
           ? products.map(product => (
               <Card
                 className="productCard"
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
+                cover={<img alt="example" src={product.image} />}
                 actions={[<CheckOutlined />, <ShoppingCartOutlined />]}
               >
-                <Meta
-                  title="Card title"
-                  description="This is the description"
-                />
+                <Meta title={product.title} description={product.description} />
               </Card>
             ))
           : 'Oh no! Something went wrong. Please try again.'}
@@ -84,8 +76,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
-// TO DO
-// dispatch action to add products to redux store
-// finish styling
-// convert to live data

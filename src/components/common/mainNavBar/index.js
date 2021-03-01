@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Badge } from 'antd';
 import { Button } from '../../common';
 import './mainNavBar.css';
 import { useOktaAuth } from '@okta/okta-react';
+
+import siteLogo from '../../../assets/merchantMarketplaceLogo.png';
 
 function MainNavBar() {
   const { authState, authService } = useOktaAuth();
@@ -12,7 +13,11 @@ function MainNavBar() {
     <div className="nav-bar">
       {/* logo */}
       <div className="logo">
-        <span>MERCHANT</span> MARKETPLACE
+        <img
+          className="logoImg"
+          src={siteLogo}
+          alt="merchant marketplace logo"
+        />
       </div>
       <div className="menu">
         {authState.isAuthenticated && (
