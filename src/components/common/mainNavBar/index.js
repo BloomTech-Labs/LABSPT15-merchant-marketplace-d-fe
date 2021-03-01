@@ -11,7 +11,6 @@ function MainNavBar() {
 
   return (
     <div className="nav-bar">
-      {/* logo */}
       <div className="logo">
         <img
           className="logoImg"

@@ -17,10 +17,12 @@ function NavBar({ searchVisible, data, setData }) {
             />
           </NavLink>
         </div>
-        <Link to="/myprofile/inventory">Inventory</Link>
-        <Link to="/">Orders</Link>
-        <Link to="/">Payment</Link>
-        <Link to="/">Messages</Link>
+        <div className="nav-links">
+          <Link to="/myprofile/inventory">Inventory</Link>
+          <Link to="/">Orders</Link>
+          <Link to="/">Payment</Link>
+          <Link to="/">Messages</Link>
+        </div>
       </div>
       <SearchBar searchVisible={searchVisible} setData={setData} data={data} />
     </div>
