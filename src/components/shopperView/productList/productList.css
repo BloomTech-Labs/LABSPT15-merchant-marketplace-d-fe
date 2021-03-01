@@ -5,8 +5,13 @@
 .productsWrapper {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 8rem;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 .productCard {
-    width: 10rem;
+    width: 15rem;
+    height: 100%;
+    margin-bottom: 3rem;
 }

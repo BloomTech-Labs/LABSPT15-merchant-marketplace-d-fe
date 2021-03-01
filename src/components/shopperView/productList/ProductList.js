@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
-import { fetchProducts } from '../../../state/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Carousel } from 'antd';
 import { CheckOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-
-import { getDSData, getExampleData } from '../../../api';
 
 import 'antd/dist/antd.css';
 import './productList.css';
@@ -33,9 +30,6 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    // getDSData(`${process.env.REACT_APP_API_URI}/items`, authState)
-    //   .then(res => console.log(res))
-    //   .error(err => console.error(err));
     axios
       .get('https://fakestoreapi.com/products')
       .then(res => setProducts(res.data))
@@ -44,20 +38,6 @@ const ProductList = () => {
 
   return (
     <div className="productListWrapper">
-      <Carousel effect="fade">
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
-      </Carousel>
       <div className="productsWrapper">
         {products
           ? products.map(product => (
