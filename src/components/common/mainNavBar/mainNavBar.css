@@ -9,7 +9,7 @@
     height: 5rem;
     top: 0;
     z-index: 4;
-    padding: 1rem;
+    padding: 1% 10%;
 }
 
 .logo{
@@ -23,4 +23,11 @@
 
 .logoImg {
     height: 100%;
+}
+
+.menu {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
