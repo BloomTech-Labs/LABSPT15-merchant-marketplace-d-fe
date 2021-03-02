@@ -1,0 +1,16 @@
+.orderCart {
+    margin-left: 10px;
+    color: white
+}
+.dropdown {
+    min-width: 250px;
+    background-color: #ffffff;
+    border: 1px solid black
+}
+.total {
+    background-color: #f0f0f0;
+}
+.ant-list-split .ant-list-item {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './navStyles.css';
 import SearchBar from '../searchbar';
+
 import siteLogo from '../../../assets/merchantMarketplaceLogo.png';
 
 function NavBar({ searchVisible, data, setData }) {
