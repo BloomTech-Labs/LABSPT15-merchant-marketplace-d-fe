@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from '../../common/navBar/index';
 import ProductInfo from '../ProductInfo/ProductInfo';
 import { connect } from 'react-redux';
+import './ProductPage.css';
 
 const ProductPage = props => {
   const paramItemId = props.match.params.id;

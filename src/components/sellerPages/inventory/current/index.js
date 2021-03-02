@@ -1,15 +1,19 @@
 import { useOktaAuth } from '@okta/okta-react/src/OktaContext';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../../../../state/actions';
+import { Button, Table, Image, Tag, Space } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  fetchProducts,
+  fetchTags,
+  deleteProduct,
+} from '../../../../state/actions';
 import { Link } from 'react-router-dom';
 
 import NavBar from '../../../common/navBar';
 import SearchResults from './searchResults';
-import useSearch from '../../../common/customHooks/useSearch';
 
-function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
+function CurrentInventory({ inventory, fetchProducts, deleteProduct }) {
   const [searchData, setSearchData] = useState({});
   const { authState } = useOktaAuth();
 
@@ -17,20 +21,25 @@ function CurrentInventory({ inventory, fetchProducts, getProductsStatus }) {
     fetchProducts(authState);
   }, []);
 
-  const displayedData = useSearch(inventory, 'name', searchData);
-  console.log(inventory);
+  const onDeleteButtonClick = async itemId => {
+    await deleteProduct(authState, itemId);
+
+    fetchProducts(authState);
+  };
+
   return (
     <>
+      <Link to="/myprofile/inventory/additem">
+        <Button className="add-item-button" style={{ margin: '70px 0 0 5%' }}>
+          + Add Item
+        </Button>
+      </Link>
       <NavBar searchVisible={false} setData={setSearchData} />
-      <div className="outerContainer">
-        <div className="contents">
-          <SearchResults data={displayedData} filter={searchData} />
-          <Link to="/myprofile/inventory/additem">
-            <Button>+Add Item</Button>
-          </Link>
-
-        </div>
-      </div>
+      <SearchResults
+        data={inventory}
+        filter={searchData}
+        onDeleteButtonClick={onDeleteButtonClick}
+      />
     </>
   );
 }
@@ -39,4 +48,8 @@ const mapStateToProps = state => ({
   getProductsStatus: state.products.getProductsStatus,
 });
 
-export default connect(mapStateToProps, { fetchProducts })(CurrentInventory);
+export default connect(mapStateToProps, {
+  fetchProducts,
+  fetchTags,
+  deleteProduct,
+})(CurrentInventory);

@@ -1,12 +1,15 @@
-export default function useSearch(initialData, catagory, searchData) {
+export default function useSearch(initialData, category, searchData) {
   if (searchData.length > 0) {
-    const test = [];
+    const result = [];
+    console.log('category', category);
+
     initialData.map(item => {
-      if (item[catagory].includes(searchData)) {
-        test.push(item);
+      console.log(item);
+      if (item[category].toLowerCase().includes(searchData.toLowerCase())) {
+        result.push(item);
       }
     });
-    return test;
+    return result;
   } else {
     return initialData;
   }

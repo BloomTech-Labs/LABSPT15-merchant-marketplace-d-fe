@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './searchbarStyles.css';
 
 function SearchBar({ searchVisible, setData }) {
-  const [inView, setInView] = useState('nope');
+  const [inView, setInView] = useState('');
   const { Search } = Input;
   const { Option } = Select;
 
@@ -29,11 +29,15 @@ function SearchBar({ searchVisible, setData }) {
   return (
     <div className={inView}>
       <div className="searchOuter">
-        <div className="searchBtns"></div>
+        <div className="searchBtns">
+          <Button>Main</Button>
+          <Button>Drafts</Button>
+          <Button>Archives</Button>
+        </div>
         <Search
-          defaultValue="Search through your inventory"
+          placeholder="Search Items"
           className="searchBar"
-          onSearch={onSearch}
+          onChange={e => onSearch(e.target.value)}
         />
         <div>
           <Select defaultValue="Sort By" onChange={sortChange}>
@@ -48,11 +52,6 @@ function SearchBar({ searchVisible, setData }) {
             <Button className="add-item-button">+ Add Item</Button>
           </Link>
         </div>
-      </div>
-      <div className="searchBtns">
-        <Button>Main</Button>
-        <Button>Drafts</Button>
-        <Button>Archives</Button>
       </div>
     </div>
   );
